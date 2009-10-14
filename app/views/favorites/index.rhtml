@@ -1,0 +1,53 @@
+<h1>Favourites</h1>
+
+<span style="color: red"><%= flash[:message] %></span>
+
+<div>
+<% old_fav_letter = 0
+   fav_index = Array.new;
+   @favs.each do |f|
+     new_letter = "" << f.name[0]
+     new_letter.upcase!
+
+     if old_fav_letter != new_letter
+       old_fav_letter = new_letter
+       fav_index.push new_letter
+     end
+   end
+%>
+<%= fav_index.collect {|x| x = "<a href=\"#" + x + "\">" + x + "</a>"}.join(" | ") %>
+<div style="float: right; border: solid 1px black; padding: 20px;">
+  <h2>Add to favourites</h2>
+  <% form_remote_tag ( :update => "fav_list",
+                       :url => { :action => :add },
+                       :position => "bottom",
+                       :complete => visual_effect(:pulsate, "fav_list_box", :duration => '0.8') +  "; favorite_name.value=''; favorite_link.value='';" ) do -%>
+     <label for="favorite_name">Name:</label>
+     <%= text_field "favorite", "name" %><br />
+
+     <label for="favorite_link">URL:</label>
+     <%= text_field "favorite", "link" %><br />
+
+     <%= submit_tag 'Opslaan' %>
+  <% end -%>
+</div>
+
+<div id="fav_list_box" name="fav_list_box">
+<ol id="fav_list">
+        <% old_fav_letter = 0
+	   @favs.each do |f|
+	      new_letter = "" << f.name[0];
+              new_letter.upcase!
+
+              if old_fav_letter != new_letter
+                old_fav_letter = new_letter
+                fav_letter = new_letter
+                %>
+                <br/><br/><a name="<%= fav_letter %>"></a><strong><%= fav_letter %></strong>
+              <% end %>
+		<li><a href="<%= f.link %>"><%= f.name %></a></li>
+	<% end %>
+	<br/><br/><strong>Freshly added</strong>
+</ol>
+</div>
+

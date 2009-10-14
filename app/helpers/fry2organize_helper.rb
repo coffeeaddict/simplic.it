@@ -1,0 +1,2 @@
+module Fry2organizeHelper
+end

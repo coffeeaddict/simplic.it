@@ -1,0 +1,262 @@
+/* hartog/20080401: style.css - styles for elegant looking
+                    { Simplic.IT } website
+   hartog/20080501: added resume and portfolio specific styles
+   hartog/20080819: changed link colors for clarity
+*/
+
+/* HTML element properties */
+body {
+  margin: 0;
+  padding: 0;
+  font: 11pt/1.5 sans-serif;
+}
+
+
+img {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+
+td {
+  vertical-align: top;
+  padding: 4px;
+}
+
+
+h1,h2,h3,h4 {
+  margin: 0.2em 0 1.5em 0;
+  color: #21409a;
+}
+
+h2 {
+  margin-top: 2em
+}
+
+h4,h5,h6,h7 { 
+  color: black;
+}
+
+a {
+  color: #21409a;
+  text-decoration: none
+}
+
+a:hover, a:active {
+  text-decoration: underline;
+}
+
+hr { 
+  border: solid #21409a 1px;
+  margin: 0px;
+  padding: 0px;
+}
+
+b, strong {
+  color: #21409a;
+}
+
+label {
+  display: block;
+  /* border forces the shape of the label */
+  border: solid white 1px;
+  width: 120px;
+  padding-left: 10px;
+}
+
+textarea {
+  margin-left: 10px;
+}
+
+#contact_form input {
+  float: right;
+}
+
+#contact_form { 
+  width: 270px;
+}
+
+/* 3 col. css markup */
+#header {
+  margin: 0;
+  padding: 0;
+}
+
+#main1 {
+  margin: 0;
+  padding: 0;
+}
+
+#main2 {
+  margin: 0;
+  padding: 0;
+}
+
+#left {
+  float:left;
+  width:130px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#right {
+  float:right;
+  width:150px;
+  margin: 0; padding: 0;
+  font-size:80%;
+
+  background-image: url('/images/note.jpeg');
+  background-repeat: no-repeat;
+}
+
+#middle {
+  margin: 0 138px;
+  font-size:80%;
+}
+
+#middle-text { 
+  width: 640px;
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+#footer { 
+  font-size: 8pt;
+  text-align: center;
+}
+
+/* the right floating UML note box */
+#note { 
+  margin: 0;
+  padding: 0.5em 1em;
+  font-size: 8pt;
+}
+
+#note a {
+  color: black;
+}
+
+
+/* classes */
+.column-in {
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+.cleaner {
+  clear:both;
+  height:1px;
+  font-size:1px;
+  border:none;
+  margin: 0;
+  padding: 0;
+  background:transparent;
+}
+
+
+.copy {
+  text-align:center;
+  font-size:80%
+}
+
+.menu-item { 
+  background-image: url("/images/activity-node.jpeg");
+  background-repeat: no-repeat;
+  background-position: 20px 0px;
+
+  padding: 0px;
+  margin: 0px;
+
+  width: 87px;
+  height: 70px;
+
+  padding-right: 10px;
+}
+
+.menu-item-text {
+  position: relative;
+  top: 12px;
+  left: 18px;
+
+  font-size: 8pt;
+}
+
+.menu-item-text a {
+  color: black;
+}
+
+/* These style notations are here for the resume only */
+table.list td { 
+  padding: 0;
+  padding-left: 4em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ol {
+  list-style-type: disc;
+}
+
+ol li {
+  margin: 0;
+  padding: 0;
+}
+
+/* These style notations are for the portfolio */
+table.portfolio { 
+  border: solid black 1px; 
+  width: 800px;
+
+  padding: 2px;
+  margin: 0px;
+}
+
+table.portfolio th { 
+  background: silver;
+  color: white;
+
+  padding: 10px;
+  margin: 0px;
+
+  border-bottom: double black;
+  margin-bottom: 10px;
+}
+
+table.portfolio tr {
+  padding: 1px;
+}
+
+table.portfolio tr.odd {
+  background: #f0f0f0;
+}
+
+table.portfolio tr.even {
+  background: white;
+}
+
+table.portfolio td { 
+  padding: 4px;
+  margin: 0px;
+}
+
+/* this inline/block voodoo is needed to make sure that the start node
+   and arrow connects with the first activity node 
+*/
+
+a.start { 
+  margin:  0px;
+  padding: 0px;
+
+  display: inline;
+}
+
+a.start img { 
+  margin-left:  20px;
+  padding: 0px;
+
+  display: block;
+}
+

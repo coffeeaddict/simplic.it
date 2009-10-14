@@ -1,0 +1,24 @@
+<h1>Portfolio</h1>
+
+<table class="portfolio" cellspacing="0">
+  <tr>
+    <th>Client</th>
+    <th>Description</th>
+    <th>Skills used</th>
+  </tr>
+  <% 
+    c = 0
+    @portfolio.each do |p|
+    c = c + 1
+  %>
+  <tr class="<% if c.modulo(2) == 1 %>even<% else %>odd<% end %>">
+    <td><%= p.client %></td>
+    <td><%= p.description %></td>
+    <td>
+      <% p.skills.each do |s| %>
+      - <%= s.name %><br />
+      <% end %>
+    </td>
+  </tr>
+  <% end%>
+</table>
