@@ -9,10 +9,12 @@ class StartController < ApplicationController
 			  )
 
       if bounce
-	bounce.clicks += 1
-	bounce.save
-
+	# count the click
+	bounce.increment!('clicks')
 	return redirect_to bounce.url, :status => 302
+
+      else
+	return render :text => "Not found", :status => 404
       end
     end
 
