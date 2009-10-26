@@ -9,6 +9,7 @@ class StartController < ApplicationController
 			  )
 
       if bounce
+	# count the click
 	bounce.increment!('clicks')
 	return redirect_to bounce.url, :status => 302
 
