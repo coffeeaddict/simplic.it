@@ -1,2 +1,10 @@
-<% form_for @bounce %>
+<div style="color: red">
+	<%= error_messages_for 'bounce' %>
+</div>
+
+<% form_for @bounce, :url => { :action => "create" } do |f| %>
+  <%= f.label :url, 'URL' %>
+  <%= f.text_field :url %><br />
+  
+  <%= f.submit("Create") %>
 <% end %>
