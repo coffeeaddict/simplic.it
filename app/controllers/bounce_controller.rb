@@ -1,7 +1,4 @@
 class BounceController < ApplicationController
-
-  before_filter :check_login, :except => [ :index, :info ]
-
   def index
     if params[:id]
       return redirect_to :action => "info", :id => params[:id]

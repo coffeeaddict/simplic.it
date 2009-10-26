@@ -45,8 +45,9 @@ class ApplicationController < ActionController::Base
 
   # check for a login or bounce to start
   def check_login
+    
     if session['logged_in'].nil? || session['logged_in'].empty?
-      redirect_to :controller => "login", :action => "index"
+      redirect_to :controller => "start", :action => "index"
     end
 
     # pages which require login do not use default behavioure. Set logged_in attr. here
