@@ -8,6 +8,8 @@ class Bounce < ActiveRecord::Base
   validates_uniqueness_of :url
 
   def generate_public_id
+    return unless self.public_id.nil?
+
     long_digest = Digest::SHA512.hexdigest(self.url)
     
     # pick 6 random bits from the sha
