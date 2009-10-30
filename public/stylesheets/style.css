@@ -260,3 +260,25 @@ a.start img {
   display: block;
 }
 
+div.date { 
+  width: 150px;
+  display: block;
+}
+
+div.dated_content { 
+  float: right;
+  width: 480px;
+  display: block;
+}
+
+div.dated_content h3 { 
+  margin: 0;
+  padding: 0;
+}
+
+div.dated_block { 
+  width: 640px;
+  display: block;
+  position: relative;
+  margin-bottom: 50px;
+}
