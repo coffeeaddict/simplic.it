@@ -282,3 +282,11 @@ div.dated_block {
   position: relative;
   margin-bottom: 50px;
 }
+
+div.blog { 
+}
+
+div.blog h2 { 
+  margin: 0;
+  padding: 0;
+}

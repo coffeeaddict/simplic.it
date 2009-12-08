@@ -1,0 +1,20 @@
+<h1>Blog</h1>
+
+<div class="blog">
+
+  <h2>
+    <%= link_to(@blog.title || "...", :action => :view, :id => @blog.id) %>
+  </h2>
+  <% if @blog.subtitle %>
+    <strong><%= @blog.subtitle %></strong>
+  <% end %>
+
+  <br /><br /><br />
+  <%= @blog.content %>
+  <br /><br /><br />
+  Tags:
+  <% @blog.tags.each do |tag| %>
+     <%= link_to tag.name, :action => :tag, :id => tag.id %>
+  <% end %>
+
+</div>

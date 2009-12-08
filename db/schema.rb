@@ -9,7 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091026102723) do
+ActiveRecord::Schema.define(:version => 20091113065831) do
+
+  create_table "blogs", :force => true do |t|
+    t.string   "title"
+    t.string   "subtitle"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blogs_tags", :force => true do |t|
+    t.integer  "blog_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bounces", :force => true do |t|
     t.string   "url"
@@ -68,6 +83,12 @@ ActiveRecord::Schema.define(:version => 20091026102723) do
 
   create_table "skills", :force => true do |t|
     t.string   "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
