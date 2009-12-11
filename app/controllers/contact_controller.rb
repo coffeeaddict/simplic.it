@@ -1,6 +1,3 @@
 class ContactController < ApplicationController
-
-  before_filter :assign_language
-
-
+  def index; end
 end

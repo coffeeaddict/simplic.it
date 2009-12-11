@@ -4,11 +4,78 @@
    hartog/20080819: changed link colors for clarity
 */
 
+
+/*
+  Div's
+*/
+
+#canvas { 
+  width: 900px;
+  margin: 0 auto!important;
+  padding-top: 20px;
+}
+
+#header {
+  margin: 0;
+  padding: 0;
+  width: 900px;
+}
+
+#logo { 
+  float: left;
+}
+
+#menu { 
+  display: block;
+  width: 470px;
+  float: right;
+  padding-top: 30px;
+  vertical-align: middle;
+  background-color: #fff;
+}
+
+#menu a { 
+  text-decoration: underline;
+  margin-left: 10px;
+}
+
+#menu h3 {
+    display: inline;
+}
+
+#page { 
+  width: auto;
+  height: auto;
+  padding: 20px;
+}
+
+#content { 
+}
+
+#footer { 
+  font-size: 8pt;
+  padding: 6px 20px;
+}
+
+#footer_images { 
+  width: 400px;
+}
+
+#footer_images img { 
+  vertical-align: middle
+}
+
+#what { 
+  display: block;
+  float: left;
+  width: 100px;
+}
+
 /* HTML element properties */
 body {
   margin: 0;
   padding: 0;
-  font: 11pt/1.5 sans-serif;
+  font: 10pt/1.5 sans-serif;
 }
 
 
@@ -25,12 +92,12 @@ td {
 
 
 h1,h2,h3,h4 {
-  margin: 0.2em 0 1.5em 0;
+  margin: 0.2em 0;
   color: #21409a;
 }
 
-h2 {
-  margin-top: 2em
+h1 {
+    margin-bottom: 0.6em;
 }
 
 h4,h5,h6,h7 { 
@@ -38,6 +105,7 @@ h4,h5,h6,h7 {
 }
 
 a {
+  font-size: inherit;
   color: #21409a;
   text-decoration: none
 }
@@ -64,126 +132,33 @@ label {
   padding-left: 10px;
 }
 
-textarea {
-  margin-left: 10px;
+pre { 
+  margin: 0;
+  padding: 0;
 }
 
-#contact_form input {
+code { 
+  font-family: Courier;
+  font-size: 9pt;
+  background: #ddd;
+  display: block;
+}
+
+.sidebar {
+    padding-left: 10px;
+    margin-left: 5px;
+    float: right;
+    width: 200px;
+    border-left: dotted #777 1px;
+    font-size: 8pt;
+}
+
+.imageleft { 
+  float: left;
+}
+
+.imageright { 
   float: right;
-}
-
-#contact_form { 
-  width: 270px;
-}
-
-/* 3 col. css markup */
-#header {
-  margin: 0;
-  padding: 0;
-}
-
-#main1 {
-  margin: 0;
-  padding: 0;
-}
-
-#main2 {
-  margin: 0;
-  padding: 0;
-}
-
-#left {
-  float:left;
-  width:130px;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-#right {
-  float:right;
-  width:150px;
-  margin: 0; padding: 0;
-  font-size:80%;
-
-  background-image: url('/images/note.jpeg');
-  background-repeat: no-repeat;
-}
-
-#middle {
-  margin: 0 138px;
-  font-size:80%;
-}
-
-#middle-text { 
-  width: 640px;
-  margin: 0;
-  padding: 0.5em 1em;
-}
-
-#footer { 
-  font-size: 8pt;
-  text-align: center;
-}
-
-/* the right floating UML note box */
-#note { 
-  margin: 0;
-  padding: 0.5em 1em;
-  font-size: 8pt;
-}
-
-#note a {
-  color: black;
-}
-
-
-/* classes */
-.column-in {
-  margin: 0;
-  padding: 0.5em 1em;
-}
-
-.cleaner {
-  clear:both;
-  height:1px;
-  font-size:1px;
-  border:none;
-  margin: 0;
-  padding: 0;
-  background:transparent;
-}
-
-
-.copy {
-  text-align:center;
-  font-size:80%
-}
-
-.menu-item { 
-  background-image: url("/images/activity-node.jpeg");
-  background-repeat: no-repeat;
-  background-position: 20px 0px;
-
-  padding: 0px;
-  margin: 0px;
-
-  width: 87px;
-  height: 70px;
-
-  padding-right: 10px;
-}
-
-.menu-item-text {
-  position: relative;
-  top: 12px;
-  left: 18px;
-
-  font-size: 8pt;
-}
-
-.menu-item-text a {
-  color: black;
 }
 
 /* These style notations are here for the resume only */
@@ -206,59 +181,54 @@ ol li {
 }
 
 /* These style notations are for the portfolio */
-table.portfolio { 
-  border: solid black 1px; 
-  width: 800px;
 
-  padding: 2px;
-  margin: 0px;
+div.portfolio_block { 
+  border-bottom: dotted #777 1px;
+  margin-bottom: 20px;
 }
 
-table.portfolio th { 
-  background: silver;
-  color: white;
-
-  padding: 10px;
-  margin: 0px;
-
-  border-bottom: double black;
-  margin-bottom: 10px;
+div.portfolio_name { 
+  font-size: 14pt;
+  color: #21409a;
 }
 
-table.portfolio tr {
-  padding: 1px;
+div.portfolio { 
+  padding: 20px;
 }
 
-table.portfolio tr.odd {
-  background: #f0f0f0;
-}
-
-table.portfolio tr.even {
-  background: white;
-}
-
-table.portfolio td { 
+div.portfolio img { 
+  border: solid black 1px;
   padding: 4px;
-  margin: 0px;
+  margin: 8px 8px 4px 0;
+  vertical-align: text-top;
 }
 
-/* this inline/block voodoo is needed to make sure that the start node
-   and arrow connects with the first activity node 
-*/
-
-a.start { 
-  margin:  0px;
-  padding: 0px;
-
-  display: inline;
+.image_note { 
+  text-align: right;
+  font-size: 6pt;
 }
 
-a.start img { 
-  margin-left:  20px;
-  padding: 0px;
+div.portfolio_block .sidebar { 
+  margin-top: 25px;
+}
 
+div.skill { 
   display: block;
+  border: solid black 1px;
+  margin-bottom: 5px;
+  padding-left: 3px;
 }
+
+#available_skills, #project_skills { 
+  float: left;
+  width: 40%;
+  border: dotted #777 1px;
+  padding: 10px;
+  margin-right: 10px;
+  padding-bottom: 100px;
+}
+
+/* Resume stuffs */
 
 div.date { 
   width: 150px;
@@ -283,10 +253,64 @@ div.dated_block {
   margin-bottom: 50px;
 }
 
-div.blog { 
+/* Blog stuffs */
+
+div.blog {
+    width: 800px;
+    float: left;
 }
 
 div.blog h2 { 
   margin: 0;
   padding: 0;
+}
+
+div.blog .tags {
+    font-size: 7pt;
+}
+
+div.blog ul { 
+  list-style-type: disc;
+}
+
+.excerpt {
+    border-bottom: dotted #777 1px;
+    margin-bottom: 20px;
+}
+
+.comment_block {
+    border-top: dotted #777 1px;
+    border-left: dotted #777 1px;
+    display: block;
+}
+
+.commenter {
+    font-weight: bold;
+    display: block;
+    font-size: 8pt;
+    margin-left: 20px;
+}
+
+.comment {
+    margin-left: 40px;
+    margin-bottom: 20px;
+    display: block;
+    font-size: 8pt;
+}
+
+
+div.tag { 
+  display: block;
+  border: solid black 1px;
+  margin-bottom: 5px;
+  padding-left: 3px;
+}
+
+#available_tags, #blog_tags { 
+  float: left;
+  width: 40%;
+  border: dotted #777 1px;
+  padding: 10px;
+  margin-right: 10px;
+  padding-bottom: 100px;
 }

@@ -5,15 +5,16 @@ class LoginController < ApplicationController
   end
 
   def login
-    @user = User.find(:first, :conditions => [ "username = ? AND password = MD5(?)",
-		                               params[:user][:username], params[:user][:password] ] )
-    
-    if ( !@user.nil? && @user.username && @user.password ) 
-      session["logged_in"] = @user.username
+    if @user = User.authenticate( params[:user][:username], params[:user][:password] )
+      self.current_user = @user
       redirect_to :controller => "start", :action => "index"
     else
       render :action => "index"
     end
+  end
 
+  def logout
+    session.delete(:user)
+    redirect_to "/start"
   end
 end

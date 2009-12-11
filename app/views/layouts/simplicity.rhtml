@@ -5,96 +5,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Simplic.IT | <%= @title %></title>
-    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" media="screen" />
+    <title>Simplic.IT | <%= params[:controller].capitalize %></title>
+
+    <%= stylesheet_link_tag "style" %>
+    <%= javascript_include_tag :defaults, :cache => true %>
   </head>
 
   <body>
+    <div id="canvas">
+      <div id="header">
+	<div id="logo">
+	  <%= link_to image_tag("LogoWebColor.jpeg"),
+	    "/start", :title => "{ Simplic.IT }"
+          %>
+        </div>
+	<div id="menu">
 
-    <%= javascript_include_tag :defaults, :cache => true %>
+	  <%= top_link_to "{ Portfolio }", "/portfolio" %>
+	  <%= top_link_to "{ CV }", "/cv" %>
+	  <%= top_link_to "{ Blog }", "/blog" %>
+	  <%= top_link_to "{ Contact }", "/contact" %>
 
-    <div id="header">
-
-      <!-- language selection -->
-      <div class="column-in">
-        <div style="float: right">
-          <a href="/set_lang?lang=NL"><img src="/images/flags/holland.jpeg" alt="NL" width="21" height="15" /></a>
-          <a href="/set_lang?lang=EN"><img src="/images/flags/great_britain.jpeg" alt="EN" width="21" height="15" /></a>
-	  <% if @logged_in %><br /><a style="font-size: 10px; color: green" href="/logout"> [ enabled ] </a><% end %>
+	  <% if current_user %>
+            <br />
+            <span style="font-size: 6pt;">
+  	      <%= link_to "{ Blog Admin }", "/blog/admin" %>
+	      <%= link_to "{ Portfolio Admin }", "/portfolio/admin" %>
+              <%= link_to "{ Bounce! }", "/bounce" %>
+              <%= link_to "{ Favourites }", "/favorites" %>
+              <%= link_to "{ Logout }", "/login/logout" %>
+            </span>
+          <% end %>
 	</div>
-
-        <!-- logo -->
-        <a href="/start" title="Simplicity home"><img src="/images/LogoWebColor.jpeg" alt="Simplic.IT" width="400" height="83" /></a>
-
-        <!-- black line -->
-        <hr />
+	<br style="clear: both" />
       </div>
-    </div>
+      <div id="page">
+        <div id="content"><%= yield %></div>
+      </div>
 
-    <div id="main1">
-      <div id="main2">
+      <br style="clear: both" />
+      <br />
 
-        <!-- activity diagram -->
-        <div id="left">
-          <a class="start" href="/start" title="Start"><img src="/images/start.jpeg" alt="start node" width="87" height="68" /></a>
-          <div class="menu-item">
-            <div class="menu-item-text">
-              <a href="/analyse">Analyse</a>
-            </div>
-          </div>
-          <div class="menu-item">
-            <div class="menu-item-text">
-              <a href="/design">Design</a>
-            </div>
-          </div>
-          <div class="menu-item">
-            <div class="menu-item-text">
-              <a href="/develop">Develop</a>
-            </div>
-          </div>
-          <div class="menu-item">
-            <div class="menu-item-text">
-              <a href="/deploy">Deploy</a>
-            </div>
-          </div>
-          <a href="http://google.com/" title="Stop"><img src="/images/stop.jpeg" alt="stop node" width="87" height="34" /></a>
+      <hr />
+      
+      <div id="footer">
+        <span style="float: right">
+          &copy; Simplic.IT 2008. All rights reserved.
+        </span>
+
+        <div id="footer_images">
+          <span id="what">find me on:</span>
+          <%= link_to image_tag("github-icon.png",
+                                :border => 0,
+                                :alt => "github" ),
+                "http://github.com/coffeeaddict",
+                :onMouseOver => "$('what').update('fork me on:');"
+          %>
+          <%= link_to image_tag("twitter-icon.png",
+                                :border => 0,
+                                :alt => "twitter"),
+                "http://twitter.com/coffeeaddict_nl",
+                :onMouseOver => "$('what').update('follow me on:');"
+           %>
+          <%= link_to image_tag("linkedin.png",
+                                :border => 0,
+                                :alt => "Linked-In"),
+                "http://www.linkedin.com/in/hartog",
+                :onMouseOver => "$('what').update('join me on:');"
+          %>
         </div>
 
-        <!-- note -->
-        <div id="right">
-           <div id="note">
-             <a href="/resume"><% if session['language'].eql?("NL") %>CV<% else %>Resume<% end %></a><br />
-             <a href="http://www.coffeeaddict.nl/blog/">Blog</a><br />
-             <a href="/contact"><% if session['language'].eql?("NL") %>Contact<% else %>Contact<% end %></a><br />
-             <br />
-             <a href="/about"><% if session['language'].eql?("NL") %>Over<% else %>About<% end %></a><br />
-           </div>
-	   <% if @logged_in %>
-	     <br /><br />
-	     <div>
-	       <a href="/favorites">Favorites</a><br />
-	       <a href="http://coffeeaddict.nl/calendar/">Calendar</a><br />
-	       <a href="/portfolio">Portfolio edit</a>
-	     </div>
-	   <% end %>
-         </div>
-
-         <!-- content -->
-         <div id="middle">
-           <!-- tagline -->
-           <div style="margin: -10px 0px 0px 130px;"><p>Keep it simple, ...</p></div>
-           <div id="middle-text">
-             <%= yield %>
-           </div>
-         </div>
-
-         <div class="cleaner">&nbsp;</div>
-       </div>
-     </div>
-
-     <hr />
-     <div id="footer">
-       &copy; Simplic.IT 2008. All rights reserved.
-     </div>
+      </div>
+    </div>
   </body>
 </html>

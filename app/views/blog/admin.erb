@@ -1,0 +1,11 @@
+<h1>Blog Admin</h1>
+
+<ol>
+<% @blog.each { |blog| %>
+  <li><%= link_to blog.title, :action => :edit, :id => blog.id %>
+  <%= link_to '{ Destroy }', :action => :destroy, :id => blog.id %>
+  </li>
+<% } %>
+</ol>
+<br />
+<%= link_to "New", :action => :new %>

@@ -1,0 +1,47 @@
+<h1>Blog edit</h1>
+
+<%= link_to "{ View }", :action => :view, :id => slug(@blog) %>
+
+<% form_for @blog, :url => { :action => :edit } do |f| %>
+  title:  <%= f.text_field :title %>
+  <br />
+  subtitle:  <%= f.text_field :subtitle %>
+  <br />
+  content:<br />
+  <%= f.text_area :content, :cols => 120 %>
+  <br /><br />
+  <%= submit_tag %>
+<% end %>
+
+<br /><br />
+  <span id="message"></span>
+  <div style="display: block">
+    <div id="available_tags">
+        Tags available:<br />
+        <% Tag.all.each do |tag| %>
+          <%= render :partial => "tag", :locals => { :tag => tag } %>
+        <% end %>
+    </div>
+    <%= drop_receiving_element "available_tags",
+      :with => "'tag_id='+element.id.split('_').last()",
+      :url  => { :action => :drop_tag, :id => @blog.id },
+      :update => "message"
+    %>
+    <div id="blog_tags">
+      Blog tags:<br />
+      <% @blog.tags.each do |tag| %>
+        <%= render :partial => "blog_tag", :locals => { :tag => tag } %>
+      <% end %>
+    </div>
+    <%= drop_receiving_element "blog_tags",
+      :with => "'tag_id='+element.id.split('_').last()",
+      :url  => { :action => :add_tag, :id => @blog.id }
+    %>
+  </div>
+  <br style="clear: both;"/>
+  <strong>New tag</strong>
+  <% form_remote_for Tag.new, :url => { :action => :new_tag } do |f| %>
+     <%= f.label :name %>
+     <%= f.text_field :name %>
+     <%= submit_tag %>
+  <% end %>

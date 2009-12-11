@@ -1,7 +1,4 @@
 class StartController < ApplicationController
-
-  before_filter :assign_language
-
   def index
     if params[:id]
       bounce = Bounce.find( :first,
@@ -17,7 +14,5 @@ class StartController < ApplicationController
 
       end
     end
-
-    super
   end
 end

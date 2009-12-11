@@ -27,5 +27,4 @@ class BounceController < ApplicationController
   def info
     @bounce = Bounce.find(params[:id])
   end
-
 end

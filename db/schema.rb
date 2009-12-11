@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091113065831) do
+ActiveRecord::Schema.define(:version => 20091211080903) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(:version => 20091113065831) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "views"
+    t.integer  "user_id"
   end
 
   create_table "blogs_tags", :force => true do |t|
@@ -34,8 +36,14 @@ ActiveRecord::Schema.define(:version => 20091113065831) do
     t.integer  "clicks"
   end
 
-  create_table "categories", :force => true do |t|
-    t.string "name"
+  create_table "comments", :force => true do |t|
+    t.text     "comment"
+    t.string   "name"
+    t.string   "email"
+    t.string   "website"
+    t.integer  "blog_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "favorites", :force => true do |t|
@@ -46,29 +54,18 @@ ActiveRecord::Schema.define(:version => 20091113065831) do
     t.integer  "category_id"
   end
 
-  create_table "length_type_translations", :force => true do |t|
-    t.integer "length_type_id"
-    t.string  "plural"
-    t.string  "singular"
-    t.string  "language"
-  end
-
-  create_table "length_types", :force => true do |t|
-    t.string "name"
-  end
-
-  create_table "portfolio_skills", :force => true do |t|
-    t.integer "portfolio_id", :null => false
-    t.integer "skill_id",     :null => false
-  end
-
   create_table "portfolios", :force => true do |t|
-    t.string   "client",      :null => false
+    t.string   "name"
     t.text     "description"
+    t.string   "url"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "length"
-    t.integer  "length_type"
+  end
+
+  create_table "portfolios_skills", :id => false, :force => true do |t|
+    t.integer "portfolio_id"
+    t.integer "skill_id"
   end
 
   create_table "sessions", :force => true do |t|
@@ -82,7 +79,8 @@ ActiveRecord::Schema.define(:version => 20091113065831) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "skills", :force => true do |t|
-    t.string   "name",       :null => false
+    t.string   "name"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -95,7 +93,10 @@ ActiveRecord::Schema.define(:version => 20091113065831) do
 
   create_table "users", :force => true do |t|
     t.string "username"
-    t.string "password", :limit => 33
+    t.string "password"
+    t.string "name"
+    t.string "email"
+    t.string "phone"
   end
 
 end

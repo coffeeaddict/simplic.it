@@ -1,0 +1,24 @@
+<i><strong>All entries tagged with <%= @tag.name %></strong></i>
+<br /><br />
+
+<div class="blog">
+<% @blog.each do |blog| %>
+  <div class="excerpt"
+    <h2>
+      <%= link_to(blog.title || "...", :action => :view, :id => slug(blog)) %>
+    </h2>
+    <% if blog.subtitle %>
+      <strong><%= blog.subtitle %></strong><br /><br />
+    <% end %>
+
+    <%= excerpt(blog) %>
+    <br /><br />
+    <div class="tags">
+      <strong>Tags:</strong>
+      <% blog.tags.each do |tag| %>
+         <%= link_to tag.name, :action => :tag, :id => tag.name %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+</div>

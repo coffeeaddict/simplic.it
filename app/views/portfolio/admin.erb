@@ -1,0 +1,10 @@
+<h1>Portfolio admin</h1>
+
+<ol>
+<% @portfolio.each { |p| %>
+  <li><%= link_to p.name, :action => :edit, :id => p.id %>
+  <%= link_to '{ Destroy }', :action => :destroy, :id => p.id %>
+  </li>
+<% } %>
+</ol>
+<%= link_to "{ New }", :action => :new %>

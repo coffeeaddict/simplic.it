@@ -1,0 +1,12 @@
+<h1>Editing portfolios</h1>
+
+<%= error_messages_for :portfolios %>
+
+<% form_for(@portfolios) do |f| %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @portfolios %> |
+<%= link_to 'Back', portfolios_path %>

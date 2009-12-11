@@ -1,0 +1,56 @@
+<div class="blog">
+  <%= render :partial => 'stats' %>
+  
+  <h2><%=  @blog.title || "..." %></h2>
+  <% if @blog.subtitle %>
+    <strong><%= @blog.subtitle %></strong>
+    <br /><br />
+  <% end %>
+
+  <%= content_filter(@blog.content) %>
+  <br /><br />
+
+  <br />
+  <strong>Comments</strong>
+  <div id="comments">
+    <% @blog.comments.each { |comment| %>
+      <%= render :partial => "comment", :locals => { :comment => comment } %>
+    <% } %>
+  </div>
+  <br /><br />
+
+  <a href="#" onclick="$('comment_form').appear({ duration: 0.6 });">
+    Want to comment?
+  </a>
+
+  <div id="comment_form" style="display: none;">
+    Leave your comment:
+    <% form_remote_for Comment.new,
+        :url => { :action => :comment },
+        :update => "comment_form",
+        :success => visual_effect(
+           :fade,
+           "comment_form",
+           :duration => 0.6
+        ),
+        :failure => visual_effect(
+           :fade,
+           "comment_form",
+           :duration => 6.0
+        ) do |f| %>
+      <%= f.hidden_field :blog_id, :value => @blog.id %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <br />
+      <%= f.label :website %>
+      <%= f.text_field :website %>
+      <br />
+      <%= f.label :comment %>
+      <%= f.text_area :comment, :cols => 80, :rows => 10 %>
+      <br />
+      <%= recaptcha_tags %>
+      <br />
+      <%= submit_tag "Say so" %>
+    <% end %>
+  </div>
+</div>

@@ -14,7 +14,5 @@ class FavoritesController < ApplicationController
     else
       render :text => "<li><a href=\"" + fav.link + "\">" + fav.name + "</a>"
     end
-
-
   end
 end

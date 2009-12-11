@@ -1,0 +1,50 @@
+<div class="sidebar">
+  <strong>Tags</strong>:
+
+  <% tags = @blog.tags.collect { |tag| tag_link(tag) } %>
+  <%= tags.join(", ") %>
+  <br />
+
+  <strong>Views: </strong>
+  <%= @blog.views %>
+  <br />
+
+  <strong>Comments: </strong>
+  <%= @blog.comments.length %>
+  <br />
+
+  <strong>By:</strong>
+  <%= @blog.user.name %>
+  <br />
+
+  <strong>Date:</strong>
+  <%= @blog.updated_at.strftime("%Y-%m-%d") %>
+  <br />
+  
+  <br />
+  <strong>Navigation:</strong><br />
+  <% if @blog.has_prev? %>
+    <%= link_to "Previous", :action => :view, :id => slug(@blog.prev) %>
+  <% end %>
+
+  <% if @blog.has_next? %>
+    <% if @blog.has_prev? %>
+      |
+    <% end %>
+    <%= link_to "Next", :action => :view, :id => slug(@blog.next) %>
+  <% end %>
+  <br />
+
+  <br />
+  <%= link_to "{ Permalink }", :action => :view, :id => slug(@blog) %>
+  <br/>
+
+  <% if current_user %>
+    <br />
+    <%= link_to "{ Edit }", :action => :edit, :id => @blog.id %>
+  <% end %>
+
+  <br />
+  <br />
+  <br />
+</div>
