@@ -53,11 +53,15 @@ class BlogController < ApplicationController
       end
       
       comment.save
+
+      Notifications.deliver_new_comment( comment )
+
       render(:update) { |page|
-        page.insert_html(
-          :bottom, 'comments',
+        page.insert_html :bottom, 'comments',
           render(:partial => "comment", :locals => { :comment => comment })
-        )
+        
+        page.replace_html 'comment_form',
+          :partial => 'comment_form', :locals => { :id => comment.blog.id }
       }
     else
       render :text => "are you not human?", :status => 403

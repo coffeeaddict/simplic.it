@@ -128,7 +128,6 @@ label {
   display: block;
   /* border forces the shape of the label */
   border: solid white 1px;
-  width: 120px;
   padding-left: 10px;
 }
 

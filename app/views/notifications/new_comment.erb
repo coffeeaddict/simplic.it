@@ -1,0 +1,13 @@
+Hi,
+
+You have a new comment on ''<%= @comment.blog.title %>''.
+
+
+  <%= @comment.comment %>
+
+
+By: <%= @comment.name %><%= " <#{@comment.email}>" if @comment.email %>
+<%= "URL: #{@comment.website}" if @comment.website %>
+
+
+Go see the comment on http://<%= "dev." if RAILS_ENV == "development" %>simplic.it/blog/view/<%= @comment.blog.title.downcase.gsub(" ", "_") %>
