@@ -17,6 +17,11 @@
          <%= link_to tag.name, :action => :tag, :id => tag.name %>
       <% end %>
     </div>
+    <div class="comments">
+      <strong>Comments:</strong>
+      <%= Comment.count( :conditions => { :blog_id => blog.id } ) %>
+    </div>
+    <br style="clear: both" />
   </div>
 <% end %>
 </div>

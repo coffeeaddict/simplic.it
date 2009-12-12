@@ -3,7 +3,9 @@ class BlogController < ApplicationController
   before_filter :check_login, :only => [ :admin, :edit, :hide, :destroy ]
 
   def index
-    @blog = Blog.find( :all, :order => "created_at DESC" )
+    @blog = Blog.find :all,
+      :conditions => { :published => true }, 
+      :order => "created_at DESC"
   end
 
   def view
@@ -88,7 +90,9 @@ class BlogController < ApplicationController
         )
       }
     else
-      render :text => "Already has that tag"
+      render(:update) { |page|
+        page.replace_html 'message', "Already has that tag"
+      }
     end
   end
 
@@ -101,8 +105,6 @@ class BlogController < ApplicationController
       page.remove "project_tag_#{tag.id}"
       page.replace_html 'message', 'OK!'
     }
-
-    return "OK"
   end
 
   def new_tag

@@ -265,8 +265,17 @@ div.blog h2 {
   padding: 0;
 }
 
-div.blog .tags {
+.tags, .comments {
     font-size: 7pt;
+    float: left;
+}
+
+.tags { 
+  min-width: 200px;
+}
+
+.comments { 
+  margin-left: 20px;
 }
 
 div.blog ul { 
@@ -312,5 +321,8 @@ div.tag {
   border: dotted #777 1px;
   padding: 10px;
   margin-right: 10px;
+}
+
+#blog_tags { 
   padding-bottom: 100px;
 }

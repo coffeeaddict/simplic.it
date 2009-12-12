@@ -13,6 +13,7 @@ module BlogHelper
   end
 
   def slug(blog)
+    return if !blog.title
     return blog.title.downcase.gsub(" ", "_")
   end
 

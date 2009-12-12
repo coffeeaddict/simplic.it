@@ -27,7 +27,7 @@ class Blog < ActiveRecord::Base
   def prev
     Blog.find( :first, 
                :conditions => [ "created_at < ?", self.created_at ],
-               :order => "created_at ASC"
+               :order => "created_at DESC"
              )
   end
 end

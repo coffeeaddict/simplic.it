@@ -2,7 +2,8 @@ class PortfolioController < ApplicationController
   before_filter :check_login, :except => [ :index ]
 
   def index
-    @portfolio = Portfolio.all
+    @portfolio = Portfolio.all :conditions => { :published => true },
+      :order => "created_at DESC"
   end
 
   def admin
