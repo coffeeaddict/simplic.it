@@ -150,6 +150,7 @@ code {
     float: right;
     width: 200px;
     border-left: dotted #777 1px;
+    border-bottom: dotted #777 1px;
     font-size: 8pt;
 }
 
