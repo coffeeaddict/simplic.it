@@ -62,7 +62,10 @@
 }
 
 #footer_images img { 
-  vertical-align: middle
+  vertical-align: middle;
+  border: none;
+  width: 24px;
+  height: 24px;
 }
 
 #what { 
@@ -147,7 +150,7 @@ code {
     padding-left: 10px;
     margin-left: 5px;
     float: right;
-    width: 200px;
+    width: 180px;
     border-left: dotted #777 1px;
     border-bottom: dotted #777 1px;
     font-size: 8pt;

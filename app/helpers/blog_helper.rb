@@ -17,6 +17,10 @@ module BlogHelper
     return blog.title.downcase.gsub(" ", "_")
   end
 
+  def url(blog)
+    return "http://simplic.it/blog/view/#{slug(blog)}"
+  end
+
   def tag_link(tag)
     link_to tag.name, :controller => :blog, :action => :tag, :id => tag.name
   end

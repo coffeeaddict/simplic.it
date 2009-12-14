@@ -8,6 +8,15 @@ class BlogController < ApplicationController
       :order => "created_at DESC"
   end
 
+  def rss
+    @blog = Blog.find :all,
+      :conditions => { :published => true }, 
+      :order => "created_at DESC"
+
+    render :layout => false
+  end
+
+
   def view
     unless @blog = Blog.find_by_title( params[:id].gsub("_", " ") )
       return render(:text => "There is no such entry", :layout => true)

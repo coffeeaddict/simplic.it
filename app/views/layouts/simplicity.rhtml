@@ -9,6 +9,9 @@
 
     <%= stylesheet_link_tag "style" %>
     <%= javascript_include_tag :defaults, :cache => true %>
+
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://simplic.it./blog/rss" />
+
   </head>
 
   <body>
@@ -55,23 +58,29 @@
 
         <div id="footer_images">
           <span id="what">find me on:</span>
-          <%= link_to image_tag("github-icon.png",
+          <%= link_to image_tag("icons/small/git.png",
                                 :border => 0,
                                 :alt => "github" ),
                 "http://github.com/coffeeaddict",
                 :onMouseOver => "$('what').update('fork me on:');"
           %>
-          <%= link_to image_tag("twitter-icon.png",
+          <%= link_to image_tag("icons/small/twitter.png",
                                 :border => 0,
                                 :alt => "twitter"),
                 "http://twitter.com/coffeeaddict_nl",
                 :onMouseOver => "$('what').update('follow me on:');"
            %>
-          <%= link_to image_tag("linkedin.png",
+          <%= link_to image_tag("icons/small/linkedin.png",
                                 :border => 0,
                                 :alt => "Linked-In"),
                 "http://www.linkedin.com/in/hartog",
                 :onMouseOver => "$('what').update('join me on:');"
+          %>
+          <%= link_to image_tag("icons/small/rss.png",
+                                :border => 0,
+                                :alt => "RSS"),
+                "/blog/rss",
+                :onMouseOver => "$('what').update('read me on:');"
           %>
         </div>
 
