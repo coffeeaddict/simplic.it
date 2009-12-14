@@ -19,11 +19,12 @@
       <div id="header">
 	<div id="logo">
 	  <%= link_to image_tag("LogoWebColor.jpeg"),
-	    "/start", :title => "{ Simplic.IT }"
+	    "/", :title => "{ Simplic.IT }"
           %>
         </div>
 	<div id="menu">
 
+          <%= top_link_to "{ Diensten }", "/home/diensten" %>
 	  <%= top_link_to "{ Portfolio }", "/portfolio" %>
 	  <%= top_link_to "{ CV }", "/cv" %>
 	  <%= top_link_to "{ Blog }", "/blog" %>

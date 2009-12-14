@@ -103,6 +103,10 @@ h1 {
     margin-bottom: 0.6em;
 }
 
+h2.next { 
+  margin-top: 2em;
+}
+
 h4,h5,h6,h7 { 
   color: black;
 }
@@ -154,6 +158,11 @@ code {
     border-left: dotted #777 1px;
     border-bottom: dotted #777 1px;
     font-size: 8pt;
+}
+
+.sidebar a img { 
+  margin: 0;
+  padding: 0;
 }
 
 .imageleft { 
