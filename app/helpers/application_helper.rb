@@ -8,7 +8,8 @@ module ApplicationHelper
     link = link_to(name, url)
 
     # if the URL is the current controller - make it bold
-    if ( url == "/" + params[:controller] )
+    if ( url == "/" + params[:controller] ) or
+       ( url == "/" + params[:controller] + "/" + params[:action] )
       link = "<h3>#{link}</h3>"
     end
 
