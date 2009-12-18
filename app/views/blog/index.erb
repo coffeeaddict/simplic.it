@@ -1,6 +1,6 @@
 <div class="blog">
 <% @blog.each do |blog| %>
-  <div class="excerpt"
+  <div class="excerpt">
     <h2>
       <%= link_to( blog.title || "...", :action => :view, :id => slug(blog)) %>
     </h2>

@@ -33,7 +33,7 @@ module ApplicationHelper
     }
 
     # make new lines visible
-    filtered = content.gsub("\r\n\r\n", "<br /><br />\n")
+    filtered.gsub!(/\r?\n/, "<br />")
 
     return filtered
   end

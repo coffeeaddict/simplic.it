@@ -17,7 +17,7 @@ xml.rss :version => "2.0", 'xmlns:content' => "http://purl.org/rss/1.0/modules/c
           xml.cdata!(excerpt(post))
         end
         xml.tag!("content:encoded") do
-          xml.cdata!(content_filter(post.content))
+          xml.cdata!(post.content)
         end
 
         xml.pubDate post.created_at.to_s(:rfc822)
@@ -26,5 +26,3 @@ xml.rss :version => "2.0", 'xmlns:content' => "http://purl.org/rss/1.0/modules/c
     end
   end
 end
-
-# LocalWords:  Subtitle
