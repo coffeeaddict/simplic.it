@@ -14,16 +14,16 @@
     <% if current_user %>
       <%= javascript_include_tag "tiny_mce/tiny_mce.js", :cache => true %>
 
-
-<script type="text/javascript">
-tinyMCE.init({
-mode : "textareas",
-theme : "advanced"
-});
-</script>
+      <script type="text/javascript">
+        tinyMCE.init({
+          mode : "textareas",
+          theme : "advanced"
+        });
+      </script>
     <% end %>
 
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://simplic.it./blog/rss" />
+    <link href="/images/simplic.it.favicon.ico" rel="shortcut icon" type="image/x-icon" />
   
   </head>
 
