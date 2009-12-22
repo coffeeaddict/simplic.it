@@ -282,7 +282,7 @@ div.blog h2 {
   padding: 0;
 }
 
-.tags, .comments {
+.tags, .comments, .views {
     font-size: 7pt;
     float: left;
 }
@@ -293,6 +293,10 @@ div.blog h2 {
 
 .comments { 
   margin-left: 20px;
+}
+
+.views { 
+  margin-left: 40px;
 }
 
 div.blog ul { 

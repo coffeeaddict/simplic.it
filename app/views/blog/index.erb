@@ -21,6 +21,10 @@
       <strong>Comments:</strong>
       <%= Comment.count( :conditions => { :blog_id => blog.id } ) %>
     </div>
+    <div class="views">
+      <strong>Views:</strong>
+      <%= blog.views %>
+    </div>
     <br style="clear: both" />
   </div>
 <% end %>
