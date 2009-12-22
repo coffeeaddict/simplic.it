@@ -21,7 +21,8 @@ class BlogController < ApplicationController
     unless @blog = Blog.find_by_title( params[:id].gsub("_", " ") )
       return render(:text => "There is no such entry", :layout => true)
     end
-    @blog.increment!('views')
+
+    @blog.increment!('views') unless current_user
   end
 
   def tag

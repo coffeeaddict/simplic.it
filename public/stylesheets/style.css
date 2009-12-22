@@ -145,12 +145,16 @@ label {
 pre { 
   margin: 0;
   padding: 0;
+  display: block;
 }
 
 code { 
   font-family: Courier;
   font-size: 9pt;
   background: #ddd;
+}
+
+pre code { 
   display: block;
 }
 
