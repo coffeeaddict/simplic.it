@@ -151,7 +151,7 @@ pre {
 code { 
   font-family: Courier;
   font-size: 9pt;
-  background: #ddd;
+  background: #eaeaea;
 }
 
 pre code { 
@@ -214,12 +214,14 @@ div.portfolio_name {
 
 div.portfolio { 
   padding: 20px;
+  padding-top: 2px;
+  text-align: justify;
 }
 
 div.portfolio img { 
   border: solid black 1px;
   padding: 4px;
-  margin: 8px 8px 4px 0;
+  margin: 20px 8px 4px 0;
   vertical-align: text-top;
 }
 
@@ -230,6 +232,7 @@ div.portfolio img {
 
 div.portfolio_block .sidebar { 
   margin-top: 25px;
+  margin-left: 12px;
 }
 
 div.skill { 
@@ -277,9 +280,14 @@ div.dated_block {
 /* Blog stuffs */
 
 div.blog {
-    width: 900px;
-    float: left;
+  width: 900px;
+  float: left;
+  text-align: justify;
 }
+
+div.blog .sidebar { 
+  margin-left: 12px;
+}  
 
 div.blog h2 { 
   margin: 0;
@@ -310,6 +318,7 @@ div.blog ul {
 .excerpt {
     border-bottom: dotted #777 1px;
     margin-bottom: 20px;
+  text-align: justify;
 }
 
 .comment_block {
@@ -354,4 +363,5 @@ div.tag {
 
 #order_message { 
   float: right;
+  margin-right: 50px;
 }
