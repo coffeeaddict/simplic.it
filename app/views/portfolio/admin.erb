@@ -1,10 +1,18 @@
 <h1>Portfolio admin</h1>
 
-<ol>
+<div id="order_message"></div>
+<ol id="list">
 <% @portfolio.each { |p| %>
-  <li><%= link_to p.name, :action => :edit, :id => p.id %>
+  <li id="item_<%= p.id %>"> ^ <%= link_to p.name, :action => :edit, :id => p.id %>
   <%= link_to '{ Destroy }', :action => :destroy, :id => p.id %>
   </li>
 <% } %>
 </ol>
+
+<%= sortable_element(
+        "list",
+        :url => { :action => :order },
+        :update => "order_message"
+) %>
+
 <%= link_to "{ New }", :action => :new %>

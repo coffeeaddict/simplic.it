@@ -3,11 +3,11 @@ class PortfolioController < ApplicationController
 
   def index
     @portfolio = Portfolio.all :conditions => { :published => true },
-      :order => "created_at DESC"
+      :order => "`order` ASC"
   end
 
   def admin
-    @portfolio = Portfolio.all
+    @portfolio = Portfolio.all( :order => "`order` ASC" );
   end
 
   def edit
@@ -66,4 +66,17 @@ class PortfolioController < ApplicationController
      }
   end
 
+  def order
+    count = 0;
+
+    begin
+      params[:list].each { |id|
+        p = Portfolio.find(id).update_attributes( :order => ( count += 1 ) )
+      }
+    rescue
+      return render :text => "O_o somethings wrong..."
+    end
+
+    render :text => "OK"
+  end
 end

@@ -351,3 +351,7 @@ div.tag {
 #blog_tags { 
   padding-bottom: 100px;
 }
+
+#order_message { 
+  float: right;
+}

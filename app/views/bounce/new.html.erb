@@ -5,6 +5,9 @@
 <% form_for @bounce, :url => { :action => "create" } do |f| %>
   <%= f.label :url, 'URL' %>
   <%= f.text_field :url %><br />
+
+  <%= f.label :public_id, 'Custom id' %>
+  <%= f.text_field :public_id %><br />
   
   <%= f.submit("Create") %>
 <% end %>

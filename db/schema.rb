@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091212074651) do
+ActiveRecord::Schema.define(:version => 20091229075313) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20091212074651) do
     t.integer  "views"
     t.integer  "user_id"
     t.boolean  "published"
+    t.integer  "order"
   end
 
   create_table "blogs_tags", :id => false, :force => true do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20091212074651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "published"
+    t.integer  "order"
   end
 
   create_table "portfolios_skills", :id => false, :force => true do |t|

@@ -1,5 +1,5 @@
 <% @bounce.each do |bounce| %>
-  <%= link_to bounce.public_id, "http://simplic.it/#{bounce.public_id}" %> : <%= bounce.url %> : <%= bounce.clicks || '0' %><br />
+  <%= link_to bounce.public_id, "/#{bounce.public_id}" %> : <%= bounce.url %> : <%= bounce.clicks || '0' %><br />
 <% end %>
 <br />
 <br />

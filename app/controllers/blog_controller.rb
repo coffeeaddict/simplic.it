@@ -5,13 +5,13 @@ class BlogController < ApplicationController
   def index
     @blog = Blog.find :all,
       :conditions => { :published => true }, 
-      :order => "created_at DESC"
+      :order => "`order` ASC"
   end
 
   def rss
     @blog = Blog.find :all,
       :conditions => { :published => true }, 
-      :order => "created_at DESC"
+      :order => "`order` ASC"
 
     render :layout => false
   end
@@ -33,7 +33,7 @@ class BlogController < ApplicationController
   def admin
     return render(:status => 403, :text => "forbidden") unless current_user
 
-    @blog = Blog.all
+    @blog = Blog.all( :order => "`order` ASC" )
   end
 
   def edit
@@ -125,5 +125,19 @@ class BlogController < ApplicationController
          render(:partial => "tag", :locals => { :tag => tag })
        )
      }
+  end
+
+  def order 
+    count = 0
+
+    begin
+      params[:list].each { |id|
+        Blog.find(id).update_attributes( :order => ( count += 1 ) );
+      }
+    rescue
+      return render :text => "O_o somethings wrong"
+    end
+
+    render :text => "OK"
   end
 end

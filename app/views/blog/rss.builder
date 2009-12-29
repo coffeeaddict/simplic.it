@@ -9,7 +9,7 @@ xml.rss :version => "2.0", 'xmlns:content' => "http://purl.org/rss/1.0/modules/c
       xml.item do
         title = post.title
         unless post.subtitle and post.subtitle.empty?
-          title += " -- post.subtitle"
+          title += " -- #{post.subtitle}"
         end
 
         xml.title title
