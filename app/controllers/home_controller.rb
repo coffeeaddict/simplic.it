@@ -7,10 +7,10 @@ class HomeController < ApplicationController
 
       if bounce
 	bounce.increment!('clicks')
-	return redirect_to bounce.url, :status => 302
+	return redirect_to( bounce.url, :status => 302 )
 
       else
-	return render :text => "Not found", :status => 404
+	return render( :text => "Not found", :status => 404 )
 
       end
     end

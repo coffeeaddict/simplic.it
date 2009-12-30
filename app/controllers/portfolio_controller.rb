@@ -74,7 +74,7 @@ class PortfolioController < ApplicationController
         p = Portfolio.find(id).update_attributes( :order => ( count += 1 ) )
       }
     rescue
-      return render :text => "O_o somethings wrong..."
+      return render( :text => "O_o somethings wrong..." )
     end
 
     render :text => "OK"

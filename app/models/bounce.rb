@@ -15,7 +15,7 @@ class Bounce < ActiveRecord::Base
     # pick 6 random bits from the sha
     id = ""
     (0..6).each do |i|
-      id << long_digest[rand long_digest.length]
+      id << long_digest[rand(long_digest.length)]
     end
 
     self.public_id = id

@@ -4,7 +4,7 @@ class BounceController < ApplicationController
 
   def index
     if params[:id]
-      return redirect_to :action => "info", :id => params[:id]
+      return redirect_to( :action => "info", :id => params[:id] )
     end
 
     @bounce = Bounce.find(:all)
