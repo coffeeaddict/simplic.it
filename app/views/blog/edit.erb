@@ -34,23 +34,22 @@
       <% Tag.all.each do |tag| %>
         <%= render :partial => "tag", :locals => { :tag => tag } %>
       <% end %>
-
-
     </div>
-    <%= drop_receiving_element "available_tags",
-      :with => "'tag_id='+element.id.split('_').last()",
-      :url  => { :action => :drop_tag, :id => @blog.id }
-    %>
-    <div id="blog_tags">
+
+    <ul id="blog_tags">
       <strong>Blog tags:</strong><br />
       <% @blog.tags.each do |tag| %>
         <%= render :partial => "blog_tag", :locals => { :tag => tag } %>
       <% end %>
+    </ul>
+    <div id="add_tags">
+      <strong>Drag tags here to add</strong>
     </div>
-    <%= drop_receiving_element "blog_tags",
+    <%= drop_receiving_element "add_tags",
       :with => "'tag_id='+element.id.split('_').last()",
       :url  => { :action => :add_tag, :id => @blog.id }
     %>
+    <%= sortable_element "blog_tags", :url => { :action => "order_tags", :id => @blog.id } %>
   </div>
   <br style="clear: both;"/>
 

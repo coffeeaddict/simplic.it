@@ -342,14 +342,25 @@ div.blog ul {
 }
 
 
-div.tag { 
+div.tag, #blog_tags li { 
   display: block;
   border: solid black 1px;
   margin-bottom: 5px;
   padding-left: 3px;
+  cursor: pointer;
 }
 
-#available_tags, #blog_tags { 
+#blog_tags li a { 
+  float: right;
+  padding-right: 5px;
+}
+
+#blog_tags { 
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+#available_tags, #blog_tags, #add_tags { 
   float: left;
   width: 40%;
   border: dotted #777 1px;
@@ -357,7 +368,7 @@ div.tag {
   margin-right: 10px;
 }
 
-#blog_tags { 
+#add_tags { 
   padding-bottom: 100px;
 }
 
