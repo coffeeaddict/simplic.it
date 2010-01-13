@@ -90,10 +90,10 @@ class BlogController < ApplicationController
   end
 
   def add_tag
-    b = Blog.find(params[:id])
+    @blog = Blog.find(params[:id])
     tag = Tag.find(params[:tag_id])
-    unless b.tags.include? tag
-      b.tags << tag 
+    unless @blog.tags.include? tag
+      @blog.tags << tag 
       render(:update) { |page|
         page.insert_html( :bottom, 'blog_tags',
           render(:partial => "blog_tag", :locals => { :tag => tag })
@@ -112,7 +112,7 @@ class BlogController < ApplicationController
     b.tags = b.tags - [ tag ]
 
     render(:update) { |page|
-      page.remove "project_tag_#{tag.id}"
+      page.remove "blog_tag_#{tag.id}"
       page.replace_html 'message', 'OK!'
     }
   end
@@ -138,6 +138,16 @@ class BlogController < ApplicationController
       return render(:text => "O_o somethings wrong")
     end
 
+    render :text => "OK"
+  end
+
+  def order_tags
+    blog = Blog.find(params[:id])
+    blog.tags = []
+    params[:blog_tags].each { |id|
+      blog.tags << Tag.find(id)
+    }
+    
     render :text => "OK"
   end
 end
