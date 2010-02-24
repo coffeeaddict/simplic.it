@@ -1,0 +1,46 @@
+<style>
+  td { padding-left: 20px; }
+</style>
+<h2>Strong passphrases for the masses</h2>
+
+
+<p>Pass phrases are strong. And when not to complicated easy to
+remember. This lil' tool will present you with then strong pass
+phrases.</p>
+
+<p>Each phrase is cooked up of 2 dictionary words no longer then 7
+letters and combined with a conjunction (and or but you me we him the
+- +).</p>
+
+<p>After that the words in the pass phrase are made even stronger by
+adding fuzz and uppercasing the letter behind the fuzz.</p>
+
+<p>Just pick a sentence you can remember, remember the fuzz and you
+have a nice strong pass phrase. If you see no good ones, hit F5</p>
+
+<br /><br />
+<table>
+  <tr>
+    <th>#</th>
+    <th>Pass phrase</th>
+    <th>Original phrase</th>
+  </tr>
+
+  <% count = 0 %>
+  <% @phrases.each { |phrase| %>
+    <tr>
+      <td><%= count += 1 %></td>
+      <td><%= phrase[0] %></td>
+      <td><%= phrase[1] %></td>
+    </tr>
+  <% } %>
+
+</table>
+
+<br /><br />
+
+<p>Sadly most of these pass phrases are no good on a lot of websites as the use 'disallowed' characters or are simply to long...</p>
+
+<br /><br />
+
+<%= link_to "Back", :action => :index %>
