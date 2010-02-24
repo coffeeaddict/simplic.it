@@ -43,6 +43,7 @@ doc\:guides=Generate Rails guides
 doc\:plugins=Generate documentation for all installed plugins
 doc\:plugins\:easy_auth=Generate documentation for the easy_auth plugin
 doc\:plugins\:one_train_working=Generate documentation for the one_train_working plugin
+doc\:plugins\:recaptcha=Generate documentation for the recaptcha plugin
 doc\:rails=Build the RDOC HTML Files
 doc\:reapp=Force a rebuild of the RDOC files
 doc\:rerails=Force a rebuild of the RDOC files

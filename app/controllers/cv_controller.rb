@@ -9,7 +9,7 @@ class CvController < ApplicationController
 
     headers["content-disposition"] = "attachment; filename=hartog.de.mik.CV.doc"
 
-    render :template => "resume/index",
+    render :template => "cv/index",
       :layout => false,
       :content_type => "application/ms-word"
   end
