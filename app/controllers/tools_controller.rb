@@ -20,7 +20,7 @@ class ToolsController < ApplicationController
     
     word1 = words[rand(words.length)]
     word2 = words[rand(words.length)]
-    con = CONJUNCTIONS[rand(CONJUNCTIONS.length)]
+    con   = CONJUNCTIONS[rand(CONJUNCTIONS.length)]
 
     return [ 
       [ strong_word(word1), con, strong_word(word2) ].join(" "),
@@ -61,5 +61,5 @@ class ToolsController < ApplicationController
     return letters.flatten.join("");
   end
 
-  private :get_passphrase, :strong_word
+  private :get_words, :get_passphrase, :strong_word
 end
