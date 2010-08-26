@@ -30,7 +30,7 @@ have a nice strong pass phrase. If you see no good ones, hit F5</p>
   <% @phrases.each { |phrase| %>
     <tr>
       <td><%= count += 1 %></td>
-      <td><%= phrase[0] %></td>
+      <td><%= h phrase[0] %></td>
       <td><%= phrase[1] %></td>
     </tr>
   <% } %>
@@ -40,6 +40,12 @@ have a nice strong pass phrase. If you see no good ones, hit F5</p>
 <br /><br />
 
 <p>Sadly most of these pass phrases are no good on a lot of websites as the use 'disallowed' characters or are simply to long...</p>
+
+<br /><br />
+
+<h3>The code behind it</h3>
+
+<script src="http://gist.github.com/546100.js?file=passphrase_generator.rb"></script>
 
 <br /><br />
 
