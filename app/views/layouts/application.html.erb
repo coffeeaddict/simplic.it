@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webapp</title>
+  <%= stylesheet_link_tag "screen" %>
+  <!--[if lt IE 8]>
+    <%= stylesheet_link_tag "ie" %>
+  <![endif]-->
+  <%= stylesheet_link_tag "style"%>
+
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  
+  <div class="container">
+    <%= image_tag "logo.png" %>
+    <ul class="menu">
+      <%= menu_link "Home", :action => :index, :controller => :home %>
+      <%= menu_link "Freelance", :action => :freelance, :controller => :home %>
+      <%= menu_link "Resume", :action => :resume, :controller => :home %>
+      <%= menu_link "LiveLine", :controller => :liveline %>
+      <%= menu_link "Tools", :controller => :contact %>
+      <%= menu_link "Contact", :controller => :contact %>
+    </ul>
+    <br class="clear" />
+    <br />
+
+    <!-- start content -->
+    <%= yield %>
+    
+  </div>
+  <br />
+
+  <div class="small footer">
+    <div class="container">
+        
+      <span style="float: left;">
+This site was lovingly hand-crafted on top of <%= link_to "#rails3", "http://rubyonrails.org/" %>.
+Uses <%= link_to "#blueprintcss", "http://www.blueprintcss.org/" %>
+   and <%= link_to "#prototypeJS", "http://prototypejs.org" %>.
+Relax, it runs on <%= link_to "#couchDB", "http://couchdb.apache.org" %>.
+The source might just be available on <%= link_to "#github", "https://github.com/coffeeaddict/simplic.it" %>.
+Everything is <%= link_to "pure copyright", :controller => :home, :action => :copyright %>.
+      </span>
+      <span style="float: right;">&pi;</span>  
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+    document.observe("dom:loaded", function() {
+      // observe the menu for mouse overs
+      $$('ul.menu li').each(function(item) {
+        if ( !item.hasClassName("selected") ) {
+          item.observe("mouseover", function() {
+            item.setStyle('color: #36576b');
+          });
+          item.observe("mouseout", function() {
+            item.setStyle('color: white');
+          });
+        }
+      });
+
+      // observer all elements with a data-url, the want to be clicked
+      $$('*[data-url]').each(function(item) {
+        item.observe("click", function() { document.location.href=item.getAttribute("data-url"); });
+        item.setStyle('cursor: pointer');
+      });
+    });
+  </script>
+</body>
+</html>
