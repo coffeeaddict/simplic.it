@@ -1,21 +1,14 @@
-<div class="span-24">
-  <div class="span-17 append-1 colborder">
-    <h1><%= controller.name %> <%= params[:action]%></h1>
-  </div>
-  <div class="span-6 push-1 last">
-    &nbsp;
-  </div>
+<div class="span-24 last">
+  <h1><%= @page.title %></h1>
 </div>
 
 <div class="span-24">
-  <div class="span-17 append-1 colborder">
-    <h2>About</h2>
-    <%= lorem rand(3)+1 %>
-    <h2>And so on</h2>
-    <%= lorem rand(3)+1 %>
+  <div class="<%= @page.info ? "span-17 append-1 colborder" : "span-24 last" %>">
+    <%= @page.contents.html_safe %>
   </div>
-  <div class="span-6 push-1 last" style="margin-top: 10px;">
-    <h3>Lesser info</h3>
-    <%= lorem 2 %>
-  </div>
+  <% if @page.info %>
+    <div class="span-6 push-1 last" style="margin-top: 10px;">
+      <%= @page.info.html_safe %>
+    </div>
+  <% end %>
 </div>

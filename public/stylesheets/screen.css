@@ -264,8 +264,10 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
 
-/* fancy-type */
+/* fancy-type 
 p + p {text-indent:2em;margin-top:-1.5em;}
+*/
+p { margin-top: -1.5em; }
 form p + p {text-indent:0;}
 .alt {color:#666;font-family:"Warnock Pro", "Goudy Old Style","Palatino","Book Antiqua", Georgia, serif;font-style:italic;font-weight:normal;}
 .dquo {margin-left:-.5em;}
