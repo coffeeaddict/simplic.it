@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Webapp</title>
+  <meta charset="utf-8">
+  <title>{ Simplic.IT } - <%= controller.name %> - <%= params[:action] %></title>
   <%= stylesheet_link_tag "screen" %>
   <!--[if lt IE 8]>
     <%= stylesheet_link_tag "ie" %>
@@ -32,18 +33,12 @@
   </div>
   <br />
 
-  <div class="small footer">
+  <div class="footer">
     <div class="container">
-        
       <span style="float: left;">
-This site was lovingly hand-crafted on top of <%= link_to "#rails3", "http://rubyonrails.org/" %>.
-Uses <%= link_to "#blueprintcss", "http://www.blueprintcss.org/" %>
-   and <%= link_to "#prototypeJS", "http://prototypejs.org" %>.
-Relax, it runs on <%= link_to "#couchDB", "http://couchdb.apache.org" %>.
-The source might just be available on <%= link_to "#github", "https://github.com/coffeeaddict/simplic.it" %>.
-Everything is <%= link_to "pure copyright", :controller => :home, :action => :copyright %>.
+Not <%= link_to "#acta", :controller => :home, :action => :copyright %> compliant.
       </span>
-      <span style="float: right;">&pi;</span>  
+      <span style="float: right;">&pi;</span>
     </div>
   </div>
   

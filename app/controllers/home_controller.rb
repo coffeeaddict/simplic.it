@@ -1,4 +1,10 @@
 class HomeController < ApplicationController
+  before_filter :set_menu
+
+  def set_menu
+    @menu_select = { :controller => "home" }
+  end
+
   def index
   end
   
@@ -9,5 +15,6 @@ class HomeController < ApplicationController
   def resume
   end
 
-  def copyright; end
+  def copyright
+  end
 end

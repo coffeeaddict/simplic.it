@@ -8,7 +8,10 @@ module ApplicationHelper
 
     elsif opts[:action].to_s == params[:action] and opts[:controller].to_s == controller.name
       selected = true
-
+    
+    elsif @menu_select and ( opts[:controller] == @menu_select[:controller] )
+      selected = true
+      
     end
     
     "<li #{selected ? "class='selected'" : ""} data-url='#{url_for(opts)}'>#{text}</li>".html_safe
