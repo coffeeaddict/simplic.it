@@ -1,7 +1,0 @@
-<% @bounce.each do |bounce| %>
-  <%= link_to bounce.public_id, "/#{bounce.public_id}" %> : <%= bounce.url %> : <%= bounce.clicks || '0' %><br />
-<% end %>
-<br />
-<br />
-
-<%= link_to "Nieuw", :action => "new" %><br />
