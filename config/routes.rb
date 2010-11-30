@@ -6,9 +6,9 @@ Webapp::Application.routes.draw do
     end
   end
   
-  namespace :liveline do
-    match :index
-  end
+  #match '/life_line' => 'life_line_controller/#index'
+  #match '/life_line/index' => 'life_line_controller_/#index'
+  #match '/life_line/origin/:origin' => 'life_line_controller#origin'
   
   namespace :tools do
     match :index
@@ -71,5 +71,5 @@ Webapp::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  match ':controller(/:action(/:id(.:format)))'
 end

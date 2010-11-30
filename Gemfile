@@ -26,9 +26,12 @@ gem 'couchrest_model'
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
+gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
+gem 'twitter'
+gem 'simple-rss'
+gem 'feed_me', :git => 'git://github.com/jnicklas/feed_me.git'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

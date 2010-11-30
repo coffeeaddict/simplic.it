@@ -66,3 +66,27 @@ dl li {
 #what { 
   vertical-align: top;
 }
+
+.life_line {
+  min-height: 40px;
+  border-bottom: solid 1px #ccf;
+  margin-bottom: 5px;
+  padding: 2px;
+  padding-right: 34px;
+}
+
+.twitter {
+  background: url('/images/icons/small/twitter.png') no-repeat top right;
+}
+
+.flickr {
+  background: url('/images/icons/small/flickr.png') no-repeat top right;
+}
+
+.github {
+  background: url('/images/icons/small/git.png') no-repeat top right;
+}
+
+.bitly {
+  background: url('/images/icons/small/bit.ly.png') no-repeat top right;
+}

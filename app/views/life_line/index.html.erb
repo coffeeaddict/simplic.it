@@ -1,0 +1,20 @@
+<h1>LifeLine</h1>
+
+<div class="span-15">
+<% @life_lines.each do |line| %>
+<div class="life_line <%= line.origin %>">
+  <% unless line.title.blank? %><h3><%= h line.title %></h3><% end %>
+  
+  <% if line.origin == "flickr" %>
+    <%= image_tag line.contents, :width => 500 %>
+  <% else %>
+    <%= line.html_safe? ? line.contents.html_safe : line.contents %>
+  <% end %>
+  <br />
+  <span class="small"><%= line.publish_time %></span>
+</div>
+<% end %>
+</div>
+
+<div id="info" class="span-9 push-1 last">
+</div>
