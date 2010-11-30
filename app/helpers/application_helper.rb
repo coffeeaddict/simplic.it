@@ -13,7 +13,7 @@ module ApplicationHelper
       selected = true
       
     end
-    
+
     "<li #{selected ? "class='selected'" : ""} data-url='#{url_for(opts)}'>#{text}</li>".html_safe
   end
   

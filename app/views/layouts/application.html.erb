@@ -16,22 +16,68 @@
   
   <div class="container">
     <%= image_tag "logo.png" %>
-    <ul class="menu">
+    <ul class="menu" id="mainmenu">
       <%= menu_link "Home", :action => :index, :controller => :home %>
       <%= menu_link "Freelance", :action => :freelance, :controller => :home %>
       <%= menu_link "Resume", :action => :resume, :controller => :home %>
       <%= menu_link "LiveLine", :controller => :liveline %>
-      <%= menu_link "Tools", :controller => :contact %>
-      <%= menu_link "Contact", :controller => :contact %>
+      <%= menu_link "Tools", :controller => :tools %>
+      <%= menu_link "Contact", :controller => :home, :action => :contact %>
     </ul>
+
     <br class="clear" />
     <br />
 
     <!-- start content -->
     <%= yield %>
-    
+    <br class="clear"/><br />
+
+    <div class="span-24 last push-1">
+      <div style="float: right; display: inline-block;">
+        <span id="what">find me on:</span>
+          <%= link_to image_tag("icons/small/git.png",
+                                :border => 0,
+                                :alt => "github" ),
+                "http://github.com/coffeeaddict",
+                :onMouseOver => "$('what').update('fork me on:');"
+          %>
+          <%= link_to image_tag("icons/small/twitter.png",
+                                :border => 0,
+                                :alt => "twitter"),
+                "http://twitter.com/coffeeaddict_nl",
+                :onMouseOver => "$('what').update('follow me on:');"
+           %>
+          <%= link_to image_tag("icons/small/linkedin.png",
+                                :border => 0,
+                                :alt => "Linked-In"),
+                "http://www.linkedin.com/in/hartog",
+                :onMouseOver => "$('what').update('join me on:');"
+          %>
+          <%= link_to image_tag("icons/small/facebook.png",
+                                :border => 0,
+                                :alt => "Facebook"),
+                "http://www.facebook.com/coffeeaddictnl",
+                :onMouseOver => "$('what').update('befriend me on:');"
+          %>
+          <%= link_to image_tag("icons/small/flickr.png",
+                                :border => 0,
+                                :alt => "Flickr"),
+                "http://www.flickr.com/photos/coffeeaddict_nl",
+                :onMouseOver => "$('what').update('view me on:');"
+          %>
+          <!--
+          # TODO; make an RSS feed
+          <%= link_to image_tag("icons/small/rss.png",
+                                :border => 0,
+                                :alt => "RSS"),
+                "/rss",
+                :onMouseOver => "$('what').update('read me on:');"
+          %>
+          -->
+      </div>
+    </div>    
+    <br class="clear" />
   </div>
-  <br />
 
   <div class="footer">
     <div class="container">
@@ -61,6 +107,17 @@ Not <%= link_to "#acta", :controller => :home, :action => :copyright %> complian
         item.observe("click", function() { document.location.href=item.getAttribute("data-url"); });
         item.setStyle('cursor: pointer');
       });
+
+      // select home if nothing was selected
+      items = $$('ul#mainmenu > li')
+      var has_selected = false
+      items.each( function(item) {
+        if ( item.hasClassName("selected") ) { has_selected = true }
+      });
+
+      if ( has_selected == false ) {
+        items.first().addClassName("selected");
+      }
     });
   </script>
 </body>

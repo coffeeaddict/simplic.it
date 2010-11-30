@@ -1,13 +1,16 @@
 Webapp::Application.routes.draw do
   namespace :home do
-    match :index, :freelance, :resume, :copyright
+    match :index
+    %w( freelance resume copyright contact ).each do |action|
+      match "#{action}" => { :controller => :home, :action => :index }
+    end
   end
   
   namespace :liveline do
     match :index
   end
   
-  namespace :contact do
+  namespace :tools do
     match :index
   end
   

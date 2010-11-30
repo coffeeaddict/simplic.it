@@ -62,3 +62,7 @@ dl {
 dl li {
   padding: 3px 0;
 }
+
+#what { 
+  vertical-align: top;
+}

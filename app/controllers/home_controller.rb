@@ -9,6 +9,7 @@ class HomeController < ApplicationController
 
   def index
     @page = Page.find_by_path "/home/index"
+    Rails.logger.info "A: #{params[:action]}"
   end
   
   def freelance
@@ -22,10 +23,11 @@ class HomeController < ApplicationController
     
     render :action => :index
   end
-  
-  def resume
-  end
+  alias_method :resume, :freelance
+  alias_method :contact, :freelance
 
   def copyright
+    @page = Page.find_by_path "/home/copyright"
+    render :action => :index
   end
 end
