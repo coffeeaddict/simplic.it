@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   
   # show my name
   def name
-    self.class.name.downcase.gsub(/controller$/, "")
+    self.class.name.underscore.gsub(/_controller$/, "")
   end  
+  
+  # generic not found
+  def not_found
+    render(:file => "404.html", :layout => true, :status => 404)
+  end
 end

@@ -1,12 +1,13 @@
 class HomeController < ApplicationController
-  require 'lipsum'
-  
-  before_filter :set_menu
+  require 'lipsum'  
 
-  def set_menu
-    @menu_select = { :controller => "home" }
+  def sub_menu
+    [ ['Resume', :resume],
+      ['Freelance', :freelance],
+      ['Contact', :contact]
+    ]
   end
-
+  
   def index
     @page = Page.find_by_path "/home/index"
     Rails.logger.info "A: #{params[:action]}"
@@ -18,16 +19,16 @@ class HomeController < ApplicationController
       :title => "Lorem ipsum dolor sit random",
       :contents => l.join("<br /><br />"),
       :info => "<h3>More info</h3><p>" + Lipsum.paragraph +
-               "</p><span class='small alt'>do it. hit F5</span>" 
+               "</p><span class='small alt'>Do it. Hit F5 &nbsp; &nbsp; :)</span>" 
     )
     
     render :action => :index
   end
   alias_method :resume, :freelance
   alias_method :contact, :freelance
-
+  
   def copyright
     @page = Page.find_by_path "/home/copyright"
     render :action => :index
-  end
+  end  
 end

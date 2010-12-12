@@ -13,18 +13,23 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  
   <div class="container">
     <%= image_tag "logo.png" %>
     <ul class="menu" id="mainmenu">
-      <%= menu_link "Home", :action => :index, :controller => :home %>
-      <%= menu_link "Freelance", :action => :freelance, :controller => :home %>
-      <%= menu_link "Resume", :action => :resume, :controller => :home %>
+      <%= menu_link "Home", :controller => :home %>
+      <%= menu_link "Blog", :controller => :blog %>
       <%= menu_link "LifeLine", :controller => :life_line %>
       <%= menu_link "Tools", :controller => :tools %>
-      <%= menu_link "Contact", :controller => :home, :action => :contact %>
+      <!-- %= menu_link "Contact", :controller => :home, :action => :contact % -->
     </ul>
-
+    <% if controller.respond_to? :sub_menu %>
+    
+    <ul class="submenu" id="submenu">
+      <% controller.sub_menu.each do |name, action| %>
+        <%= menu_link name, :action => action %>
+      <% end %>
+    </ul>
+    <% end %>
     <br class="clear" />
     <br />
 
@@ -82,7 +87,7 @@
   <div class="footer">
     <div class="container">
       <span style="float: left;">
-Not <%= link_to "#acta", :controller => :home, :action => :copyright %> compliant.
+        Not <%= link_to "#acta", :controller => :home, :action => :copyright %> compliant.
       </span>
       <span style="float: right;">&pi;</span>
     </div>
@@ -102,6 +107,17 @@ Not <%= link_to "#acta", :controller => :home, :action => :copyright %> complian
         }
       });
 
+      $$('ul.submenu li').each(function(item) {
+        if ( !item.hasClassName("selected") ) {
+          item.observe("mouseover", function() {
+            item.setStyle('border-width: 3px;');
+          });
+          item.observe("mouseout", function() {
+            item.setStyle('border-width: 1px;');
+          });
+        }
+      });
+      
       // observer all elements with a data-url, the want to be clicked
       $$('*[data-url]').each(function(item) {
         item.observe("click", function() { document.location.href=item.getAttribute("data-url"); });

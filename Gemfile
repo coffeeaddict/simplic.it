@@ -1,17 +1,17 @@
 source 'http://rubygems.org'
 
-# gem 'rails', '3.0.3'
-gem 'railties'
-gem 'activeresource'
-gem 'actionmailer'
-gem 'actionpack'
-gem 'activesupport'
-gem 'activemodel'
+gem 'rails', '3.0.3'
+#gem 'railties'
+#gem 'activeresource'
+#gem 'actionmailer'
+#gem 'actionpack'
+#gem 'activesupport'
+#gem 'activemodel'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# gem 'mysql2'
+gem 'sqlite3-ruby', :require => "sqlite3"
 gem 'couchrest_model'
 
 # Use unicorn as the web server

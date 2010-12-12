@@ -4,6 +4,11 @@ body {
   
 }
 
+h1.page_title {
+  font-size: 32pt;  
+  color: #102b79;
+}
+
 ul.menu {
   padding: 0;
   margin: 0;
@@ -27,6 +32,34 @@ ul.menu li {
 ul.menu li.selected {
   background: #8698cb;
   border: solid white 1px;  
+}
+
+ul.submenu {
+  padding: 0;
+  margin: 0;
+  padding-top: 4px;
+  padding-left: 20px;  
+  margin-left: 8px;
+  color: #333;
+  font-size: 14px;  
+  list-style-type: none;
+  display: block;
+  height: 25px;  
+  
+}
+
+ul.submenu li {
+  display: inline-block;
+  height: 20px;
+  width: 90px;
+  padding-left: 1em;  
+  margin: -1px;
+  margin-left: 1em;
+  border-bottom: solid #333 1px;  
+}
+
+ul.submenu li.selected {
+  border-width: 3px;
 }
 
 p {
@@ -69,10 +102,13 @@ dl li {
 
 .life_line {
   min-height: 40px;
-  border-bottom: solid 1px #ccf;
-  margin-bottom: 5px;
+  border-bottom: solid 1px #ddd;
+  padding-bottom: 25px;
+  margin-top: 25px;
+  padding-top: 10px;
   padding: 2px;
   padding-right: 34px;
+  font-size: 12pt;
 }
 
 .twitter {
@@ -89,4 +125,53 @@ dl li {
 
 .bitly {
   background: url('/images/icons/small/bit.ly.png') no-repeat top right;
+}
+
+.tag a {
+  color: black;
+}
+
+.size-1 {
+  font-size: 8pt;
+}
+
+.size-2 {
+  font-size: 8.5pt;
+}
+
+.size-3 {
+  font-size: 9pt;
+}
+
+.size-4 {
+  font-size: 9.5pt;
+}
+
+.size-5 {
+  font-size: 10pt;
+}
+
+.size-6 {
+  font-size: 10.5pt;
+}
+
+.size-7 {
+  font-size: 11pt;
+}
+
+.size-8 {
+  font-size: 12pt;
+}
+
+.size-9 {
+  font-size: 12.5pt;
+}
+
+.size-10 {
+  font-size: 13pt;
+}
+
+.more_link {
+  float: right;
+  font-size: 12.5pt;
 }
