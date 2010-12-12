@@ -16,4 +16,8 @@ class LifeLine < CouchRest::Model::Base
   def html_safe?
     %w(bitly flickr twitter github).include? origin
   end
+  
+  def self.all_by_origin origin
+    all.select { |ll| ll.origin == origin }
+  end
 end
