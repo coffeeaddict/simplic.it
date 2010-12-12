@@ -2,5 +2,7 @@
   <h2><%= blog.title %></h2>
   <h3><%= blog.subtitle %></h3>
   <%= excerpt(blog) %>
+  <h4 style="display: inline-block;">Tags : </h4>
+  <% blog.tags.each do |tag| %> <%= render tag %> <% end %>
   <hr />
 <% end %>
