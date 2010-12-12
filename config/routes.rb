@@ -1,4 +1,9 @@
 Webapp::Application.routes.draw do
+  
+  match '/blog' => "blog#index"
+  match '/blog/:url_key' => "blog#by_url_key"
+  match '/blog/tag/:tag' => "blog#by_tag"
+  
   namespace :home do
     match :index
     %w( freelance resume copyright contact ).each do |action|

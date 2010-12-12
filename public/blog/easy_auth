@@ -1,0 +1,29 @@
+<p>...that was the goal.</p>
+<p>I had a glance over at <a href="http://www.themomorohoax.com/2009/02/21/rails-2-3-authentication-comparison">this lil' comparison</a> when I was looking for a good authentication plugin (I like plugins, they save me code writing) and I gloomed.</p>
+<p>All I wanted was something to authenticate a user with. Something that has knowledge of a username and password and can combine the two together so that you can say; "That girl at the other end is Alice after all".</p>
+
+<p>And I wanted a mechanism to do authorization so that I could grant Bob access here and deny that same access to Alice. The granularity of the authorization I needed was 'user' and 'admin'. Blunt, effective and useful :-)  I choose to use <a href="http://github.com/platform45/easy_roles">easy_roles</a> for that. Although I think the serialized array could have been better done, it served my purposes.</p>
+
+<!-- more -->
+
+<p>But I still had no authentication framework. So I stumbed out my own plugin using the methods of authentication I have used many times before. There is a user, a password and some salt. Mix the password and the salt to have some sort of security in your database and search the user by his username and salted version of the supplied password.If you can find something, the user is authentic (or has stolen the username and password, but then the owner is an ass so I couldn't care less)  The salt is added in the config/environment.rb like so:</p>
+<pre><code>  EASY_AUTH_SALT = '# the output of rake secret here #'
+</code></pre>
+<p>I wanted the users of the plugin to have control over the model they would choose as their user model. I would call it User, but names like Role or WebUser are not unthinkable so I made the plugin hookup on request. This is done by calling the acts_as_authentic method.</p>
+<pre><code>  class User &lt; ActiveRecord::Base
+    acts_as_authentic
+  end
+</code></pre>
+<p>This will do a number of things for the User model.</p>
+<ul>
+<li>It will add 2 accessors, namely 'password_confirm' and 'new_password' so the user can confirm his first and later passwords</li>
+<li>It will add a class method called authenticate which takes the username and a password as its argument and will perform a find for you. Returning the user object or nil</li>
+<li>It will add a class method called hashed_password which you can feed a string which will then be salted and hex'ed and returned</li>
+</ul>
+<p>For the integration with easy_roles (and perhaps others) I wanted my Rails apps to have a 'current_user'.  But is it always necessary to have a current user? r is it perhaps only necessary in shielded parts of your app? You get to decide by nominating a controller as an authenticator by using 'acts_as_authenticator_for' and specifying the model that is to be the current user.</p>
+<pre><code>  class AdminController &lt; ApplicationController
+    acts_as_authenticator_for User
+  end
+</code></pre>
+<p>All the things you need like: reset password, signup, login &amp; logout are left as an exercise for the developer. You may have needs I don't know about.</p>
+

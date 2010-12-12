@@ -1,0 +1,5 @@
+<p>I can't figure out why the Rails core team hasn't fixed this yet...</p>
+<p>The form_authentication_token is composed of Base64 and it kills some Internet Explorer non-Browsers when the Base64 contains '=', '+' or '/' (which happens with Base64 sometimes).</p>
+<p>The token is generated using <a href="http://railsapi.com/doc/rails-v2.3.5/classes/ActiveSupport/SecureRandom.html">ActiveSupport::SecureRandom</a>. It hands out a method called base64(). And, here is the surprise, it also hands out a method called hex(). Why the core team hasn't changed the base64(32) to hex(32) some odd releases of Rails ago is beyond me.</p>
+<p>So there is a plugin (by me) that does it for you: http://github.com/coffeeaddict/one_train_working</p>
+<p>Finding a sound name wasn't easy, it took some reading of the almighty wikipedia, but I have <a href="http://en.wikipedia.org/wiki/Token_(railway_signalling)#Token_only">found this</a>.</p>

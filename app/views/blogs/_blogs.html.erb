@@ -1,0 +1,6 @@
+<% @blogs.each do |blog| %>
+  <h2><%= blog.title %></h2>
+  <h3><%= blog.subtitle %></h3>
+  <%= excerpt(blog) %>
+  <hr />
+<% end %>
