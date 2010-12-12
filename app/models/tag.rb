@@ -12,7 +12,7 @@ class Tag < ActiveRecord::Base
   def score
     total   = BlogTag.count
     
-    return 2 if total < 30
+    return 2 if total < 20
     
     me      = BlogTag.where( :tag_id => self.id ).count
     percent = total / 100.0
