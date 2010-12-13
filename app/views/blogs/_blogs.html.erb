@@ -1,6 +1,6 @@
 <% @blogs.each do |blog| %>
-  <h2><%= blog.title %></h2>
-  <h3><%= blog.subtitle %></h3>
+  <h2 class="page_title">~> <%= blog.title %></h2>
+  <h3 class="alt"><%= blog.subtitle %><br /><br /></h3>
   <%= excerpt(blog) %>
   <h4 style="display: inline-block;">Tags : </h4>
   <% blog.tags.each do |tag| %> <%= render tag %> <% end %>
