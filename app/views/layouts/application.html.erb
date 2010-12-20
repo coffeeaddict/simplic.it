@@ -146,7 +146,7 @@
               lang: block.getAttribute("language")
             },
             onSuccess: function(response) {
-              block.update(response.responseText);
+              block.replace(response.responseText);
             }
           });
         }
