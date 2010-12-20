@@ -4,6 +4,16 @@ body {
   
 }
 
+pre { 
+  display: inline-block;
+}
+
+p code { 
+  background: #b9cafd;
+  padding: 2px 3px;
+}
+
+
 h1.page_title {
   font-size: 32pt;  
   color: #102b79;
