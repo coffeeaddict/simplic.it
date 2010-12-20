@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer">1</category-id>
+  <created-at type="datetime">2008-04-11T11:12:39+02:00</created-at>
+  <id type="integer">2</id>
+  <link>http://gbo.overheid.nl/</link>
+  <name>GBO.Overheid</name>
+  <updated-at type="datetime">2008-04-11T11:12:39+02:00</updated-at>
+</favorite>

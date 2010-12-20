@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">4</blog-id>
+  <comment>Some of our customers use windows.  I've never run across this problem, and the only mention of it is a comment on an old ticket for an unrelated issue (https://rails.lighthouseapp.com/projects/8994/tickets/2177).  
+
+Thanks for posting your plugin. I've recently been struggling with similar base64 issues (in cases where a random hex wouldn't make sense), so I can see why this might cause problems.  I'm not sure why base64 is even used, I seem to recall using SHA hex strings when I wrote it.  Patches do help move the contribution process long though.</comment>
+  <created-at type="datetime">2010-01-02T11:01:06+01:00</created-at>
+  <email>technoweenie@gmail.com</email>
+  <id type="integer">5</id>
+  <name>rick</name>
+  <updated-at type="datetime">2010-01-02T11:01:06+01:00</updated-at>
+  <website></website>
+</comment>

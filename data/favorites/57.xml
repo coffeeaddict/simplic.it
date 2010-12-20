@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2009-02-12T09:46:09+01:00</created-at>
+  <id type="integer">57</id>
+  <link>http://www.redbubble.com/sell/sell-your-photos</link>
+  <name>Red Bubble - fotos verkopen</name>
+  <updated-at type="datetime">2009-02-12T09:46:09+01:00</updated-at>
+</favorite>

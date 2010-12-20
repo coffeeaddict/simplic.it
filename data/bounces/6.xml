@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bounce>
+  <clicks type="integer">2</clicks>
+  <created-at type="datetime">2009-12-10T14:11:56+01:00</created-at>
+  <id type="integer">6</id>
+  <public-id>d6bd7b8</public-id>
+  <updated-at type="datetime">2009-12-10T14:12:47+01:00</updated-at>
+  <url>http://github.com/coffeeaddict/import-export</url>
+</bounce>

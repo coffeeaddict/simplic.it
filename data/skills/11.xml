@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skill>
+  <created-at type="datetime">2009-12-11T11:53:12+01:00</created-at>
+  <id type="integer">11</id>
+  <name>WordPress Themes</name>
+  <updated-at type="datetime">2009-12-11T11:53:12+01:00</updated-at>
+  <url>http://codex.wordpress.org/Theme_Development</url>
+</skill>

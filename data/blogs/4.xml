@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;I can't figure out why the Rails core team hasn't fixed this yet...&lt;/p&gt;
+&lt;p&gt;The form_authentication_token is composed of Base64 and it kills some Internet Explorer non-Browsers when the Base64 contains '=', '+' or '/' (which happens with Base64 sometimes).&lt;/p&gt;
+&lt;p&gt;The token is generated using &lt;a href="http://railsapi.com/doc/rails-v2.3.5/classes/ActiveSupport/SecureRandom.html"&gt;ActiveSupport::SecureRandom&lt;/a&gt;. It hands out a method called base64(). And, here is the surprise, it also hands out a method called hex(). Why the core team hasn't changed the base64(32) to hex(32) some odd releases of Rails ago is beyond me.&lt;/p&gt;
+&lt;p&gt;So there is a plugin (by me) that does it for you: http://github.com/coffeeaddict/one_train_working&lt;/p&gt;
+&lt;p&gt;Finding a sound name wasn't easy, it took some reading of the almighty wikipedia, but I have &lt;a href="http://en.wikipedia.org/wiki/Token_(railway_signalling)#Token_only"&gt;found this&lt;/a&gt;.&lt;/p&gt;</content>
+  <created-at type="datetime">2009-12-11T13:43:01+01:00</created-at>
+  <id type="integer">4</id>
+  <order type="integer">7</order>
+  <published type="boolean">true</published>
+  <subtitle>stop the intermittent InvalidAuthToken error!</subtitle>
+  <title>One Train Working</title>
+  <updated-at type="datetime">2010-11-26T23:26:00+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">762</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">4</blog-id>
+      <created-at type="datetime">2009-12-11T14:00:18+01:00</created-at>
+      <id type="integer">6</id>
+      <name>One Train Working</name>
+      <tag-id type="">6</tag-id>
+      <updated-at type="datetime">2009-12-11T14:00:18+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">4</blog-id>
+      <created-at type="datetime">2009-12-11T13:59:57+01:00</created-at>
+      <id type="integer">3</id>
+      <name>rails</name>
+      <tag-id type="">3</tag-id>
+      <updated-at type="datetime">2009-12-11T13:59:57+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">4</blog-id>
+      <created-at type="datetime">2009-12-11T14:00:02+01:00</created-at>
+      <id type="integer">4</id>
+      <name>plugin</name>
+      <tag-id type="">4</tag-id>
+      <updated-at type="datetime">2009-12-11T14:00:02+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">4</blog-id>
+      <created-at type="datetime">2009-12-11T14:00:09+01:00</created-at>
+      <id type="integer">5</id>
+      <name>github</name>
+      <tag-id type="">5</tag-id>
+      <updated-at type="datetime">2009-12-11T14:00:09+01:00</updated-at>
+    </tag>
+  </tags>
+</blog>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">6</blog-id>
+  <comment>True, maar als je die features wilt dan neem je toch zeker PostgreSQL? De kracht en charme van MySQL zit em (imho) juist in de kleinschaligheid.
+
+En als het dan uit z'n jasje groeit dan kost het vanzelfsprekend moeite om te migreren, maar het is niet onmogelijk. PostgreSQL is dan wat mij betreft de betere kandidaat. Of http://www.enterprisedb.com/ natuurlijk ;)</comment>
+  <created-at type="datetime">2009-12-22T08:54:54+01:00</created-at>
+  <email>hartog.de.mik@simplic.it</email>
+  <id type="integer">4</id>
+  <name>Hartog</name>
+  <updated-at type="datetime">2009-12-22T08:54:54+01:00</updated-at>
+  <website>http://simplic.it/</website>
+</comment>

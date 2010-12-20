@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2009-02-20T10:57:36+01:00</created-at>
+  <id type="integer">59</id>
+  <link>http://www.slicehost.com/</link>
+  <name>Slice host - cloud computen voor mezelf?</name>
+  <updated-at type="datetime">2009-02-20T10:57:36+01:00</updated-at>
+</favorite>

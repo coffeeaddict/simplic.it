@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">4</blog-id>
+  <comment>they all use macs ;)</comment>
+  <created-at type="datetime">2009-12-22T08:20:23+01:00</created-at>
+  <email>npo@aol.com</email>
+  <id type="integer">2</id>
+  <name>giggy</name>
+  <updated-at type="datetime">2009-12-22T08:20:23+01:00</updated-at>
+  <website></website>
+</comment>

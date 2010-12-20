@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2009-01-09T17:36:35+01:00</created-at>
+  <id type="integer">49</id>
+  <link>http://icanhascheezburger.com/</link>
+  <name>Lolcats</name>
+  <updated-at type="datetime">2009-01-09T17:36:35+01:00</updated-at>
+</favorite>

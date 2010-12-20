@@ -1,0 +1,31 @@
+#!/usr/bin/perl -l
+
+use strict;
+use warnings;
+
+use XML::LibXML;
+
+my $file = shift @ARGV;
+my $element = shift @ARGV;
+
+my $parser = XML::LibXML->new();
+my $dom  = $parser->parse_file($file);
+
+my $xpc = XML::LibXML::XPathContext->new($dom->documentElement);
+
+
+my $defs = qq{xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://publisher.copernica.nl/?SOAPAPI=WSDL" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://publisher.copernica.nl/?SOAPAPI=WSDL"};
+
+foreach my $def ( split(/ /, $defs) ) {
+  if ( $def =~ /xmlns:/ ) {
+    my ( $ns, $url ) = $def =~ /xmlns:([^\=]+)=\"?([^\"]+)/;
+    print "Register $ns @ $url";
+    $xpc->registerNs($ns, $url);
+  }
+}
+
+foreach my $node ( $xpc->findnodes($element) ) {
+  print $node->nodeName;
+  print $node->serialize;
+}
+

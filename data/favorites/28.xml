@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer">1</category-id>
+  <created-at type="datetime">2008-04-22T17:28:22+02:00</created-at>
+  <id type="integer">28</id>
+  <link>http://www.3edge.com/</link>
+  <name>3edge</name>
+  <updated-at type="datetime">2008-04-22T17:28:22+02:00</updated-at>
+</favorite>

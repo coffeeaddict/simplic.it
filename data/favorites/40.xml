@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2008-12-16T10:02:48+01:00</created-at>
+  <id type="integer">40</id>
+  <link>http://eelkodv.hyves.nl/blog/</link>
+  <name>Eelko's Blog</name>
+  <updated-at type="datetime">2008-12-16T10:02:48+01:00</updated-at>
+</favorite>

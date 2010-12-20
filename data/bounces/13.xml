@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bounce>
+  <clicks type="integer">67</clicks>
+  <created-at type="datetime">2009-12-30T08:18:34+01:00</created-at>
+  <id type="integer">13</id>
+  <public-id>getcnctd</public-id>
+  <updated-at type="datetime">2010-11-23T06:47:22+01:00</updated-at>
+  <url>http://simplic.it/blog/view/get_connected</url>
+</bounce>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">4</blog-id>
+  <comment>I think the main reason you haven't seen is, is because the problem only occurs when the Base64 string contains chars which aren't appreciated by IE(6). This isn't always the case.
+
+The problem is so intermittent that it is accepted as just an other minor error  (thank you Microsoft!) by most users.</comment>
+  <created-at type="datetime">2010-01-02T16:45:06+01:00</created-at>
+  <email>hartog@simplic.it</email>
+  <id type="integer">6</id>
+  <name>Hartog</name>
+  <updated-at type="datetime">2010-01-02T16:45:06+01:00</updated-at>
+  <website>http://simplic.it/</website>
+</comment>

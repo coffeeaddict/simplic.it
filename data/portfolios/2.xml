@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portfolio>
+  <created-at type="datetime">2009-12-11T11:29:42+01:00</created-at>
+  <description>&lt;p&gt;Tijdens een opdracht voor &lt;a href="http://2organize.com"&gt;2organize&lt;/a&gt; kwam de noodzaak voor authenticatie naar boven binnen de Rails applicatie. Daarbij moesten 2 rollen bestaan. Alle bestaande plugins leken mij nodeloos complex en hadden bijzonder veel code voor een triviale bezigheid; authenticeren.&lt;/p&gt;
+&lt;p&gt;Ik had een plugin gevonden voor de rollen, &lt;a href="http://github.com/platform45/easy_roles"&gt;easy_roles&lt;/a&gt;, en wilde deze laten aansluiten op een kleine compacte plugin voor authenticatie. Na niet al te lang zoeken heb ik besloten om er zelf 1 te bouwen.&lt;/p&gt;
+&lt;p&gt;Mijn plan was om EasyAuth alleen de authenticatie van gebruikers te laten verzorgen, dit in tegenstelling tot bijna alle andere authenticatie plugins welke zich ook graag willen bezighouden met authorisatie. Dit om de complexiteit en de drempel om het te gaan gebruiken laag te houden. Authorisatie kan immers met dingen als easy_roles goed verzorgd worden.&lt;/p&gt;
+&lt;p&gt;1 toegevoegde functionaliteit die ongepland was; is het toevoegen van een routine waarmee de huidige gebruiker in alle controllers beschikbaar komt.&lt;/p&gt;
+&lt;p&gt;Wachtwoorden worden opgeslagen in de database, maar zeker niet in plain text. Ze worden feitelijk versleuteld (omdat EasyAuth een salt verplicht stelt voor de wachtwoorden) door middel van een SHA512 hexdigest. In de sessie zit alleen de ID van de gebruiker.&lt;/p&gt;
+&lt;p&gt;Een toevoeging die gedaan moet worden is het koppelen van de ID uit de sessie aan de gebruiker die de sessie heeft gemaakt, bijvoorbeeld op basis van IP adres.&lt;/p&gt;</description>
+  <id type="integer">2</id>
+  <image></image>
+  <name>EasyAuth</name>
+  <order type="integer">3</order>
+  <published type="boolean">true</published>
+  <updated-at type="datetime">2009-12-29T09:45:08+01:00</updated-at>
+  <url>http://github.com/coffeeaddict/easy_auth</url>
+  <skills type="array">
+    <skill>
+      <created-at type="datetime">2009-12-11T11:04:19+01:00</created-at>
+      <id type="integer">7</id>
+      <name>Ruby</name>
+      <portfolio-id type="">2</portfolio-id>
+      <skill-id type="">7</skill-id>
+      <updated-at type="datetime">2009-12-11T11:04:19+01:00</updated-at>
+      <url>http://ruby-lang.org/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T11:04:40+01:00</created-at>
+      <id type="integer">8</id>
+      <name>Rails</name>
+      <portfolio-id type="">2</portfolio-id>
+      <skill-id type="">8</skill-id>
+      <updated-at type="datetime">2009-12-11T11:04:40+01:00</updated-at>
+      <url>http://rubyonrails.org/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T11:34:41+01:00</created-at>
+      <id type="integer">9</id>
+      <name>Rails Plugins</name>
+      <portfolio-id type="">2</portfolio-id>
+      <skill-id type="">9</skill-id>
+      <updated-at type="datetime">2009-12-11T11:34:41+01:00</updated-at>
+      <url></url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T11:34:54+01:00</created-at>
+      <id type="integer">10</id>
+      <name>github</name>
+      <portfolio-id type="">2</portfolio-id>
+      <skill-id type="">10</skill-id>
+      <updated-at type="datetime">2009-12-11T11:34:54+01:00</updated-at>
+      <url>http://github.com/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T12:34:42+01:00</created-at>
+      <id type="integer">12</id>
+      <name>Security</name>
+      <portfolio-id type="">2</portfolio-id>
+      <skill-id type="">12</skill-id>
+      <updated-at type="datetime">2009-12-11T12:34:42+01:00</updated-at>
+      <url></url>
+    </skill>
+  </skills>
+</portfolio>

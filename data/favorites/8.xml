@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer">1</category-id>
+  <created-at type="datetime">2008-04-11T13:07:25+02:00</created-at>
+  <id type="integer">8</id>
+  <link>http://www.2organize.com/</link>
+  <name>2organize</name>
+  <updated-at type="datetime">2008-04-11T13:07:25+02:00</updated-at>
+</favorite>

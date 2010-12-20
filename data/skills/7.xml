@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skill>
+  <created-at type="datetime">2009-12-11T11:04:19+01:00</created-at>
+  <id type="integer">7</id>
+  <name>Ruby</name>
+  <updated-at type="datetime">2009-12-11T11:04:19+01:00</updated-at>
+  <url>http://ruby-lang.org/</url>
+</skill>

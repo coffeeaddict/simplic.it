@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;I was browsing through my lost tweets and found &lt;a href="http://twitter.com/mojombo/status/6916459916"&gt;this tweet by Mojombo&lt;/a&gt;, promoting &lt;a href="http://github.com/jferris/effigy"&gt;this wonderful idea called Effigy&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I am wonderfully amazed by the simplicity of the concept and wonder why I it hasn't been done before (although &lt;a href="http://wicket.apache.org/"&gt;Wicket&lt;/a&gt; does something similar). It gives true power to the View as seen as part of an MVC framework. The view tends to clutter with Control stuffs, but Effigy might have a good chance of stopping that.&lt;/p&gt;
+&lt;p&gt;I had to try it immediatly; and hooray! It works!&lt;/p&gt;
+&lt;p&gt;(what the docs of Effigy don't mention is that you need to add&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  config.gem "effigy"&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br /&gt; to you config/environment.rb, but that was quickly figures out)&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;I wondered how Effigy would work with the Rails Helpers, so I tried the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class FooIndexView &amp;lt; Effigy::Rails::View 
+  def transform 
+    text('h1', @title) 
+    attr( 
+        'a#menu', 
+        :href =&amp;gt; ActionView::Helpers::UrlHelper.url_for( { :controller =&amp;gt; 'foo', :action =&amp;gt; 'index' } ) 
+    ) 
+  end
+end&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Doesn't work-station. Effigy interferes and somehow ActionView::Helpers::UrlHelper does not contain 'url_for' according to ruby. But when I second guess that on &lt;code&gt;script/console&lt;/code&gt; like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; ActionView::Helpers::UrlHelper.instance_methods.include? "url_for"
+=&amp;gt; true&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And when I peek in the url_helper.rb it quite clearly states that there is a &lt;code&gt;def url_for(options = {})&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Why this isn't working is beyond me, but I will be looking in to it. When I find something, I'll leave a comment (and if you have the solution, please let me know).&lt;/p&gt;
+&lt;p&gt;So there is some work to do for &lt;a href="http://github.com/jferris"&gt;jferis&lt;/a&gt; and his Effigy; because the loss of the ActionView::Helpers is somewhat unbearable (for me @ least)&lt;/p&gt;
+&lt;p&gt;Apart from that, getting stuff like observe_field() and such in seems a challenge. Perhaps Effigy should allow the use of ERb as a template (Checked it, doesn't work). This would allow the helpers to work and to have a specialized view mechanism for stuffs that tend to end-up in the controller, because there is also logic that needs be in the view.&lt;/p&gt;
+&lt;p&gt;I forked Effigy on github and when I find the time I will try to get this plan together&lt;/p&gt;</content>
+  <created-at type="datetime">2009-12-22T12:21:16+01:00</created-at>
+  <id type="integer">8</id>
+  <order type="integer">3</order>
+  <published type="boolean">true</published>
+  <subtitle>brilliant plan needs work</subtitle>
+  <title>Effigy</title>
+  <updated-at type="datetime">2010-11-27T10:51:54+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">341</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">8</blog-id>
+      <created-at type="datetime">2009-12-11T14:00:09+01:00</created-at>
+      <id type="integer">5</id>
+      <name>github</name>
+      <tag-id type="">5</tag-id>
+      <updated-at type="datetime">2009-12-11T14:00:09+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">8</blog-id>
+      <created-at type="datetime">2009-12-22T12:36:49+01:00</created-at>
+      <id type="integer">18</id>
+      <name>Effigy</name>
+      <tag-id type="">18</tag-id>
+      <updated-at type="datetime">2009-12-22T12:36:49+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">8</blog-id>
+      <created-at type="datetime">2009-12-22T12:36:45+01:00</created-at>
+      <id type="integer">17</id>
+      <name>MVC</name>
+      <tag-id type="">17</tag-id>
+      <updated-at type="datetime">2009-12-22T12:36:45+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">8</blog-id>
+      <created-at type="datetime">2009-12-14T08:44:47+01:00</created-at>
+      <id type="integer">15</id>
+      <name>Twitter</name>
+      <tag-id type="">15</tag-id>
+      <updated-at type="datetime">2009-12-14T08:44:47+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">8</blog-id>
+      <created-at type="datetime">2009-12-11T13:59:57+01:00</created-at>
+      <id type="integer">3</id>
+      <name>rails</name>
+      <tag-id type="">3</tag-id>
+      <updated-at type="datetime">2009-12-11T13:59:57+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">8</blog-id>
+      <created-at type="datetime">2009-12-22T14:25:49+01:00</created-at>
+      <id type="integer">20</id>
+      <name>forked</name>
+      <tag-id type="">20</tag-id>
+      <updated-at type="datetime">2009-12-22T14:25:49+01:00</updated-at>
+    </tag>
+  </tags>
+</blog>

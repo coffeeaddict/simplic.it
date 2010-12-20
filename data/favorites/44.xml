@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2008-12-30T14:56:43+01:00</created-at>
+  <id type="integer">44</id>
+  <link>http://www.youtube.com/watch?v=hOgALTFzFbQ</link>
+  <name>Japanese pop song</name>
+  <updated-at type="datetime">2008-12-30T14:56:43+01:00</updated-at>
+</favorite>

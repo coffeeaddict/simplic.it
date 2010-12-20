@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bounce>
+  <clicks type="integer">112</clicks>
+  <created-at type="datetime">2009-12-24T08:27:10+01:00</created-at>
+  <id type="integer">12</id>
+  <public-id>start</public-id>
+  <updated-at type="datetime">2010-11-25T17:42:30+01:00</updated-at>
+  <url>http://simplic.it/</url>
+</bounce>

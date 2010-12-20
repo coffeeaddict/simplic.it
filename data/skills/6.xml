@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skill>
+  <created-at type="datetime">2009-12-11T11:03:42+01:00</created-at>
+  <id type="integer">6</id>
+  <name>git</name>
+  <updated-at type="datetime">2009-12-11T11:03:42+01:00</updated-at>
+  <url>http://git-scm.com/</url>
+</skill>

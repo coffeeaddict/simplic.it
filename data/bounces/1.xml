@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bounce>
+  <clicks type="integer">1</clicks>
+  <created-at type="datetime">2009-10-23T16:30:21+02:00</created-at>
+  <id type="integer">1</id>
+  <public-id>202ef3c</public-id>
+  <updated-at type="datetime">2009-10-26T11:49:10+01:00</updated-at>
+  <url>http://github.com/coffeeaddict/beu/</url>
+</bounce>

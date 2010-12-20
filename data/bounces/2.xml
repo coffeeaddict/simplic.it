@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bounce>
+  <clicks type="integer" nil="true"></clicks>
+  <created-at type="datetime">2009-10-23T16:50:42+02:00</created-at>
+  <id type="integer">2</id>
+  <public-id>dc432c6</public-id>
+  <updated-at type="datetime">2009-10-23T16:50:42+02:00</updated-at>
+  <url>https://twitter.com/coffeeaddict_nl</url>
+</bounce>

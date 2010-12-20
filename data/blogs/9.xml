@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;In Rails, the database connection hides behind an adapter. This adapter allows you to execute queries, but you cannot bind variables in a safe manner where the database driver does the escaping for you. Not something you want in a web-application where SQL injection should be on the top of your list of concerns.&lt;/p&gt;
+&lt;p&gt;Here's a little snippet of code to put in &lt;code&gt;lib/adapter_connection.rb&lt;/code&gt; of your &lt;code&gt;RAILS_ROOT&lt;/code&gt; to be able to obtain the true connection and start binding and escaping.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# this will grant access to the true database connection which is hidden
+# in the current ConnectionAdapter.
+#
+module AdapterConnection
+  def get_true_connection
+    adapter = ActiveRecord::Base.connection
+
+    # when we cannot get the TRUE connection yet, make it so
+    unless adapter.respond_to?(:get_connection)
+      klass = adapter.class
+      klass.class_eval do
+        def get_connection
+          @connection
+        end
+      end
+    end
+
+    # return the TRUE connection
+    adapter.get_connection
+  end
+end&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;Be aware that the way binding occurs differs for different database drivers so you should be pretty sure this is the only way, since it isn't very portable!&lt;/p&gt;
+&lt;p&gt;Now in your model you would want to add the following lines of code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class MyModel &amp;lt;&amp;lt; ActiveRecord::Base
+
+  include AdapterConnection
+
+  def my_tailored_query
+    conn = get_true_connection
+    # ...
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;</content>
+  <created-at type="datetime">2009-12-30T08:06:07+01:00</created-at>
+  <id type="integer">9</id>
+  <order type="integer">2</order>
+  <published type="boolean">true</published>
+  <subtitle>find your true connection with rails</subtitle>
+  <title>Get connected</title>
+  <updated-at type="datetime">2010-11-26T19:58:16+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">296</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">9</blog-id>
+      <created-at type="datetime">2009-12-11T13:59:57+01:00</created-at>
+      <id type="integer">3</id>
+      <name>rails</name>
+      <tag-id type="">3</tag-id>
+      <updated-at type="datetime">2009-12-11T13:59:57+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">9</blog-id>
+      <created-at type="datetime">2009-12-30T08:17:33+01:00</created-at>
+      <id type="integer">21</id>
+      <name>ruby</name>
+      <tag-id type="">21</tag-id>
+      <updated-at type="datetime">2009-12-30T08:17:33+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">9</blog-id>
+      <created-at type="datetime">2009-12-30T08:17:45+01:00</created-at>
+      <id type="integer">22</id>
+      <name>code-snippet</name>
+      <tag-id type="">22</tag-id>
+      <updated-at type="datetime">2009-12-30T08:17:45+01:00</updated-at>
+    </tag>
+  </tags>
+</blog>

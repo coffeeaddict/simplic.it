@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skill>
+  <created-at type="datetime">2009-12-28T08:26:38+01:00</created-at>
+  <id type="integer">19</id>
+  <name>Cross Platform</name>
+  <updated-at type="datetime">2009-12-28T08:26:38+01:00</updated-at>
+  <url>http://en.wikipedia.org/wiki/Cross_platform</url>
+</skill>

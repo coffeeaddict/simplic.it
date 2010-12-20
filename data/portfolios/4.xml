@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portfolio>
+  <created-at type="datetime">2009-12-11T12:24:09+01:00</created-at>
+  <description>&lt;p&gt;Rails lijdt aan een nare, soms optredende, IE (6?) bug. Rails genereert een formulier-geldigheids-token wat wordt beveiligd voor netwerk transport doormiddel van Base64. In Base64 mogen tekens als '/', '+' en '=' voorkomen en helaas kunnen verschillende Internet Explorer browsers daar niet zo goed mee omgaan.&lt;/p&gt;
+&lt;p&gt;Niet iets wat je wilt tegen komen op een druk gebruikte website als http://thomascook.nl/gratisvakantie en dus moest er een oplossing gevonden worden.&lt;/p&gt;
+&lt;p&gt;Ik heb een bijzonder kleine, eenvoudige en krachtige plugin geschreven die dit probleem verhelpt door Rails routines to overrulen en in plaats van Base64 een HEX waarde terug te geven voor de willekeurig gegenereerde bytes van het token.&lt;/p&gt;</description>
+  <id type="integer">4</id>
+  <image></image>
+  <name>OneTrainWorking</name>
+  <order type="integer">4</order>
+  <published type="boolean">true</published>
+  <updated-at type="datetime">2009-12-29T09:45:08+01:00</updated-at>
+  <url>http://github.com/coffeeaddict/one_train_working</url>
+  <skills type="array">
+    <skill>
+      <created-at type="datetime">2009-12-11T11:04:19+01:00</created-at>
+      <id type="integer">7</id>
+      <name>Ruby</name>
+      <portfolio-id type="">4</portfolio-id>
+      <skill-id type="">7</skill-id>
+      <updated-at type="datetime">2009-12-11T11:04:19+01:00</updated-at>
+      <url>http://ruby-lang.org/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T11:04:40+01:00</created-at>
+      <id type="integer">8</id>
+      <name>Rails</name>
+      <portfolio-id type="">4</portfolio-id>
+      <skill-id type="">8</skill-id>
+      <updated-at type="datetime">2009-12-11T11:04:40+01:00</updated-at>
+      <url>http://rubyonrails.org/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T11:34:41+01:00</created-at>
+      <id type="integer">9</id>
+      <name>Rails Plugins</name>
+      <portfolio-id type="">4</portfolio-id>
+      <skill-id type="">9</skill-id>
+      <updated-at type="datetime">2009-12-11T11:34:41+01:00</updated-at>
+      <url></url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T11:34:54+01:00</created-at>
+      <id type="integer">10</id>
+      <name>github</name>
+      <portfolio-id type="">4</portfolio-id>
+      <skill-id type="">10</skill-id>
+      <updated-at type="datetime">2009-12-11T11:34:54+01:00</updated-at>
+      <url>http://github.com/</url>
+    </skill>
+  </skills>
+</portfolio>

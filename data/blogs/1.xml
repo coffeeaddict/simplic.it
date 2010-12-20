@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;I wrote on my &lt;a href="http://coffeeaddict.nl/blog/"&gt;personal blog&lt;/a&gt;, which gets heavily abused for tech stuff, it was time for a tech blog.  I wrote that about a year ago.&lt;/p&gt;
+&lt;p&gt;So, I guess now is the time for a tech blog.  Rolled my own (as I do with my cigarettes) as I needed less then anything and wanted to do it with Rails (As I love Ruby and like to write code).&lt;/p&gt;
+&lt;p&gt;You are looking @ it now. Have a peek over on &lt;a href="http://github.com/coffeeaddict/simplic.it"&gt;github&lt;/a&gt; to see how it is done (The coolest features are, as always, only available to those that are enabled - it does dragging and dropping of tags and such).&lt;/p&gt;
+&lt;p&gt;I hope to enlighten you with my tech scribbles real soon so I can unload my private WordPress blog.&lt;/p&gt;</content>
+  <created-at type="datetime">2009-11-13T08:09:05+01:00</created-at>
+  <id type="integer">1</id>
+  <order type="integer">9</order>
+  <published type="boolean">true</published>
+  <subtitle></subtitle>
+  <title>Time for a tech blog</title>
+  <updated-at type="datetime">2010-11-26T12:43:52+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">310</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">1</blog-id>
+      <created-at type="datetime">2009-12-11T15:43:56+01:00</created-at>
+      <id type="integer">8</id>
+      <name>blogging</name>
+      <tag-id type="">8</tag-id>
+      <updated-at type="datetime">2009-12-11T15:43:56+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">1</blog-id>
+      <created-at type="datetime">2009-12-11T15:44:00+01:00</created-at>
+      <id type="integer">9</id>
+      <name>coffeeaddict</name>
+      <tag-id type="">9</tag-id>
+      <updated-at type="datetime">2009-12-11T15:44:00+01:00</updated-at>
+    </tag>
+  </tags>
+</blog>

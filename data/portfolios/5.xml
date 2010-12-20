@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portfolio>
+  <created-at type="datetime">2009-12-28T08:13:17+01:00</created-at>
+  <description>&lt;p&gt;&lt;a href="http://2organize4life.com/"&gt;2organize4life!&lt;/a&gt; is een stichting die is opgericht met als doel team te worden binnen de Roparun. Een jaarlijks evenement waarin honderden teams van Rotterdam naar Parijs (of andersom)&amp;nbsp; rennen in de strijd tegen kanker.&lt;/p&gt;
+&lt;p&gt;Tijdens een kort durende klus voor &lt;a href="http://2organize.com/"&gt;2organize&lt;/a&gt; waarin een aantal kleine Ruby on Rails projecten gerealiseerd moesten worden heb ik ook de site van 2organize4life gemaakt. Het ontwerp werdt verzorgd door &lt;a href="http://www.adriehello.nl/"&gt;Adrie Hello&lt;/a&gt; van 2organize, maar voor de technische invulling, als mede voor de interpretatie van het visueel ontwerp kreeg ik de vrije hand.&lt;/p&gt;
+&lt;p&gt;In minder dan 1 werk week de gehele 1ste versie van de site gebouwd zodat deze nog voor de kerst dagen live kon. In de eerste versie zaten ondermeer een eenvoudig CMS systeem, gebruikersauthenticatie, een tags en comments systeem dat overal gebruikt kan worden, een blog &amp;amp; een agenda systeem en integratie met het twitter account. Daarnaast is de basis gelegd voor alle beoogde toekomstige functionaliteiten.&lt;/p&gt;
+&lt;p&gt;De door Rails meegeleverde Prototype en Scriptacoulous javascript frameworks zijn genegeerd en inplaats daarvan heb ik gebruik gemaakt van jQuery voor de benodigde animaties. De HTML, CSS en JavaScripts zijn vanzelfsprekend met de hand in elkaar gezet zodat alles Cross-Platform en Cross-Browser gelijke resultaten zou geven.&lt;/p&gt;
+&lt;p&gt;Als kers op de appelmoes heb ik een bijzonder populaire WordPress plugin,&amp;nbsp; sexy bookmarks, geschikt gemaakt voor Rails (en Internet Explorer) zodat blog posts, pagina's en agenda items geshared kunnen worden door de gebruikers van de site en zodat de site hiermee een iets hoger Web 2.0 gehalte zou krijgen.&lt;/p&gt;</description>
+  <id type="integer">5</id>
+  <image>/images/portfolio/2organize4life_screen.png</image>
+  <name>2organize4life!</name>
+  <order type="integer">2</order>
+  <published type="boolean">true</published>
+  <updated-at type="datetime">2009-12-29T09:45:08+01:00</updated-at>
+  <url>http://2organize4life.com/</url>
+  <skills type="array">
+    <skill>
+      <created-at type="datetime">2009-12-11T11:04:19+01:00</created-at>
+      <id type="integer">7</id>
+      <name>Ruby</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">7</skill-id>
+      <updated-at type="datetime">2009-12-11T11:04:19+01:00</updated-at>
+      <url>http://ruby-lang.org/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T11:04:40+01:00</created-at>
+      <id type="integer">8</id>
+      <name>Rails</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">8</skill-id>
+      <updated-at type="datetime">2009-12-11T11:04:40+01:00</updated-at>
+      <url>http://rubyonrails.org/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T12:35:34+01:00</created-at>
+      <id type="integer">13</id>
+      <name>(x)html</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">13</skill-id>
+      <updated-at type="datetime">2009-12-11T12:35:34+01:00</updated-at>
+      <url></url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T12:35:38+01:00</created-at>
+      <id type="integer">14</id>
+      <name>CSS</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">14</skill-id>
+      <updated-at type="datetime">2009-12-11T12:35:38+01:00</updated-at>
+      <url></url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T12:35:46+01:00</created-at>
+      <id type="integer">15</id>
+      <name>JavaScript</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">15</skill-id>
+      <updated-at type="datetime">2009-12-11T12:35:46+01:00</updated-at>
+      <url></url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-28T08:23:17+01:00</created-at>
+      <id type="integer">17</id>
+      <name>CMS</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">17</skill-id>
+      <updated-at type="datetime">2009-12-28T08:23:17+01:00</updated-at>
+      <url>http://en.wikipedia.org/wiki/Content_management_system</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-28T08:23:46+01:00</created-at>
+      <id type="integer">18</id>
+      <name>Blog</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">18</skill-id>
+      <updated-at type="datetime">2009-12-28T08:23:46+01:00</updated-at>
+      <url>http://en.wikipedia.org/wiki/Blog</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-28T08:26:38+01:00</created-at>
+      <id type="integer">19</id>
+      <name>Cross Platform</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">19</skill-id>
+      <updated-at type="datetime">2009-12-28T08:26:38+01:00</updated-at>
+      <url>http://en.wikipedia.org/wiki/Cross_platform</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-28T08:28:02+01:00</created-at>
+      <id type="integer">20</id>
+      <name>Cross Browser</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">20</skill-id>
+      <updated-at type="datetime">2009-12-28T08:28:02+01:00</updated-at>
+      <url>http://en.wikipedia.org/wiki/Cross-browser</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-28T08:30:17+01:00</created-at>
+      <id type="integer">21</id>
+      <name>Web 2.0</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">21</skill-id>
+      <updated-at type="datetime">2009-12-28T08:30:17+01:00</updated-at>
+      <url>http://en.wikipedia.org/wiki/Web_2.0</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T10:59:49+01:00</created-at>
+      <id type="integer">4</id>
+      <name>jQuery</name>
+      <portfolio-id type="">5</portfolio-id>
+      <skill-id type="">4</skill-id>
+      <updated-at type="datetime">2009-12-11T10:59:49+01:00</updated-at>
+      <url>http://jquery.com/</url>
+    </skill>
+  </skills>
+</portfolio>

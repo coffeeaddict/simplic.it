@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">10</blog-id>
+  <comment>I also agree that IE6 (and all the IEs) are a pain for the web developer. It's unfortunate I sense FF starting to be a pain too (I recently tweeted about some strange behavior). As a fact I can say that the WebKit is the most advanced browser engine right now, and I would love to see all other browsers use it.
+
+But coming back to Google vs IE6. As I understood from the message, Google plans to advise its users to upgrade their browsers, and starting March 2010 they will upgrade their products to versions that use solutions incompatible with IE6. Now, why can't Google just leave the last IE6-compatible snapshot for there to be served to the old users? It may not have the new features, but it will work like it does now.
+
+The only reason I think is that Google plans to advise to upgrade to Chrome, not just 'any modern browser'. This may not be huge for Docs and Sites, but when it comes to GMail, all the offices, cybercafes etc. can go with the suggestion from the GMail vendor.
+
+Now this creates a problem for the business clients. A lot of their intranet apps work just with IE. Will they weight Chrome against IE, GMail against their SAP? Or will they install 2 browsers. Or move GMail to Outlook? And ditch Google services?
+
+My point is, it's probably a great new for web developers, but the outcome of this decision is not yet clear, and may backfire at both interested parties.</comment>
+  <created-at type="datetime">2010-02-02T11:12:45+01:00</created-at>
+  <email>blog@f055.net</email>
+  <id type="integer">9</id>
+  <name>f055</name>
+  <updated-at type="datetime">2010-02-02T11:12:45+01:00</updated-at>
+  <website>http://f055.net</website>
+</comment>

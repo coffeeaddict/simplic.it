@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2008-12-16T09:59:34+01:00</created-at>
+  <id type="integer">38</id>
+  <link>http://nl.youtube.com/watch?v=nvHiqqOqu8U</link>
+  <name>Misheard #6</name>
+  <updated-at type="datetime">2008-12-16T09:59:34+01:00</updated-at>
+</favorite>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;This morning a tweet alerted me to the fact that Oracle is to acquire Sun and with it MySQL. It led to the blog of Monty (Micheal Widenius, creator of MySQL) where a doom scenario is laid out for the future of MySQL.&lt;/p&gt;
+&lt;p&gt;It explains how Oracle has been proven unworthy of OpenSource projects by the way they have treated InnoDB and it also explains that the European Commission (EC) has second thoughts about the deal.&lt;/p&gt;
+&lt;p&gt;So Monty pleads to send a letter to the EC and ask it to have it force Oracle to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;exclude MySQL from the deal&lt;/li&gt;
+&lt;li&gt;be a valid OpenSource stewart&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can find a examplatory petition in &lt;a href="http://monty-says.blogspot.com/2009/12/help-saving-mysql.html" target="_blank"&gt;the original blog post of Monty&lt;/a&gt;. Find it, fill it in and send it to Brussels.  In the name of Open Source, free software and great tools; Thank you.&lt;/p&gt;</content>
+  <created-at type="datetime">2009-12-14T08:27:24+01:00</created-at>
+  <id type="integer">6</id>
+  <order type="integer">4</order>
+  <published type="boolean">true</published>
+  <subtitle>... there is hope, is there?</subtitle>
+  <title>Oracle to consume MySQL</title>
+  <updated-at type="datetime">2010-11-27T10:51:59+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">291</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">6</blog-id>
+      <created-at type="datetime">2009-12-11T15:43:56+01:00</created-at>
+      <id type="integer">8</id>
+      <name>blogging</name>
+      <tag-id type="">8</tag-id>
+      <updated-at type="datetime">2009-12-11T15:43:56+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">6</blog-id>
+      <created-at type="datetime">2009-12-14T08:44:30+01:00</created-at>
+      <id type="integer">13</id>
+      <name>MySQL</name>
+      <tag-id type="">13</tag-id>
+      <updated-at type="datetime">2009-12-14T08:44:30+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">6</blog-id>
+      <created-at type="datetime">2009-12-14T08:44:37+01:00</created-at>
+      <id type="integer">14</id>
+      <name>Open Source</name>
+      <tag-id type="">14</tag-id>
+      <updated-at type="datetime">2009-12-14T08:44:37+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">6</blog-id>
+      <created-at type="datetime">2009-12-14T08:44:47+01:00</created-at>
+      <id type="integer">15</id>
+      <name>Twitter</name>
+      <tag-id type="">15</tag-id>
+      <updated-at type="datetime">2009-12-14T08:44:47+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">6</blog-id>
+      <created-at type="datetime">2009-12-14T08:47:32+01:00</created-at>
+      <id type="integer">16</id>
+      <name>free software</name>
+      <tag-id type="">16</tag-id>
+      <updated-at type="datetime">2009-12-14T08:47:32+01:00</updated-at>
+    </tag>
+  </tags>
+</blog>

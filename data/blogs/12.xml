@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I recently stumbled upon &lt;a title="ruote" href="http://ruote.rubyforge.org/" target="_blank"&gt;ruote&lt;/a&gt;. I have in the past worked with jBPM and have been intrigued by Business Process Management stuffs ever since but have not been able to put that interest into my work so it has been mostly dormant.&lt;/p&gt;
+&lt;p&gt;I was able to get a neat little sand-box project up and running in no time. Ruote seems very plausible for my current work project but it should be able to run in a somewhat service oriented architecture to be really useful (for my project at least).&lt;/p&gt;
+&lt;p&gt;Turns out I would need a Message Queue (MQ) that has the &lt;a title="Advanced Message Queueing Protocol" href="http://www.amqp.org/confluence/display/AMQP/Advanced+Message+Queuing+Protocol" target="_blank"&gt;AMQP&lt;/a&gt; lingo and ruote-amqp. I went with &lt;a title="RabbitMQ" href="http://www.rabbitmq.com/" target="_blank"&gt;RabbitMQ&lt;/a&gt; as my MQ for no apparant reason (other then being available in apt-get and that it uses Erlang).&lt;/p&gt;
+&lt;p&gt;So I read some examples of ruote and ruote amqp and then some more and tried to get the stuff to work. Not an easy task... After some more blind messing around I decided I would take the ping-pong example from the &lt;a title="tmm1/amqp" href="http://github.com/tmm1/amqp" target="_blank"&gt;Ruby AMQP library&lt;/a&gt; and do it in ruote.&lt;/p&gt;
+&lt;p&gt;To get some insights as to how to do this I investigated the &lt;a title="MeeGo Boss" href="meego.gitorious.org/meego-infrastructure-tools/boss" target="_blank"&gt;meego-boss&lt;/a&gt; project, by David Greaves and the &lt;a title="ruote Rails example" href="http://github.com/threetee/ruote-rails-example" target="_blank"&gt;ruote-rails-example&lt;/a&gt;, by Eric Dennis and tried to replicate their results.&lt;/p&gt;
+&lt;h2&gt;Getting started&lt;/h2&gt;
+&lt;h3&gt;Installation instructions&lt;/h3&gt;
+&lt;p&gt;I work on Ubuntu, so these instructions assume you also have Ubuntu. They also assume you know a little something about UN*X (read: your favorite distro) and are able to translate the instructions here to your own needs.&lt;/p&gt;
+&lt;p&gt;To get started you need to install some stuff; work as root,&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;% sudo -s&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and install the needed reqs.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# gem install ruote ruote-amqp daemon-kit bundler
+# apt-get install rabbitmq&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that you have the gems, you must set up the RabbitMQ (again as root (or using sudo))&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# rabbitmqctl add_vhost ruote
+# rabbitmqctl add_user ruote ruote
+# rabbitmqctl set_permissions -p ruote ruote '.*' '.*' '.*'&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Making a ping and a pong participant to the game&lt;/h3&gt;
+&lt;p&gt;We use daemon-kit to generate 2 daemons; ping and pong.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;% daemon-kit -i ruote ping
+% daemon-kit -i ruote pong&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First we edit the ping daemon:&lt;/p&gt;
+&lt;p&gt;Edit config/amqp.yml to look somewhat like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;defaults: &amp;amp;defaults
+  user: ruote
+  pass: ruote
+  host: localhost
+  vhost: ruote&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And make sure the daemon will listen on the ping queue by editing config/ruote.yml to look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;defaults: &amp;amp;defaults&lt;br /&gt;&amp;nbsp; amqp:&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; queues:&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; - ping&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now make a Ping class and clear the given sample&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;% mv lib/sample.rb lib/ping.rb&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Edit ping.rb to become a Ping class and change the quote function to a ping function something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Ping &amp;lt; DaemonKit::RuotePseudoParticipant &lt;br /&gt;   # ...
+&amp;nbsp; def ping   # it said 'def quote' here in the sample&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; workitem["state"] = "ping"&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; count = Integer(workitem["count"]) rescue 0&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; workitem["count"] = count + 1&lt;br /&gt;&amp;nbsp; end
+&amp;nbsp; # ...
+end&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Update the daemon code to register the Ping class as a participant, where it says &lt;code&gt;config.register Sample&lt;/code&gt; make it say &lt;code&gt;config.register Ping&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now we do the same for pong (replacing ping with pong where needed)&lt;/p&gt;
+&lt;h3&gt;Starting ping and pong&lt;/h3&gt;
+&lt;p&gt;You should now be able to get the ping and the pong player onto the field (although I might have forgotten some steps - please notify me if so).&lt;/p&gt;
+&lt;p&gt;So we have to first start the ping and the pong daemon. You can do this by starting each in a separate (x)term for each, or just by backgrounding them. The latter approach is used here&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;% cd ping&lt;br /&gt;% ./bin/ping &amp;amp;&lt;br /&gt;% cd ../pong&lt;br /&gt;% ./bin/pong &amp;amp;&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Each should generate output that looks somewhat like this:&lt;/p&gt;
+&lt;pre&gt;[daemon-kit]: Setting up trap for USR1&lt;br /&gt;[daemon-kit]: Setting up trap for USR2&lt;br /&gt;[daemon-kit]: Setting up trap for HUP&lt;br /&gt;[daemon-kit]: Setting up trap for INT&lt;br /&gt;[daemon-kit]: Setting up trap for TERM&lt;br /&gt;[daemon-kit]: DaemonKit (0.1.8.1) booted, now running pong&lt;br /&gt;[daemon-kit]: AMQP.start({:pass=&amp;gt;"ruote", :vhost=&amp;gt;"ruote", :host=&amp;gt;"localhost", :user=&amp;gt;"ruote"})&lt;br /&gt;[daemon-kit]: Subscribing to pong for workitems&lt;/pre&gt;
+&lt;p&gt;Now that both the players are on the field it is time to start the match. But we must create a playing field for that. Ruote to the rescue:&lt;/p&gt;
+&lt;h2&gt;Make a ruote&lt;/h2&gt;
+&lt;p&gt;Create a directory (next to ping/ and pong/) called ping-pong-engine/&lt;/p&gt;
+&lt;p&gt;First, let's make a Gemfile for Bundler&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source "http://rubygems.org"&lt;br /&gt;gem 'daemon-kit'&lt;br /&gt;gem 'amqp', :git =&amp;gt;"git://github.com/tmm1/amqp.git"&lt;br /&gt;gem 'ruote', :git =&amp;gt; 'git://github.com/jmettraux/ruote.git', :branch =&amp;gt; 'ruote2.1'&lt;br /&gt;gem 'ruote-amqp', :git =&amp;gt; "git://github.com/kennethkalmer/ruote-amqp.git", :branch =&amp;gt; 'ruote2.1'&lt;br /&gt;gem 'rspec'&lt;br /&gt;gem 'eventmachine'&lt;br /&gt;gem 'json'&lt;br /&gt;gem 'yajl-ruby'&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and run &lt;code&gt;bundler install&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We obviously have already installed the gems, but this will put us on the edge&lt;/p&gt;
+&lt;p&gt;In lib/main.rb - I use NetBeans for development so I got a lib/ directory for free - create a script to execute the match. Start of with some she-bang and require stuff&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env ruby&lt;br /&gt;&lt;br /&gt;require 'rubygems'&lt;br /&gt;require 'bundler'&lt;br /&gt;Bundler.setup&lt;br /&gt;&lt;br /&gt;require 'ruote'&lt;br /&gt;require 'ruote/storage/fs_storage'&lt;br /&gt;require 'ruote-amqp'&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now let's create a ruote engine, using a FileSystem storage method, letting it store the stuff in ruote-data.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;engine = Ruote::Engine.new(&lt;br /&gt;&amp;nbsp; Ruote::Worker.new(&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Ruote::FsStorage.new("ruote_data")&lt;br /&gt;&amp;nbsp; )&lt;br /&gt;)&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And set up the AMQP gem to use the previously configured vhost, user and password&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{ :host&amp;nbsp; =&amp;gt; 'localhost',&lt;br /&gt;&amp;nbsp; :vhost =&amp;gt; 'ruote',&lt;br /&gt;&amp;nbsp; :user&amp;nbsp; =&amp;gt; 'ruote',&lt;br /&gt;&amp;nbsp; :pass&amp;nbsp; =&amp;gt; 'ruote'&lt;br /&gt;}.each { |k,v|&lt;br /&gt;&amp;nbsp; AMQP.settings[k]=v&lt;br /&gt;}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, we must have a receiver for the return messages from Ping and Pong.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# listens to the ruote_workitems queue by default.&lt;br /&gt;receiver = RuoteAMQP::Receiver.new(&lt;br /&gt;&amp;nbsp; engine,&lt;br /&gt;&amp;nbsp; :launchitems =&amp;gt; false # tell the receiver only to only accept workitems&lt;br /&gt;)&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that we are all setup for the match, we must define it.&lt;/p&gt;
+&lt;p&gt;First, we make some particpants.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# register ping and pong as participants to the game and subscribe them to the right queue&lt;br /&gt;engine.register_participant :ping, RuoteAMQP::Participant, :queue =&amp;gt; "ping"&lt;br /&gt;engine.register_participant :pong, RuoteAMQP::Participant, :queue =&amp;gt; "pong"&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# we need a crowd as well&lt;br /&gt;engine.register_participant :logger do |workitem|&lt;br /&gt;&amp;nbsp; $stderr.puts "State: #{workitem.fields['state']}"&lt;br /&gt;&amp;nbsp; $stderr.puts "Count: #{workitem.fields['count']}"&lt;br /&gt;end&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# and we need some one to initiate the game&lt;br /&gt;engine.register_participant :alpha do |wi|&lt;br /&gt;&amp;nbsp; wi.fields['state'] = 'alpha'&lt;br /&gt;&amp;nbsp; wi.fields['count'] = 0&lt;br /&gt;end&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pretty straight forward right? Now; create the definition of the game&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pdef = Ruote.process_definition :name =&amp;gt; 'game' do&lt;br /&gt;&amp;nbsp; # the main definition, perform the setup and play until the count is 6 or higher&lt;br /&gt;&amp;nbsp; sequence :on_error =&amp;gt; :shout do&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; setup&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; repeat do&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; play&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; _break :if =&amp;gt; '${f:count} &amp;gt;= 6'&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br /&gt;&amp;nbsp; end&lt;br /&gt;&lt;br /&gt;&amp;nbsp; # setup shop by calling alpha and let the logger show the state&lt;br /&gt;&amp;nbsp; define 'setup' do&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; alpha&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; logger&lt;br /&gt;&amp;nbsp; end&lt;br /&gt;&lt;br /&gt;&amp;nbsp; # perform a ping and a pong. To get the workitem to the right place we need to specify&lt;br /&gt;&amp;nbsp; # a command. It is composed of '/$service/$function' - the first being the Ping class&lt;br /&gt;&amp;nbsp; # registered by our ping daemon and the latter the method to call on that class&lt;br /&gt;&amp;nbsp; #&lt;br /&gt;&amp;nbsp; # unfortunately we have to specify the reply_queue here... :-/&lt;br /&gt;&amp;nbsp; #&lt;br /&gt;&amp;nbsp; define 'play' do&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; ping :command =&amp;gt; "/ping/ping", :reply_queue =&amp;gt; "ruote_workitems"&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; logger&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; pong :command =&amp;gt; "/pong/pong", :reply_queue =&amp;gt; "ruote_workitems"&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; logger&lt;br /&gt;&amp;nbsp; end&lt;br /&gt;&lt;br /&gt;&amp;nbsp; # show the occurence of errors&lt;br /&gt;&amp;nbsp; define :shout do&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; echo 'Error occured...'&lt;br /&gt;&amp;nbsp; end&lt;br /&gt;end&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again, not to complex - now let's launch the game, be blocking for it, and show any errors that occured.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wfid = engine.launch(pdef) # launch&lt;br /&gt;engine.wait_for(wfid)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; # be blocking&lt;br /&gt;&lt;br /&gt;# show the errors&lt;br /&gt;errs = engine.errors&lt;br /&gt;if errs.size &amp;gt; 0&lt;br /&gt;&amp;nbsp; puts "there are processes with errors :"&lt;br /&gt;&amp;nbsp; errs.each do |err|&lt;br /&gt;  &amp;nbsp; puts "process #{err.wfid}"&lt;br /&gt;&amp;nbsp; end&lt;br /&gt;end&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;save your work and execute&lt;/p&gt;
+&lt;pre&gt;% ruby lib/main.rb&lt;/pre&gt;
+&lt;p&gt;If all is well you should see something like this:&lt;/p&gt;
+&lt;pre&gt;State: alpha&lt;br /&gt;Count: 0&lt;br /&gt;State: ping&lt;br /&gt;Count: 1&lt;br /&gt;State: pong&lt;br /&gt;Count: 2&lt;br /&gt;State: ping&lt;br /&gt;Count: 3&lt;br /&gt;State: pong&lt;br /&gt;Count: 4&lt;br /&gt;State: ping&lt;br /&gt;Count: 5&lt;br /&gt;State: pong&lt;br /&gt;Count: 6&lt;/pre&gt;
+&lt;p&gt;It worked! Your ruoting engine has submitted a workitem to both of the daemons a couple of times and they have altered the workitem before returning it. Your participants where orchestrated to play a blind game of ping pong. Now how cool is that?&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;You can find all the above code in my &lt;a title="Examplatory Code" href="http://github.com/coffeeaddict/ruote-amqp-ping-pong" target="_blank"&gt;ruote-amqp-ping-pong project on github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;(20100927/minor edits after suggestions from &lt;a title="John Mettraux" href="http://api.twitter.com/jmettraux" target="_blank"&gt;@jmettraux&lt;/a&gt; in &lt;a title="Gist" href="http://gist.github.com/598447" target="_blank"&gt;http://gist.github.com/598447&lt;/a&gt;)&lt;/small&gt;&lt;/p&gt;</content>
+  <created-at type="datetime">2010-09-26T12:18:40+02:00</created-at>
+  <id type="integer">12</id>
+  <order type="integer" nil="true"></order>
+  <published type="boolean">true</published>
+  <subtitle>And a working example as a bonus</subtitle>
+  <title>An investigiation into Ruote and AMQP</title>
+  <updated-at type="datetime">2010-11-27T10:20:06+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">632</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">12</blog-id>
+      <created-at type="datetime">2009-12-30T08:17:33+01:00</created-at>
+      <id type="integer">21</id>
+      <name>ruby</name>
+      <tag-id type="">21</tag-id>
+      <updated-at type="datetime">2009-12-30T08:17:33+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">12</blog-id>
+      <created-at type="datetime">2010-09-26T12:36:42+02:00</created-at>
+      <id type="integer">24</id>
+      <name>ruote</name>
+      <tag-id type="">24</tag-id>
+      <updated-at type="datetime">2010-09-26T12:36:42+02:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">12</blog-id>
+      <created-at type="datetime">2010-09-26T12:36:52+02:00</created-at>
+      <id type="integer">25</id>
+      <name>AMQP</name>
+      <tag-id type="">25</tag-id>
+      <updated-at type="datetime">2010-09-26T12:36:52+02:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">12</blog-id>
+      <created-at type="datetime">2010-09-26T12:36:56+02:00</created-at>
+      <id type="integer">26</id>
+      <name>RabbitMQ</name>
+      <tag-id type="">26</tag-id>
+      <updated-at type="datetime">2010-09-26T12:36:56+02:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">12</blog-id>
+      <created-at type="datetime">2010-09-26T20:53:47+02:00</created-at>
+      <id type="integer">27</id>
+      <name>daemon-kit</name>
+      <tag-id type="">27</tag-id>
+      <updated-at type="datetime">2010-09-26T20:53:47+02:00</updated-at>
+    </tag>
+  </tags>
+</blog>

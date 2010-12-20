@@ -1,0 +1,576 @@
+#!/usr/bin/perl -l
+#
+# hartog/20100311: break down a WSDL into a list of functions with
+#                  input and output nicely tucked in.
+#
+#                  install the perl modules below, put this in your
+#                  cgi-bin and get going.
+#
+#                  wouldn't be using this in a public space as it
+#                  might consume a lot of resources...
+#
+#                  DISCLAIMER : This is a hack. It might be damaging.
+#                  There are no guarantees and this comes AS-IS
+#
+#                  You can find the latest version of this software @
+#                  http://coffeeaddict.nl/public/wsdl.cgi.txt
+#
+
+use strict;
+
+use CGI;
+use CGI::Session;
+use XML::LibXML;
+use LWP::UserAgent;
+use POSIX qw();
+use FreezeThaw qw(freeze thaw);
+
+my $INDENT        = "&nbsp;&nbsp;&nbsp;&nbsp;";
+my @NS            = ();
+my ( $XS, $WSDL ) = "";
+
+my $cgi     = CGI->new();
+my $session;
+if ( $cgi->param("sid") ) {
+  $session = CGI::Session->new(undef, $cgi->param("sid"));
+} else {
+  $session = CGI::Session->new();
+}
+
+# flush buffers NOW
+$|=1;
+
+# print a header
+print $session->header();
+
+if ( my $restart = $cgi->param("restart") ) {
+  my $tmp_file = $session->param("wsdl");
+  unlink $tmp_file;
+
+  $session->delete();
+  displayForm();
+
+} elsif ( my $show = $cgi->param("show") ) {
+  my $tmp_file = $session->param("wsdl");
+  displayRawWsdl($tmp_file);
+
+} elsif ( my $tmp_file = $session->param("wsdl") ) {
+  displayWsdl( $tmp_file );
+
+} elsif ( my $file = $cgi->param("wsdl") ) {
+  displayWsdl( $file );
+
+} else {
+  displayForm();
+
+}
+
+$session->flush();
+exit;
+
+
+sub getHtmlHead {
+  return qq{<html>
+<head>
+<title>WSDL breakdown</title>
+<style>
+* {
+  font-family: Verdana, arial, sans-serif;
+}
+ul, .code, span {
+  font-family: courier;
+  color: #0e0e0e;
+  font-weight: bold;
+  font-size: 9pt;
+}
+.type { color: purple }
+.complexType { color: magenta }
+.name { color: green }
+
+address {
+  font-size: 75%;
+}
+</style>
+</head>};
+}
+
+
+sub displayRawWsdl {
+  my $file = shift;
+
+  my $wsdl = "";
+  open(local *IN, "/usr/bin/xmllint --format $file |");
+  while ( my $line = <IN> ) {
+    $wsdl .= $line;
+  }
+  close IN;
+
+  $wsdl =~ s/\</\&lt\;/mg;
+
+  print getHtmlHead();
+  print qq{<body>
+<strong><a href="wsdl.cgi">back</a></strong><br /><br />
+<pre name="code" class="xml" class="dp-highlighter">
+$wsdl
+</pre>
+</body>
+</html>
+};
+}
+
+sub displayForm {
+  if ( my $url = $cgi->param("wsdl-url") ) {
+    my $ua = LWP::UserAgent->new();
+    my $res = $ua->get($url);
+
+    if ( $res->is_success ) {
+      my $tmpfile = POSIX::tmpnam();
+      open(local *TMP, ">$tmpfile");
+      print TMP $res->content;
+      close TMP;
+
+      $session->param( wsdl => $tmpfile );
+
+      displayWsdl( $tmpfile );
+
+    } else {
+      print $res->status_line;
+
+    }
+
+  } elsif( my $file = $cgi->param("wsdl-file") ) {
+
+    my $tmpfile;
+    if ( $ENV{LOCAL} ) {
+      $tmpfile = $file;
+    } else {
+      $tmpfile = POSIX::tmpnam();
+      open(local *TMP, ">$tmpfile");
+
+      while ( my $line = <$file> ) {
+        print TMP $line;
+      }
+
+      close TMP;
+    }
+    $session->param( wsdl => $tmpfile );
+
+    displayWsdl( $tmpfile );
+
+  } else {
+    print getHtmlHead();
+    print qq{<body>
+  Give me your WSDL:
+  <form method="POST" action="wsdl.cgi" enctype="multipart/form-data">
+    file: <input type="file" name="wsdl-file" />
+    <br />
+    url: <input type="text" name="wsdl-url" />
+    <br />
+    <input type="submit" />
+  </form>
+</body>
+</html>};
+    
+  }
+}
+
+sub parseDom {
+  my $wsdl = $_[0] || $session->param("wsdl");
+  my $dom  = "";
+
+  eval {
+    my $parser  = XML::LibXML->new();
+    $dom     = $parser->parse_file($wsdl);
+  };
+
+  unless ( $@ ) {
+    my $xpc = XML::LibXML::XPathContext->new($dom->documentElement);
+ 
+    # find out if the namespace is xsd or xs
+    #
+    open(local *IN, "<$wsdl");
+    for (0..20) {
+      my $line = <IN>;
+      if ( $line =~ /xmlns:/ ) {
+        foreach my $def ( split(/ /, $line) ) {
+          if ( $def =~ /xmlns:/ ) {
+            my ( $ns, $url ) = $def =~ /xmlns:([^\=]+)=\"?([^\"]+)/;
+            print "Register $ns @ $url" if $ENV{LOCAL};
+
+            $xpc->registerNs($ns, $url);
+            push @NS, $ns;
+          }
+        }
+      }
+    }
+
+    $dom = $xpc;
+    close IN;
+
+    $XS = (grep { /xsd?/ } @NS)[0];
+    print STDERR "XS: $XS" if $ENV{LOCAL};
+    $WSDL = (grep { /wsdl?/ } @NS)[0];
+    print STDERR "WSDL: $WSDL" if $ENV{LOCAL};
+  }
+
+  return $dom;
+}
+
+sub displayWsdl {
+  my ( $wsdl ) = @_;
+  my $dom = "";
+
+  my $title = "";
+  my $body  = "";
+
+  if ( $@ ) {
+    $title = "error";
+    $body = $@;
+
+  } elsif ( my $op = $cgi->param("op") ) {
+    # list the details of an operation
+    $title = "Details for $op";
+
+    $body  = getOperationDetails($dom, $op);
+
+  } else {
+    # list all operations
+
+    # display the service name
+    my $service;
+    unless ( $service = $session->param( 'service' ) ) {
+      $dom = parseDom($wsdl);
+      $service = findvalue($dom, '/definitions/service/@name');
+      $service .= " @ ";
+      $service .=
+        findvalue($dom, '/definitions/service/port/address/@location');
+      $session->param( 'service' => $service );
+    }
+
+    $title = $service;
+    my $doc;
+    unless ( $doc = $session->param( 'docs' ) ) {
+      $dom ||= parseDom($wsdl);
+      $doc = findvalue($dom, '/definitions/service/documentation');
+      $session->param( 'docs' => $doc );
+    }
+
+    $body  = $doc;
+    $body .= "<br /><br />";
+    $body .= getOperations($dom);
+  }
+
+  # print a simple HTML page
+  print getHtmlHead();
+  print qq{<body>
+<h1>$title</h1>
+$body
+<br /><br />
+<address>[
+<a href="wsdl.cgi?restart=1">restart</a> 
+| <a href="wsdl.cgi?show=1">show wsdl</a>
+]</address>
+</body>
+</html>};
+}
+
+
+sub getOperations {
+  my $dom = shift;
+
+  my $html = "<ul>";
+
+  my %operations = ();
+  if ( $session->param( 'operations' ) ) {
+    %operations = thaw($session->param('operations'));
+  } else {
+    $dom ||= parseDom();
+
+    foreach my $node ( findnodes($dom, "/definitions/portType/operation") ) {
+      my $name = findvalue($node, '@name');
+      my $docs = findvalue($node, "documentation");
+      $operations{$name} = $docs;
+    }
+    $session->param('operations' => freeze(%operations));
+  }
+
+  my $prev = "";
+  my @index = ();
+  foreach my $name ( sort keys %operations ) {
+    my $index = substr($name, 0, 1);
+    if ( $index ne $prev ) {
+      $html .= qq{<a name="$index">$index</a>};
+      push @index, $index;
+    }
+
+    $html .= qq{<li><a href="wsdl.cgi?op=$name">$name</a><ul><li><small>$operations{$name}</small></li></ul></li>};
+    $prev = $index;
+  }
+
+  $html .= "</ul>";
+
+  $html = join(" | ", map { qq{<a href="#$_">$_</a>} } @index) . "<br /><br />" . $html;
+
+  return $html;
+}
+
+sub getOperationDetails {
+  my ( $dom, $name ) = @_;
+
+  if ( $session->param("op_details_$name") ) {
+    return $session->param("op_details_$name");
+  }
+
+  $dom ||= parseDom();
+
+  my $html = "";
+  foreach my $node ( findnodes($dom, '/definitions/portType/operation[@name="'.$name.'"]') ) {
+    ( my $in  = findvalue($node, 'input/@message') ) =~ s/^[^:]+://;
+    ( my $out = findvalue($node, 'output/@message') ) =~ s/^[^:]+://;
+
+    $html .= "<p><b>Docs</b><ul>" . findvalue($node, "documentation");
+    $html .= "</ul></p>\n\n";
+
+    $html .= "<p><b>Input</b></p><ul>";
+    $html .= join("<br />", getMessage( $dom, $in ));
+    $html .= "</ul>\n\n";
+
+    $html .= "<p><b>Output</b><ul>";
+    $html .= join("", getMessage( $dom, $out ));
+    $html .= "</ul></p>\n\n";
+  }
+
+  $html .= qq{<a href="wsdl.cgi">back</a>};
+
+  $session->param("op_details_$name" => $html);
+
+  return $html;
+}
+
+sub getComplexTypeDetails {
+  my ( $dom, $name, $depth ) = @_;
+  $depth ||= 0;
+
+  if ( $depth == 0 and $session->param("ctd_$name") ) {
+    return $session->param("ctd_$name");
+  }
+
+  $dom ||= parseDom();
+
+  my $html = "";
+  if ( $depth == 20 ) {
+    $html = $INDENT x ++$depth;
+    return $html .= "<strong>deep recursion</strong>";
+  }
+
+  return if !$name;
+
+  # format the output @ start
+  $html .= "<span class='code'>" if ( $depth == 0 );
+
+  # define the brackets
+  my $oBrack = ( $name =~ /array/i ? "[" : "{" );
+  my $cBrack = ( $name =~ /array/i ? "]" : "}" );
+
+  $html .= $INDENT x $depth;
+  $html .= "<span class='complexType'>${name}</span> ${oBrack}<br />\n";
+
+  my $elements_xpath = '/definitions/types/schema/element[@name="'.
+    $name.'"]/complexType/*'; 
+
+  my $types_xpath = '/definitions/types/schema/complexType[@name="'.
+    $name.'"]/*';
+
+  foreach my $node ( findnodes($dom, $types_xpath), findnodes($dom, $elements_xpath) ) {
+
+    $html .= "\n<!-- $name : " . $node->nodeName . " -->\n";
+
+    # if it says 'all', treat as a 'struct'
+    if ( $node->nodeName =~ /(all|sequence)/ ) {
+      foreach my $element ( findnodes($node, "element") ) {
+	( my $type = $element->findvalue('@type') || $element->findvalue('@element') ) =~ s/xsd?://;
+
+        $html .= "<!-- found type: $type -->\n";
+
+	my $name = $element->findvalue('@name');
+
+	if ( $type =~ /:/ && $type !~ /^xsd?:/i ) {
+          # "CTD $depth $type";
+	  $type =~ s/^[^:]+://;
+          $html .= "<!-- checking $type for $name -->\n";
+	  $type = getComplexTypeDetails( $dom, $type, $depth + 1 );
+
+	} else {
+          $type = "<span class='type'>$type</span>";
+	  $html .= $INDENT x ($depth + 1);
+
+	}
+
+	$html .= "$type : <span class='name'>$name</span>,<br />\n";
+      }
+      
+    # else it would be an array
+    } elsif ( $node->nodeName =~ /complexContent/ ) {
+      ( my $type = $node->findvalue('.//@wsdl:arrayType') );
+      $type =~ s/\[\]//g;
+
+      if ( $type !~ /^xsd?:/i ) {
+	$type =~ s/^[^:]+://g;
+	$type = getComplexTypeDetails( $dom, $type, $depth + 1 );
+	
+      } else {
+        $type =~ s/xsd?://;
+        $type = "<span class='type'>$type</span>";
+	$html .= $INDENT x ($depth + 1);
+
+      }
+
+      $html .= "$type<br />\n";
+    } else {
+      $html .= "none of the above: $name - " . $node->nodeName . "<br />";
+    }
+  }
+
+  $html .= $INDENT x $depth;
+
+  # put a closing bracketk
+  $html .= $cBrack;
+
+  if ( $depth == 0 ) {
+    $html .= "##type##</span>\n" ;
+    $session->param("ctd_$name" => $html)
+  }
+
+  return $html
+}
+
+sub getMessage {
+  my ( $dom, $name ) = @_;
+
+  return if !$name;
+
+  my @values = ();
+
+  if ( $session->param("message_$name") ) {
+    @values = thaw($session->param("message_$name"));
+
+  } else {
+    $dom ||= parseDom();
+
+    my @parts = findnodes($dom, '/definitions/message[@name="'.$name.'"]/part');
+
+    foreach my $part ( @parts ) {
+      ( my $type = $part->findvalue('@type') || $part->findvalue('@element') ) =~ s/^xsd?://g;
+
+      my $name = $part->findvalue('@name');
+
+      if ( $type =~ /:/ && $type !~ /^xsd?:/i ) {
+        $type =~ s/^[^:]+://;
+        $type = getComplexTypeDetails($dom, $type, 0);
+        $type =~ s/\#\#type\#\#/ : <span class='name'>$name<\/span>/;
+      } else {
+        $type = "<span class='code'><span class='type'>$type</span> : <span class='name'>$name</span></span>"
+      }
+
+      push @values, $type;
+    }
+
+    $session->param("message_$name" => freeze(@values));
+  }
+
+  return @values;
+}
+
+# try all the accepted 		     
+sub findvalue {
+  my ( $dom, $xpath ) = @_;
+
+  return $dom->findvalue( getExistingXpath($dom, $xpath) );
+}
+
+sub findnodes {
+  my ( $dom, $xpath ) = @_;
+
+  my @list = $dom->findnodes( getExistingXpath($dom, $xpath) );
+
+  return @list;
+}
+
+# method: $xpath = getExistingXpath( $dom_or_node, $xpath )
+#
+# find an xpath that actually exists in the document by trying well
+# known namespaces for the element
+#
+# Brute force approach which could kill you if you're not careful
+#
+sub getExistingXpath {
+  my $dom   = shift;
+  my $xpath = shift;
+
+  my $fixPath = "";
+  if ( $xpath =~ s/^\/// ) {
+    $fixPath = "/";
+  }
+    
+  my @parts = split /\//, $xpath;
+  my $final = pop @parts;
+
+  if ( $final !~ /^\@/ ) {
+    push @parts, $final;
+    $final = "";
+  } 
+
+  my %ns = ( address => "soap" );
+
+  # this said 5 times xsd, but it turns out the d is optional...
+  #
+  # see the parsing section to find out how $XS is set
+  #
+  @ns{ qw(elements element complexType schema all) } = (
+     $XS, $XS, $XS, $XS 
+  );
+  @ns{ qw(definitions types message portType binding operation input
+          output documentation port service part)
+  } = ( 
+    $WSDL, $WSDL, $WSDL, $WSDL, $WSDL, $WSDL, $WSDL, $WSDL, $WSDL,
+    $WSDL, $WSDL, $WSDL
+  );
+  
+  for my $i ( 0..$#parts ) {
+    my $part = $parts[$i];
+
+    ( my $partName = $part ) =~ s/\///;
+    $partName =~ s/\[[^\]]+\]//;
+
+    my $added = 0;
+    foreach my $ns ( undef, $ns{$partName} ) {
+      my $test = $part;
+
+      if ( defined $ns ) {
+        my $nsed = $ns . ":" . $partName;
+        $test =~ s/$partName/$nsed/;
+      }
+
+      if ( $dom->exists( $fixPath . $test ) ) {
+        $fixPath .= "$test/";
+        $added = 1;
+        last;
+      }
+    }
+
+    # if this part wasn't added, add it now
+    if ( !$added ) {
+      $fixPath .= "$part/";
+    }
+  }
+  
+  # add the final part.
+  $fixPath .= $final;
+
+  # remove trailing slashes
+  $fixPath =~ s/\/$//;
+
+  $fixPath ||= $xpath;
+
+  return $fixPath
+}

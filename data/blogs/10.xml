@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;I read f055's "&lt;a href="http://f055.net/article/google-phasing-out-support-for-internet-explorer-6.0-and-what-does-it-mean/"&gt;Google phasing out support for Internet Explorer 6.0 and what does it mean?&lt;/a&gt;" today and started to reply. As I went allong it became somewhat of a blog post. So this is the reply.&lt;/p&gt;
+&lt;p&gt;I think ignorance is the greatest factor in keeping IE6 around. When you put an icon of a globe with the word 'Internet' below on the middle of an otherwise clean desktop everybody will use that for browsing the internet.&lt;br /&gt;&lt;br /&gt;People dont care what their browser is (only webdevelopers and the otherwise enlightened do) as long as they can access the intertubes, twitter, watch videos, order stuffs and do their banking they are fine. In their minds there is no such thing as an insecure / incompatible browser, and if any browser would be insecure it would be most certainly from the otherwise unknown Mozilla Foundation. The fact that things misrender goes right pass them as they have nothing to compare it with.&lt;br /&gt;&lt;br /&gt;I cry a little everytime I see one of those big billboards next to the road advertising Chrome. Not because it's chrome but because formentioned foundation just doesn't have the funds to put up this kind of advertising. If they had they would already be dominating. It is, all in all, a small miracle that they have a 28.xx% share of the market.&lt;/p&gt;
+&lt;p&gt;And the huge share of IE stems from the corporate world off course. The most major organisations I know have IE 6 as their default browser so "You must make sure it works on that to!". If you have spent hundreds of euros on obtaining your MSC*** you have a) been brainwashed and b) are not going to advertise Firefox as a good/safe/standards-adhering alternative.&lt;/p&gt;
+&lt;p&gt;All that aside, I agree with Google to phase out support for IE6. The web proffesionals should be able to expect some adhering to standards and IE6 adheres to none. I know Google can't be phasing out the entire Microsoft Browser Soup but I would just love to see Microsoft withdraw from the browser wars and let dedicated corporations or foundations have their go at it.&lt;/p&gt;
+&lt;p&gt;Here is why:&lt;/p&gt;
+&lt;p&gt;Back in the day (gosh I sound old now...) we webdevelopers hacked in exceptions for all the browsers. There where standards (w3c provided them) but there was no browser to adhere to all the standards. No browser was standard. Today we have to hack in exceptions for IE only. And every major version of IE needs it own hacks.&lt;/p&gt;</content>
+  <created-at type="datetime">2010-02-02T09:01:19+01:00</created-at>
+  <id type="integer">10</id>
+  <order type="integer">1</order>
+  <published type="boolean">true</published>
+  <subtitle>flamewar?</subtitle>
+  <title>On Browsers</title>
+  <updated-at type="datetime">2010-11-26T19:57:51+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">414</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">10</blog-id>
+      <created-at type="datetime">2010-02-02T09:16:05+01:00</created-at>
+      <id type="integer">23</id>
+      <name>browser wars</name>
+      <tag-id type="">23</tag-id>
+      <updated-at type="datetime">2010-02-02T09:16:05+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">10</blog-id>
+      <created-at type="datetime">2009-12-14T08:47:32+01:00</created-at>
+      <id type="integer">16</id>
+      <name>free software</name>
+      <tag-id type="">16</tag-id>
+      <updated-at type="datetime">2009-12-14T08:47:32+01:00</updated-at>
+    </tag>
+  </tags>
+</blog>

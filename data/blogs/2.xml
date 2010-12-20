@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;...that was the goal.&lt;/p&gt;
+&lt;p&gt;I had a glance over at &lt;a href="http://www.themomorohoax.com/2009/02/21/rails-2-3-authentication-comparison"&gt;this lil' comparison&lt;/a&gt; when I was looking for a good authentication plugin (I like plugins, they save me code writing) and I gloomed.&lt;/p&gt;
+&lt;p&gt;All I wanted was something to authenticate a user with. Something that has knowledge of a username and password and can combine the two together so that you can say; "That girl at the other end is Alice after all".&lt;/p&gt;
+&lt;p&gt;And I wanted a mechanism to do authorization so that I could grant Bob access here and deny that same access to Alice. The granularity of the authorization I needed was 'user' and 'admin'. Blunt, effective and useful :-)  I choose to use &lt;a href="http://github.com/platform45/easy_roles"&gt;easy_roles&lt;/a&gt; for that. Although I think the serialized array could have been better done, it served my purposes.&lt;/p&gt;
+&lt;p&gt;But I still had no authentication framework. So I stumbed out my own plugin using the methods of authentication I have used many times before. There is a user, a password and some salt. Mix the password and the salt to have some sort of security in your database and search the user by his username and salted version of the supplied password.If you can find something, the user is authentic (or has stolen the username and password, but then the owner is an ass so I couldn't care less)  The salt is added in the config/environment.rb like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  EASY_AUTH_SALT = '# the output of rake secret here #'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I wanted the users of the plugin to have control over the model they would choose as their user model. I would call it User, but names like Role or WebUser are not unthinkable so I made the plugin hookup on request. This is done by calling the acts_as_authentic method.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  class User &amp;lt; ActiveRecord::Base
+    acts_as_authentic
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will do a number of things for the User model.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It will add 2 accessors, namely 'password_confirm' and 'new_password' so the user can confirm his first and later passwords&lt;/li&gt;
+&lt;li&gt;It will add a class method called authenticate which takes the username and a password as its argument and will perform a find for you. Returning the user object or nil&lt;/li&gt;
+&lt;li&gt;It will add a class method called hashed_password which you can feed a string which will then be salted and hex'ed and returned&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For the integration with easy_roles (and perhaps others) I wanted my Rails apps to have a 'current_user'.  But is it always necessary to have a current user? r is it perhaps only necessary in shielded parts of your app? You get to decide by nominating a controller as an authenticator by using 'acts_as_authenticator_for' and specifying the model that is to be the current user.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  class AdminController &amp;lt; ApplicationController
+    acts_as_authenticator_for User
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;All the things you need like: reset password, signup, login &amp;amp; logout are left as an exercise for the developer. You may have needs I don't know about.&lt;/p&gt;</content>
+  <created-at type="datetime">2009-12-10T21:17:26+01:00</created-at>
+  <id type="integer">2</id>
+  <order type="integer">6</order>
+  <published type="boolean">true</published>
+  <subtitle>Make authentication simple</subtitle>
+  <title>Easy Auth</title>
+  <updated-at type="datetime">2010-11-26T23:25:55+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">361</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">2</blog-id>
+      <created-at type="datetime">2009-12-11T13:59:57+01:00</created-at>
+      <id type="integer">3</id>
+      <name>rails</name>
+      <tag-id type="">3</tag-id>
+      <updated-at type="datetime">2009-12-11T13:59:57+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">2</blog-id>
+      <created-at type="datetime">2009-12-11T14:00:02+01:00</created-at>
+      <id type="integer">4</id>
+      <name>plugin</name>
+      <tag-id type="">4</tag-id>
+      <updated-at type="datetime">2009-12-11T14:00:02+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">2</blog-id>
+      <created-at type="datetime">2009-12-11T14:00:09+01:00</created-at>
+      <id type="integer">5</id>
+      <name>github</name>
+      <tag-id type="">5</tag-id>
+      <updated-at type="datetime">2009-12-11T14:00:09+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">2</blog-id>
+      <created-at type="datetime">2009-12-11T14:13:39+01:00</created-at>
+      <id type="integer">7</id>
+      <name>EasyAuth</name>
+      <tag-id type="">7</tag-id>
+      <updated-at type="datetime">2009-12-11T14:13:39+01:00</updated-at>
+    </tag>
+  </tags>
+</blog>

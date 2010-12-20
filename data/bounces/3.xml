@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bounce>
+  <clicks type="integer" nil="true"></clicks>
+  <created-at type="datetime">2009-10-26T11:47:02+01:00</created-at>
+  <id type="integer">3</id>
+  <public-id>33b9271</public-id>
+  <updated-at type="datetime">2009-10-26T11:47:02+01:00</updated-at>
+  <url>http://momac.net/</url>
+</bounce>

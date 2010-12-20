@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2009-02-12T09:46:31+01:00</created-at>
+  <id type="integer">58</id>
+  <link>http://www.richtprijzen.org/1/1.html</link>
+  <name>Richtprijzen fotografie</name>
+  <updated-at type="datetime">2009-02-12T09:46:31+01:00</updated-at>
+</favorite>

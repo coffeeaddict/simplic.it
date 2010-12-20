@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">9</blog-id>
+  <comment>This is never needed in Rails.</comment>
+  <created-at type="datetime">2010-01-05T09:13:37+01:00</created-at>
+  <email>joost@spacebabies.nl</email>
+  <id type="integer">7</id>
+  <name>tilsammans</name>
+  <updated-at type="datetime">2010-01-05T09:13:37+01:00</updated-at>
+  <website>www.spacebabies.nl.</website>
+</comment>

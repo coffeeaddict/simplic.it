@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">9</blog-id>
+  <comment>That is a rather blunt comment. A little explanation as to why it is never needed wouldn't hurt a soul...
+
+But I disagree; in the normal rails operation there is absolutely no need for by-passing the current adapter. But when you are, like I was last week, building a rails based SOAP service on top of an existing and fully functional Oracle system where there is no place for Rails specific tables and there are views and trigger tables to fulfill your needs it is nonsense to force Rails to use ActiveRecord and models and it speeds up development to utilize custom queries with the true connection.
+
+DRY and KISS is also leaving the framework when it is required.</comment>
+  <created-at type="datetime">2010-01-05T11:02:17+01:00</created-at>
+  <email>hartog@simplic.it</email>
+  <id type="integer">8</id>
+  <name>Hartog</name>
+  <updated-at type="datetime">2010-01-05T11:02:17+01:00</updated-at>
+  <website>http://simplic.it/</website>
+</comment>

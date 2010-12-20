@@ -8,7 +8,7 @@
     <%= render :partial => "stats", :locals => { :portfolio => portfolio } %>
 
     <div class="portfolio">
-      <% unless portfolio.image and portfolio.image.empty? %>
+      <% unless portfolio.image.blank? %>
         <%= image_tag portfolio.image, :class => "imageleft" %>
       <% end %>
 

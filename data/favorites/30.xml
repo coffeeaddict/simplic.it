@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2008-10-02T11:10:12+02:00</created-at>
+  <id type="integer">30</id>
+  <link>http://www.ericsink.com/scm/</link>
+  <name>SCM (Version Control) Howto</name>
+  <updated-at type="datetime">2008-10-02T11:10:12+02:00</updated-at>
+</favorite>

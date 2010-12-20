@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skill>
+  <created-at type="datetime">2009-12-11T09:11:32+01:00</created-at>
+  <id type="integer">1</id>
+  <name>PHP</name>
+  <updated-at type="datetime">2009-12-11T09:11:32+01:00</updated-at>
+  <url>http://php.net</url>
+</skill>

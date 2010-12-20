@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portfolio>
+  <created-at type="datetime">2009-12-11T09:11:32+01:00</created-at>
+  <description>&lt;p&gt;Voor een oud collega en huidig eigenaar van &lt;a href="http://labelsandbuttons.nl"&gt;Labels &amp;amp; Buttons&lt;/a&gt; in onderaannemerschap de site gebouwd voor Meestewerk VOF.&lt;br /&gt; Het design en de afstemming daarom trent werd verzorgd door Labels &amp;amp; Buttons zelf.&lt;/p&gt;
+&lt;p&gt;De site is gebaseerd op WordPress om ook de leek eenvoudig content te kunnen laten verzorgen. De opmaak is gerealizeerd door een handgemaakt theme. De structuur van de site bestaat uit pagina's met daarin een slider waarin blog posts te zien zijn die behoren bij de pagina.&lt;/p&gt;
+&lt;p&gt;Hiervoor is Glider gebruikt; Een op &lt;a href="http://prototypejs.org/"&gt;prototype&lt;/a&gt; en &lt;a href="http://script.aculo.us/"&gt;script.aculo.us&lt;/a&gt; gebaseerde carousel. In het template hangen een aantal zaken af van de naam van de pagina, zoals de categorie van de blog posts in de slider en de naam van het sfeerbeeld boven aan de pagina.&lt;/p&gt;
+&lt;p&gt;Dit is gedaan om met weinig tijd toch een sterke en functionele web 2.0 site neer te zetten. Het schrijven van een WordPress plugin had veel meer tijd gekost.  Om te kunnen voldoen aan de typografische eisen van het ontwerp is sIFR 3.0 ingezet.  De xhtml, CSS en JavaScripts zijn zodanig getuned dat ze op alle browsers hetzelfde resultaat en beeld geven.&lt;/p&gt;
+&lt;p&gt;Begin februari 2010 is de site live gegaan in een eerste release. Er zal snel een nieuwe release volgen met wat meer functionaliteit en een betere user experience.&lt;/p&gt;</description>
+  <id type="integer">1</id>
+  <image>meesterwerk.png</image>
+  <name>Meesterwerk</name>
+  <order type="integer">1</order>
+  <published type="boolean">true</published>
+  <updated-at type="datetime">2010-02-15T09:47:23+01:00</updated-at>
+  <url>http://meesterwerkvof.nl/</url>
+  <skills type="array">
+    <skill>
+      <created-at type="datetime">2009-12-11T09:11:32+01:00</created-at>
+      <id type="integer">1</id>
+      <name>PHP</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">1</skill-id>
+      <updated-at type="datetime">2009-12-11T09:11:32+01:00</updated-at>
+      <url>http://php.net</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T10:43:04+01:00</created-at>
+      <id type="integer">2</id>
+      <name>WordPress</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">2</skill-id>
+      <updated-at type="datetime">2009-12-11T10:43:04+01:00</updated-at>
+      <url>http://wordpress.org</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T10:58:52+01:00</created-at>
+      <id type="integer">3</id>
+      <name>sIFR</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">3</skill-id>
+      <updated-at type="datetime">2009-12-11T10:58:52+01:00</updated-at>
+      <url>http://wiki.novemberborn.net/sifr/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T11:53:12+01:00</created-at>
+      <id type="integer">11</id>
+      <name>WordPress Themes</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">11</skill-id>
+      <updated-at type="datetime">2009-12-11T11:53:12+01:00</updated-at>
+      <url>http://codex.wordpress.org/Theme_Development</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T12:35:34+01:00</created-at>
+      <id type="integer">13</id>
+      <name>(x)html</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">13</skill-id>
+      <updated-at type="datetime">2009-12-11T12:35:34+01:00</updated-at>
+      <url></url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-11T12:35:38+01:00</created-at>
+      <id type="integer">14</id>
+      <name>CSS</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">14</skill-id>
+      <updated-at type="datetime">2009-12-11T12:35:38+01:00</updated-at>
+      <url></url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-29T07:21:10+01:00</created-at>
+      <id type="integer">22</id>
+      <name>Prototype.js</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">22</skill-id>
+      <updated-at type="datetime">2009-12-29T07:21:10+01:00</updated-at>
+      <url>http://www.prototypejs.org/</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-28T08:30:17+01:00</created-at>
+      <id type="integer">21</id>
+      <name>Web 2.0</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">21</skill-id>
+      <updated-at type="datetime">2009-12-28T08:30:17+01:00</updated-at>
+      <url>http://en.wikipedia.org/wiki/Web_2.0</url>
+    </skill>
+    <skill>
+      <created-at type="datetime">2009-12-29T07:22:00+01:00</created-at>
+      <id type="integer">23</id>
+      <name>Script.aculo.us</name>
+      <portfolio-id type="">1</portfolio-id>
+      <skill-id type="">23</skill-id>
+      <updated-at type="datetime">2009-12-29T07:22:00+01:00</updated-at>
+      <url>http://script.aculo.us/</url>
+    </skill>
+  </skills>
+</portfolio>

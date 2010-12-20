@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2008-12-16T09:57:43+01:00</created-at>
+  <id type="integer">32</id>
+  <link>http://www.youtube.com/watch?v=N2LmlidHdoQ</link>
+  <name>Dogs Sing Cristmas songs</name>
+  <updated-at type="datetime">2008-12-16T09:57:43+01:00</updated-at>
+</favorite>

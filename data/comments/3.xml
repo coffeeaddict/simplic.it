@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">4</blog-id>
+  <comment>If only that where true... Would make so much easier! (And less interesting ;)</comment>
+  <created-at type="datetime">2009-12-22T08:51:22+01:00</created-at>
+  <email>hartog.de.mik@simplic.it</email>
+  <id type="integer">3</id>
+  <name>Hartog</name>
+  <updated-at type="datetime">2009-12-22T08:51:22+01:00</updated-at>
+  <website>http://simplic.it/</website>
+</comment>

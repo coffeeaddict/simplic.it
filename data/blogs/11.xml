@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;In my work at Matchvertise I am building an order-handling system in Rails (2.8) that absorbs orders from various e-commerce sites (and platforms). I came to a point that the observers of my models no longer sufficed in leading the order from "pending" to a state in which they could be send to a warehouse as the amount of possible transitions had grown beyond a point manageable by observers and some &lt;a title="Flag Shih-Tzu" href="http://github.com/xing/flag_shih_tzu" target="_blank"&gt;flags&lt;/a&gt;. The misery of using observers in Rails is that you have to be very careful about saving your model as it might kick-in the observer which could have unwanted side-effects. These side-effects where already showing up in our production system.&lt;/p&gt;
+&lt;p&gt;So I started looking around for a work flow system to be integrated in my Rails app. The first thing I found was a number of State Machine plug-ins, but reading up on them i found a nice article explaining how &lt;a title="state_machine != work_flow" href="http://jmettraux.wordpress.com/2009/07/03/state-machine-workflow-engine/" target="_blank"&gt;State Machine's are not work flow systems&lt;/a&gt;. I realized the truth in that an investigated &lt;a title="ruote" href="http://ruote.rubyforge.org/" target="_blank"&gt;ruote&lt;/a&gt;. I was able to get a working sandbox in no time, but integrating this with Rails would be a bigger challenge. My first thoughts that I would need some sort of bus and place the ruote-engine and the Rails app (and a daemon or two) along side it.&lt;/p&gt;
+&lt;p&gt;There are some nice examples of Rails and ruote out there, but they are geared toward human interference for the work items at hand, and my main goal is to have as little human interference as possible. I don't believe that is impossible to make a set up where this is going to work, but for me it was to late; I would have to reconsider and redesign some major aspect of my work so far and now is not the time to do that.&lt;/p&gt;
+&lt;p&gt;So I ended up using the &lt;a title="state_machine" href="http://github.com/pluginaweek/state_machine" target="_blank"&gt;state_machine&lt;/a&gt; plug-in. I tried to separate it from my Order model by placing it into an OrderRouter model (name inspired by ruote) and adding some work-flow logic into the OrderRouter. The state-changing methods that used to live in the Order where placed into a handler method. This gave me the separation of concern I needed and the power to closely guard the state transitions and make it clear what work-flow mechanism where to be executed at what point. The Order model now flows through the system completely driven by events and can be saved at any given point without hesitation.&lt;/p&gt;</content>
+  <created-at type="datetime">2010-09-26T11:48:09+02:00</created-at>
+  <id type="integer">11</id>
+  <order type="integer" nil="true"></order>
+  <published type="boolean">false</published>
+  <subtitle></subtitle>
+  <title>A State Machine with Work Flow features</title>
+  <updated-at type="datetime">2010-09-26T12:18:34+02:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer" nil="true"></views>
+  <tags type="array"/>
+</blog>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skill>
+  <created-at type="datetime">2009-12-28T08:28:02+01:00</created-at>
+  <id type="integer">20</id>
+  <name>Cross Browser</name>
+  <updated-at type="datetime">2009-12-28T08:28:02+01:00</updated-at>
+  <url>http://en.wikipedia.org/wiki/Cross-browser</url>
+</skill>

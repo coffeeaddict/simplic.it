@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+  <content>&lt;p&gt;Was out early this morning (or rather the kids where up and it was Jenny's turn to keep the bed warm) and as they where multitasking between playing and watching Thomas the Tank Engine and Friends I was having a critical second look at the new me (or rather the business presentation of me called website).&lt;/p&gt;
+&lt;p&gt;I fixed some stuff (see &lt;a href="http://github.com/coffeeaddict/simplic.it/commits/master"&gt;http://github.com/coffeeaddict/simplic.it/commits/master&lt;/a&gt;) and am still amazed with the ease the Rails run.&lt;/p&gt;
+&lt;p&gt;Obviously I had to divide my attention between the x-term and my kids but I had my improvements in no time. Despite the fact that I had to go and look at the big adventures of Thomas a dozen or so times...&lt;/p&gt;
+&lt;p&gt;The work I did with git at &lt;a href="http://www.2organize.nl"&gt;2organize&lt;/a&gt; has made me even more comfortable with it and I seem to be able to get around with no errors now ;-).  My git/tier setup is like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+  [ github ]  &amp;lt;- origin -  [ simplic.it ]  (RAILS_ENV = production)
+                             /\      |
+                              |     dev
+                            origin   |        
+                              |      \/
+                           [ dev.simplic.it ]
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I develop on dev.simplic.it, pull my fixes from dev/master in simplic.it and then push to origin (being github). This ensures I have only production ready code on github (not that it matters for simplic.it) and I like the workflow it gives me.&lt;/p&gt;
+&lt;p&gt;Still hope to find a workplace where git is the leading SCM because I firmly believe in the power of git over subversion or CVS. Come to think of it, I hope to find a workplace... As my current assignment over at 2organize is due to end along with the present year.&lt;/p&gt;</content>
+  <created-at type="datetime">2009-12-12T09:13:32+01:00</created-at>
+  <id type="integer">5</id>
+  <order type="integer">5</order>
+  <published type="boolean">true</published>
+  <subtitle>Thomas, rails and git</subtitle>
+  <title>Playfull morning</title>
+  <updated-at type="datetime">2010-11-27T10:08:53+01:00</updated-at>
+  <user-id type="integer">4</user-id>
+  <views type="integer">318</views>
+  <tags type="array">
+    <tag>
+      <blog-id type="">5</blog-id>
+      <created-at type="datetime">2009-12-11T15:43:56+01:00</created-at>
+      <id type="integer">8</id>
+      <name>blogging</name>
+      <tag-id type="">8</tag-id>
+      <updated-at type="datetime">2009-12-11T15:43:56+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">5</blog-id>
+      <created-at type="datetime">2009-12-12T09:24:07+01:00</created-at>
+      <id type="integer">10</id>
+      <name>simplic.it</name>
+      <tag-id type="">10</tag-id>
+      <updated-at type="datetime">2009-12-12T09:24:07+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">5</blog-id>
+      <created-at type="datetime">2009-12-11T14:00:09+01:00</created-at>
+      <id type="integer">5</id>
+      <name>github</name>
+      <tag-id type="">5</tag-id>
+      <updated-at type="datetime">2009-12-11T14:00:09+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">5</blog-id>
+      <created-at type="datetime">2009-12-12T09:36:22+01:00</created-at>
+      <id type="integer">11</id>
+      <name>git</name>
+      <tag-id type="">11</tag-id>
+      <updated-at type="datetime">2009-12-12T09:36:22+01:00</updated-at>
+    </tag>
+    <tag>
+      <blog-id type="">5</blog-id>
+      <created-at type="datetime">2009-12-12T09:38:01+01:00</created-at>
+      <id type="integer">12</id>
+      <name>work</name>
+      <tag-id type="">12</tag-id>
+      <updated-at type="datetime">2009-12-12T09:38:01+01:00</updated-at>
+    </tag>
+  </tags>
+</blog>

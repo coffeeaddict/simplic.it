@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer">1</category-id>
+  <created-at type="datetime">2008-04-11T15:53:36+02:00</created-at>
+  <id type="integer">25</id>
+  <link>http://en.wikipedia.org/wiki/RUP</link>
+  <name>RUP (wiki)</name>
+  <updated-at type="datetime">2008-04-11T15:53:36+02:00</updated-at>
+</favorite>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bounce>
+  <clicks type="integer" nil="true"></clicks>
+  <created-at type="datetime">2009-12-10T14:12:34+01:00</created-at>
+  <id type="integer">7</id>
+  <public-id>a5a912b</public-id>
+  <updated-at type="datetime">2009-12-10T14:12:34+01:00</updated-at>
+  <url>http://github.com/coffeeaddict/one_train_working</url>
+</bounce>

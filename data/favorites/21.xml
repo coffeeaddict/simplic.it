@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer">1</category-id>
+  <created-at type="datetime">2008-04-11T13:46:18+02:00</created-at>
+  <id type="integer">21</id>
+  <link>http://www.ovsoftware.nl/</link>
+  <name>OV Software</name>
+  <updated-at type="datetime">2008-04-11T13:46:18+02:00</updated-at>
+</favorite>

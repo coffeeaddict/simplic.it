@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2008-12-30T14:06:30+01:00</created-at>
+  <id type="integer">42</id>
+  <link>http://www.youtube.com/watch?v=gg5_mlQOsUQ</link>
+  <name>Misheard Nightwish Wishmaster</name>
+  <updated-at type="datetime">2008-12-30T14:06:30+01:00</updated-at>
+</favorite>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer">1</category-id>
+  <created-at type="datetime">2008-04-11T13:04:23+02:00</created-at>
+  <id type="integer">7</id>
+  <link>http://jade-lavendel.eu/</link>
+  <name>Jade</name>
+  <updated-at type="datetime">2008-04-11T13:04:23+02:00</updated-at>
+</favorite>

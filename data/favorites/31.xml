@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<favorite>
+  <category-id type="integer" nil="true"></category-id>
+  <created-at type="datetime">2008-10-17T13:25:09+02:00</created-at>
+  <id type="integer">31</id>
+  <link>http://derekprospero.com/</link>
+  <name>Derek Prospero (Photoshop i-candy)</name>
+  <updated-at type="datetime">2008-10-17T13:25:09+02:00</updated-at>
+</favorite>

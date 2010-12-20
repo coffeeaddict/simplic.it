@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment>
+  <blog-id type="integer">10</blog-id>
+  <comment>Leaving a compatible versiom around will not force away 13% of the (corporate) highly insecure browser population. Google is right to pick up the glove @ the lazy internet (and Microsofr) community this way. Or am I ranting now?</comment>
+  <created-at type="datetime">2010-02-08T22:07:08+01:00</created-at>
+  <email>hartog@simplic.it</email>
+  <id type="integer">10</id>
+  <name>hartog </name>
+  <updated-at type="datetime">2010-02-08T22:07:08+01:00</updated-at>
+  <website></website>
+</comment>
