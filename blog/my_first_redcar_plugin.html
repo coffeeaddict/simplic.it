@@ -1,0 +1,193 @@
+<p>An few weeks ago I tried <code>gem install redcar</code> once more.</p>
+
+<p>I had tried it before, but the editor was not in a workable state
+back then and I was more then satisfied with Netbeans as a Rails
+development platform. But as my projects grew, so did the monsterous
+memory consumption of Netbeans bringing it to a grinding halt on my
+measily 2Gig system if I dared open a couple of projects at the same
+time; which I tend to do, as I am working on a some what Service
+Oriented Application-network</p>
+
+<p>I switched almost instanlty. Which is a big achievement for an
+editor! The only thing I dearly missed from Netbeans was jumping to
+the associated Rails file, when in an action inside a controller, open
+the according view instantly for instance.</p>
+
+<p>So I /join'ed the #redcar channel on irc.freenode.org and asked around a bit about making a plugin and was up and running in no time.</p>
+
+<p>And now is the time to decide where this blog should go; tell
+something about plugins, or tell you about the strugles I had with my
+plugin. I will stick with the first, as it addresses some of my
+problems as well. And besided; my plugin is not done yet. If you are
+interested in the strugle with my plugin, just red the commit log on
+<a
+href="https://github.com/coffeeaddict/redcar_associated_file">github</a>. I
+started pushing to github the instant I started developing
+(almost)</p>
+
+<h3>Begin</h3>
+
+<p>First we need something of a layout to place the files in. Not
+wanting to be the authoritive source for this, but it seems like the
+following layout is the defacto standard:</p>
+
+<pre><code>your_project/.
+your_project/plugin.rb
+your_project/lib/
+your_project/lib/your_project.rb
+your_project/lib/your_project/
+your_project/lib/your_project/a_file.rb</code></pre>
+
+<p>The basic layout for any ruby project actualy...</p>
+
+<h3>The setup</h3>
+
+<p>The <code>plugin.rb</code> file tells Redcar what to expect and do. It should look a little somethin' like this:
+<br />
+<code language="ruby">
+Plugin.define do
+  name         "your_project"
+  version      "1.0.0"   # be proud of what you make - release as 1.0!
+  file         "lib", "your_project"
+  object       "Redcar::YourProject"
+  dependencies ""
+end
+</code></p>
+
+<p>I could take you line-by-line, but I think the DSL Dan created here
+is pretty straight forward. What is nice to know is that the
+<code>lib</code> part of the file definition is pushed onto
+<code>$AUTO_LOAD</code> so you can include other related files more
+easily.</p>
+
+<h3>The commander</h3>
+
+<p>I will limit this HOWTO to a command, basicly becuase I haven't had
+the time to look at other aspects yet (like tasks). A command can be
+executed from the menu and bound to a key stroke. I will show you
+both.</p>
+
+<p>First, let's define the skeleton of the plugin. We must define the
+menus and the keybindings.<br />
+<code language="ruby">
+module Redcar
+  class YourProject
+    def self.menus
+    end
+
+    def self.keymaps
+    end
+  end
+end
+</code><br />
+
+The both of them are tied to a 'Command' class. I will show you the
+command class next. What is going here holds little secrets:
+Once redcar loads the plugin class <code>Redcar::YourProject</code>
+it executes the class methods 'menus' and 'keymaps' to get things
+going.</p>
+
+<h3>The command</h3>
+
+<p>Let's first define a simple command class placed in
+<code>lib/your_project/a_file.rb</code>. To break the drag of
+programming, you might want to be enlightend by some wisdom, so we are
+going to make a neat little class to show a message box with a fortune
+in it.
+<br />
+<code language="ruby">
+module Redcar
+  class YourProject
+    class AFile < Command
+      def execute
+        # perhaps you must install fortune for your system and perhaps it is
+        # not located in '/usr/games'
+        #
+        message = `/usr/games/fortune`
+        Application::Dialog.message_box(message)
+      end
+    end
+  end
+end
+</code>
+<br />
+
+<em class="alt">I know, backticks are evil. But this is all for the
+purpose of demonstration. If you know better, then do better.</em>
+<br />
+<br />
+We inherit from Command and have to implement the execute method and
+now; it works. It just works.
+</p>
+
+<h3>Tie it up</h3>
+
+<p>Back to our plugin class! We want to tie this thing into a menu
+real quick so we can enjoy some good wisdom. This is again very
+straight forward (Dan has done a good job on those DSL's
+<em>*hattip*</em><br />
+
+<code language="ruby">
+require 'your_project/a_file.rb';
+
+module Redcar
+  class YourProject
+    def self.menus
+      Menu::Builder.build do
+        sub_menu "View" do
+          item "Show me wisdom", YourProject::AFile
+        end
+      end
+    end
+
+  end
+end
+</code><br />
+
+What this does is open the existing definitions for the View menu and
+add another item called 'Show me wisdom' which is tied to our AFile
+class. Once the item get's clicked, the AFile class is instantiated
+and 'execute' is called on the instance, which in term should render a
+fortune on screen.</p>
+
+<p>Now, let's tie the same command class to a keystroke<br />
+<code language="ruby">
+    # ...
+
+    def self.keymaps
+      linwin = Keymap.build("main", [ :linux, :windows ]) do
+        link "Ctrl+Alt+F", YourProject::AFile
+      end
+      osx = Keymap.build("main", :osx) do
+        link "Cmd+Alt+F", YourProject::AFile
+      end
+
+      # return a list of bindings
+      [linwin, osx]
+    end
+
+    # ...
+</code>
+<br />
+
+I have to be honest and admit that I do not know what 'main' does, but
+I can guess. Can you?</p>
+
+<h3>Test ride</h3>
+
+<p>So now that the demonstration plugin is ready, let's take the
+little red car for a spin with fortune-wisdom included.</p>
+
+<p>Copy or symlink the contents of the plugin directory (including
+plugin.rb) into <code>$HOME/.redcar/plugins</code>. (Re)start redcar
+and see if it works...</p>
+
+<h3>The wrap up</h3>
+
+<p>You need only your imagination now to make beautiful plugins.</p>
+
+<p>There is however one big cave-at: <strong>Gems</strong>. Since
+Redcar runs inside of it's own bundled jruby you cannot access the
+gems you have installed. And depending on gems becomes difficult. So
+vendoring in is the way I went forth, but perhaps with some trickery
+you could tell rubygems where to find the right dependencies.</p>
