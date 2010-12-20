@@ -16,18 +16,23 @@ module BlogHelper
   def excerpt blog
     string = contents(blog)
 
+    return string if string.length < 1024
+      
+
     excerpt = nil
     if ( more = string.match /<!--\s?more\s?-->/ )
       excerpt = string[0...more.begin(0)]
       
     elsif ( p = string.match /<\/p>/ )
-      excerpt = string[0...p.begin(0)]
+      excerpt = string[0...p.begin(0)] + "...</p>"
       
     end
     
     if excerpt.nil? or ( !p.nil? and excerpt.length < 800 )
       excerpt = string[0...string[0..1024].rindex(" ")]
-      excerpt = balance_tags(excerpt)
+      excerpt = balance_tags(excerpt + "...")
+    else
+      excerpt += "..."
     end
     
     excerpt + link_to(
