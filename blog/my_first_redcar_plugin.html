@@ -1,25 +1,28 @@
-<p>An few weeks ago I tried <code>gem install redcar</code> once more.</p>
+<p>An odd couple of weeks ago I tried <code>gem install redcar</code>
+once more.</p>
 
 <p>I had tried it before, but the editor was not in a workable state
 back then and I was more then satisfied with Netbeans as a Rails
-development platform. But as my projects grew, so did the monsterous
+development platform. But as my projects grew, so did the monstrous
 memory consumption of Netbeans bringing it to a grinding halt on my
-measily 2Gig system if I dared open a couple of projects at the same
+measly 2Gig system if I dared open a couple of projects at the same
 time; which I tend to do, as I am working on a some what Service
 Oriented Application-network</p>
 
-<p>I switched almost instanlty. Which is a big achievement for an
+<p>I switched almost instantly. Which is a big achievement for an
 editor! The only thing I dearly missed from Netbeans was jumping to
 the associated Rails file, when in an action inside a controller, open
 the according view instantly for instance.</p>
 
-<p>So I /join'ed the #redcar channel on irc.freenode.org and asked around a bit about making a plugin and was up and running in no time.</p>
+<p>So I /join'ed the #redcar channel on irc.freenode.org and asked
+around a bit about making a plugin and was up and running in no
+time.</p>
 
 <p>And now is the time to decide where this blog should go; tell
-something about plugins, or tell you about the strugles I had with my
+something about plugins, or tell you about the struggles I had with my
 plugin. I will stick with the first, as it addresses some of my
-problems as well. And besided; my plugin is not done yet. If you are
-interested in the strugle with my plugin, just red the commit log on
+problems as well. And besides; my plugin is not done yet. If you are
+interested in the struggle with my plugin, just read the commit log on
 <a
 href="https://github.com/coffeeaddict/redcar_associated_file">github</a>. I
 started pushing to github the instant I started developing
@@ -27,18 +30,22 @@ started pushing to github the instant I started developing
 
 <h3>Begin</h3>
 
+<p>To break the drag of programming, you might want to be enlightend
+by some wisdom, so we are going to make a neat little plugin to show a
+message box with a fortune in it.</p>
+
 <p>First we need something of a layout to place the files in. Not
 wanting to be the authoritive source for this, but it seems like the
-following layout is the defacto standard:</p>
+following layout is the de facto standard:</p>
 
 <pre><code>your_project/.
 your_project/plugin.rb
 your_project/lib/
 your_project/lib/your_project.rb
 your_project/lib/your_project/
-your_project/lib/your_project/a_file.rb</code></pre>
+your_project/lib/your_project/show_wisdom.rb</code></pre>
 
-<p>The basic layout for any ruby project actualy...</p>
+<p>The basic layout for any ruby project actually...</p>
 
 <h3>The setup</h3>
 
@@ -62,13 +69,13 @@ easily.</p>
 
 <h3>The commander</h3>
 
-<p>I will limit this HOWTO to a command, basicly becuase I haven't had
+<p>I will limit this HOWTO to a command, basicly because I haven't had
 the time to look at other aspects yet (like tasks). A command can be
 executed from the menu and bound to a key stroke. I will show you
 both.</p>
 
 <p>First, let's define the skeleton of the plugin. We must define the
-menus and the keybindings.<br />
+menus and the key-bindings.<br />
 <code language="ruby">
 module Redcar
   class YourProject
@@ -90,15 +97,12 @@ going.</p>
 <h3>The command</h3>
 
 <p>Let's first define a simple command class placed in
-<code>lib/your_project/a_file.rb</code>. To break the drag of
-programming, you might want to be enlightend by some wisdom, so we are
-going to make a neat little class to show a message box with a fortune
-in it.
+<code>lib/your_project/show_wisdom.rb</code>. Remember, we are only going to display some wisdom, so it should be as straightforward as this:
 <br />
 <code language="ruby">
 module Redcar
   class YourProject
-    class AFile < Command
+    class ShowWisdom < Command
       def execute
         # perhaps you must install fortune for your system and perhaps it is
         # not located in '/usr/games'
@@ -112,7 +116,7 @@ end
 </code>
 <br />
 
-<em class="alt">I know, backticks are evil. But this is all for the
+<em class="alt">I know, back-ticks are evil. But this is all for the
 purpose of demonstration. If you know better, then do better.</em>
 <br />
 <br />
@@ -125,17 +129,17 @@ now; it works. It just works.
 <p>Back to our plugin class! We want to tie this thing into a menu
 real quick so we can enjoy some good wisdom. This is again very
 straight forward (Dan has done a good job on those DSL's
-<em>*hattip*</em><br />
+<em>*hat-tip*</em><br />
 
 <code language="ruby">
-require 'your_project/a_file.rb';
+require 'your_project/show_wisdom.rb';
 
 module Redcar
   class YourProject
     def self.menus
       Menu::Builder.build do
         sub_menu "View" do
-          item "Show me wisdom", YourProject::AFile
+          item "Show me wisdom", YourProject::ShowWisdom
         end
       end
     end
@@ -145,8 +149,8 @@ end
 </code><br />
 
 What this does is open the existing definitions for the View menu and
-add another item called 'Show me wisdom' which is tied to our AFile
-class. Once the item get's clicked, the AFile class is instantiated
+add another item called 'Show me wisdom' which is tied to our ShowWisdom
+class. Once the item gets clicked, the ShowWisdom class is instantiated
 and 'execute' is called on the instance, which in term should render a
 fortune on screen.</p>
 
@@ -156,10 +160,10 @@ fortune on screen.</p>
 
     def self.keymaps
       linwin = Keymap.build("main", [ :linux, :windows ]) do
-        link "Ctrl+Alt+F", YourProject::AFile
+        link "Ctrl+Alt+F", YourProject::ShowWisdom
       end
       osx = Keymap.build("main", :osx) do
-        link "Cmd+Alt+F", YourProject::AFile
+        link "Cmd+Alt+F", YourProject::ShowWisdom
       end
 
       # return a list of bindings
@@ -191,3 +195,8 @@ Redcar runs inside of it's own bundled jruby you cannot access the
 gems you have installed. And depending on gems becomes difficult. So
 vendoring in is the way I went forth, but perhaps with some trickery
 you could tell rubygems where to find the right dependencies.</p>
+
+<!--  LocalWords:  enlightend plugin
+ -->
+
+<!-- EDIT: typo's fixed, renamed a_file to show_wisdom and shuffled text around a bit -->
