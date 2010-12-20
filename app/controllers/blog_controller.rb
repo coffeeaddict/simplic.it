@@ -1,6 +1,11 @@
 class BlogController < ApplicationController
   def index
     @blogs = Blog.order( 'created_at DESC' ).limit(25)
+
+    respond_to do |format|
+      format.html
+      format.rss { render :layout => false }
+    end
   end
   
   def by_url_key

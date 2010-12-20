@@ -44,4 +44,9 @@ module BlogHelper
       { :class => "more_link" }
     )
   end
+
+  def url(blog)
+    url_for( :controller => :blog ) + "/#{blog.url_key}.html"
+  end
+  
 end
