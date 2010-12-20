@@ -1,7 +1,7 @@
 module BlogHelper
   # Get the (file) contents of a blog
   def contents blog
-    File.read(blog.file).html_safe
+    File.read(blog.file_path).html_safe
   end
   
   # Get the excerpt of a blog

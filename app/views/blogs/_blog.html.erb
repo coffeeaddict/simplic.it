@@ -9,7 +9,7 @@
   </div>
   <div class="span-5 push-1">
     <code>Published at: <%= l blog.created_at.to_date %><br />
-    Last update: <%= l blog.updated_at.to_date %></code>
+    Last update: <%= l blog.last_update.to_date %></code>
     <br /><br />
     <h3>Tags</h3>
     <% blog.tags.each do |tag| %>
