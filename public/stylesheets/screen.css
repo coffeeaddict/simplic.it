@@ -204,6 +204,7 @@ input.span-24, textarea.span-24 {width:1010px;}
 .prepend-22 {padding-left:946px;}
 .prepend-23 {padding-left:989px;}
 .border {padding-right:4px;margin-right:5px;border-right:1px solid #ddd;}
+.leftborder {border-left:1px solid #ddd;}
 .colborder {padding-right:26px;margin-right:26px;border-right:1px solid #ddd;}
 .pull-1 {margin-left:-43px;}
 .pull-2 {margin-left:-86px;}

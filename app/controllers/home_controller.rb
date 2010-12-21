@@ -5,15 +5,19 @@ class HomeController < ApplicationController
   require 'lipsum'  
 
   def sub_menu
-    [ ['Resume', :resume],
+    [ 
       ['Freelance', :freelance],
+      ['Resume', :resume],
       ['Contact', :contact]
     ]
   end
 
   def index
     @page = Page.find_by_path "/home/index"
-    Rails.logger.info "A: #{params[:action]}"
+    @blogs = Blog.order('created_at DESC').limit(2)
+    @life_lines = LifeLine.all.sort_by { |l|
+      l.publish_time.in_time_zone("Amsterdam")
+    }.reverse.take 5
   end
 
   def copyright

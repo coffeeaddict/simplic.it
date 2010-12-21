@@ -20,4 +20,22 @@ class BlogController < ApplicationController
     end
     @blogs = @tag.blogs    
   end
+  
+  def archive
+    year  = params[:year]
+    month = params[:month]
+        
+    template = "%Y"
+    @period  = "%i" % year
+    unless month.blank?
+      template += "/%m"
+      @period  += "/%02i" % month.gsub(/^0+/, "")
+    end
+    
+    @blogs = Blog.where( [ "strftime('#{template}', created_at)=?", @period] )
+  rescue ArgumentError => e    
+    @blogs = []
+    @error = true
+    
+  end
 end

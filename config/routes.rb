@@ -3,6 +3,7 @@ Webapp::Application.routes.draw do
   match '/blog' => "blog#index"
   match '/blog/:url_key' => "blog#by_url_key"
   match '/blog/tag/:tag' => "blog#by_tag"
+  match '/blog/archive/:year(/:month)' => "blog#archive"
   
   match '/:controller/pygment' => '#pygment'
   
