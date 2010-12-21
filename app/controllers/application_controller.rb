@@ -1,23 +1,33 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
+require 'net/http'
+require 'uri'
+require 'digest/md5'
 
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  layout "simplicity"
   protect_from_forgery
-  filter_parameter_logging :password, :new_password, :password_confirm
-
-  acts_as_authenticator_for User
-
-  # check for a login or bounce to start
-  def check_login
-    unless current_user
-      redirect_to :controller => "login", :action => "index"
-    end
-
-    # pages which require login do not use default behavioure. Set logged_in attr. here
-    @logged_in = true
-
+  
+  # show my name
+  def name
+    self.class.name.underscore.gsub(/_controller$/, "")
+  end  
+  
+  # generic not found
+  def not_found
+    render(:file => "404.html", :layout => true, :status => 404)
   end
-
+  
+  def pygment
+    code = CGI::unescapeHTML params[:code]
+    lang = params[:lang]
+    
+    pygmented = Rails.cache.fetch(Digest::MD5.hexdigest(code)) do      
+      request = Net::HTTP.post_form(
+        URI.parse('http://pygments.appspot.com/'), {'lang'=>lang, 'code'=>code}
+      )
+      request.body.gsub("class=\"highlight\"", "class='pygmented'")
+    end
+    
+    Rails.logger.info pygmented
+    
+    render :text => pygmented.html_safe
+  end
 end

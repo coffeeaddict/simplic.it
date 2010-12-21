@@ -1,0 +1,14 @@
+<div class="span-24 last">
+  <h1 class="page_title"><%= @page.title %></h1>
+</div>
+
+<div class="span-24">
+  <div class="<%= @page.info ? "span-17 append-1 colborder" : "span-24 last" %>">
+    <%= @page.contents.html_safe %>
+  </div>
+  <% if @page.info %>
+    <div class="span-6 push-1 last" style="margin-top: 10px;">
+      <%= @page.info.html_safe %>
+    </div>
+  <% end %>
+</div>

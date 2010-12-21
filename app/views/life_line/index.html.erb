@@ -1,0 +1,33 @@
+<div class="large alt" style="float: right">An aggregation of my social activities</div>
+
+<h1 class="page_title">LifeLine <%= "for #{params[:origin]}" unless params[:origin].blank? %></h1>
+
+<div class="span-20">
+<% @life_lines.each do |line| %>
+<div class="life_line alt <%= line.origin %>" data-url="<%= url_for( :action => :by_origin, :origin => line.origin ) %>">
+  <% unless line.title.blank? %><h3><%= h line.title %></h3><% end %>
+  
+  <%
+    contents = line.contents
+    if line.origin == "twitter"
+      contents = twitter_link_up contents
+    else 
+      contents = link_up contents
+    end
+  %>
+  
+  
+  <% if line.origin == "flickr" %>
+    <%= link_to image_tag line.contents, :width => 500 %>
+  <% else %>
+    <%= line.html_safe? ? contents.html_safe : contents %>
+  <% end %>
+  <br />
+  <br />
+  <span class="small"><%= l line.publish_time %></span>
+</div>
+<% end %>
+</div>
+
+<div id="info" class="span-9 push-1 last">
+</div>

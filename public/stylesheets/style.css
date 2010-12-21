@@ -1,378 +1,193 @@
-/* hartog/20080401: style.css - styles for elegant looking
-                    { Simplic.IT } website
-   hartog/20080501: added resume and portfolio specific styles
-   hartog/20080819: changed link colors for clarity
-*/
-
-
-/*
-  Div's
-*/
-
-#canvas { 
-  width: 1000px;
-  margin: 0 auto!important;
-  padding-top: 20px;
-}
-
-#header {
-  margin: 0;
-  padding: 0;
-  width: 900px;
-}
-
-#logo { 
-  float: left;
-}
-
-#menu { 
-  display: block;
-  width: 480px;
-  float: right;
-  padding-top: 30px;
-  vertical-align: middle;
-  background-color: #fff;
-}
-
-#menu a { 
-  text-decoration: underline;
-  margin-left: 5px;
-}
-
-#menu h3 {
-    display: inline;
-}
-
-#page { 
-  width: auto;
-  height: auto;
-  padding: 20px;
-}
-
-#content { 
-}
-
-#footer { 
-  font-size: 8pt;
-  padding: 6px 20px;
-}
-
-#footer_images { 
-  width: 400px;
-}
-
-#footer_images img { 
-  vertical-align: middle;
-  border: none;
-  width: 24px;
-  height: 24px;
-}
-
-#what { 
-  display: block;
-  float: left;
-  width: 100px;
-}
-
-#cv h1, #cv h2 { 
-  margin-top: 50px;
-}
-
-/* HTML element properties */
 body {
-  margin: 0;
-  padding: 0;
-  font: 10pt/1.5 sans-serif;
-}
-
-
-img {
-  margin: 0px;
-  padding: 0px;
-  border: none;
-}
-
-td {
-  vertical-align: top;
-  padding: 4px;
-}
-
-
-h1,h2,h3,h4 {
-  margin: 0.2em 0;
-  color: #21409a;
-}
-
-h1 {
-    margin-bottom: 0.6em;
-}
-
-h2.next { 
-  margin-top: 2em;
-}
-
-h4,h5,h6,h7 { 
-  color: black;
-}
-
-a {
-  font-size: inherit;
-  color: #21409a;
-  text-decoration: none
-}
-
-a:hover, a:active {
-  text-decoration: underline;
-}
-
-hr { 
-  border: solid #21409a 1px;
-  margin: 0px;
-  padding: 0px;
-}
-
-b, strong {
-  color: #21409a;
-}
-
-label {
-  display: block;
-  /* border forces the shape of the label */
-  border: solid white 1px;
-  padding-left: 10px;
+  background: url('/images/header_bg.png') repeat-x #ededff;
+  padding-top: 9px;
+  
 }
 
 pre { 
+  display: inline-block;
+}
+
+p code { 
+  background: #b9cafd;
+  padding: 2px 3px;
+}
+
+
+h1.page_title {
+  font-size: 32pt;  
+  color: #102b79;
+}
+
+h2.page_title { 
+  color: #102b79;
+  padding-left: 15px;
+}
+
+ul.menu {
+  padding: 0;
+  margin: 0;
+  padding-top: 18px;  
+  margin-left: 8px;
+  color: white;
+  font-size: 17px;  
+  list-style-type: none;
+  display: block;
+  height: 32px;
+}
+
+ul.menu li {
+  display: inline-block;
+  height: 32px;
+  width: 110px;
+  padding-left: 1em;  
+  margin: -1px;
+}
+
+ul.menu li.selected {
+  background: #8698cb;
+  border: solid white 1px;  
+}
+
+ul.submenu {
+  padding: 0;
+  margin: 0;
+  padding-top: 4px;
+  padding-left: 20px;  
+  margin-left: 8px;
+  color: #333;
+  font-size: 14px;  
+  list-style-type: none;
+  display: block;
+  height: 25px;  
+  
+}
+
+ul.submenu li {
+  display: inline-block;
+  height: 20px;
+  width: 90px;
+  padding-left: 1em;  
+  margin: -1px;
+  margin-left: 1em;
+  border-bottom: solid #333 1px;  
+}
+
+ul.submenu li.selected {
+  border-width: 3px;
+}
+
+p {
+  padding-bottom: 10px;
+}
+
+.clear { clear: both; }
+.left { float: left; }
+.right { float: right; }
+.bold { font-weight: bold; }
+.italic { font-variant: italic; }
+
+/* h1, h2 { font-weight: bold; } */
+
+.footer {
+  background: #8698cb;
+  color: #555;
   margin: 0;
   padding: 0;
-  display: block;
 }
 
-code { 
-  font-family: Courier;
-  font-size: 9pt;
-  background: #eaeaea;
+.footer a { 
+  color: #333;
 }
 
-pre code { 
-  display: block;
-}
-
-.sidebar {
-    padding-left: 10px;
-    margin-left: 5px;
-    float: right;
-    width: 200px;
-    border-left: dotted #777 1px;
-    border-bottom: dotted #777 1px;
-    font-size: 8pt;
-}
-
-.sidebar a img { 
+dl { 
   margin: 0;
   padding: 0;
-}
-
-.imageleft { 
-  float: left;
-}
-
-.imageright { 
-  float: right;
-}
-
-/* These style notations are here for the resume only */
-table.list td { 
-  padding: 0;
-  padding-left: 4em;
-}
-
-ul {
+  padding-left: 30px;
   list-style-type: none;
 }
 
-ol {
-  list-style-type: disc;
+dl li {
+  padding: 3px 0;
 }
 
-ol li {
-  margin: 0;
-  padding: 0;
+#what { 
+  vertical-align: top;
 }
 
-/* These style notations are for the portfolio */
-
-div.portfolio_block { 
-  border-bottom: dotted #777 1px;
-  margin-bottom: 20px;
-}
-
-div.portfolio_name { 
-  font-size: 14pt;
-  color: #21409a;
-}
-
-div.portfolio { 
-  padding: 20px;
-  padding-top: 2px;
-  text-align: justify;
-}
-
-div.portfolio img { 
-  border: solid black 1px;
-  padding: 4px;
-  margin: 20px 8px 4px 0;
-  vertical-align: text-top;
-}
-
-.image_note { 
-  text-align: right;
-  font-size: 6pt;
-}
-
-div.portfolio_block .sidebar { 
+.life_line {
+  min-height: 40px;
+  border-bottom: solid 1px #ddd;
+  padding-bottom: 25px;
   margin-top: 25px;
-  margin-left: 12px;
+  padding-top: 10px;
+  padding: 2px;
+  padding-right: 34px;
+  font-size: 12pt;
 }
 
-div.skill { 
-  display: block;
-  border: solid black 1px;
-  margin-bottom: 5px;
-  padding-left: 3px;
+.twitter {
+  background: url('/images/icons/small/twitter.png') no-repeat top right;
 }
 
-#available_skills, #project_skills { 
-  float: left;
-  width: 40%;
-  border: dotted #777 1px;
-  padding: 10px;
-  margin-right: 10px;
-  padding-bottom: 100px;
+.flickr {
+  background: url('/images/icons/small/flickr.png') no-repeat top right;
 }
 
-/* Resume stuffs */
-
-div.date { 
-  width: 200px;
-  display: block;
+.github {
+  background: url('/images/icons/small/git.png') no-repeat top right;
 }
 
-div.dated_content { 
+.bitly {
+  background: url('/images/icons/small/bit.ly.png') no-repeat top right;
+}
+
+.tag a {
+  color: black;
+}
+
+.size-0 { font-size: 7.5pt; }
+.size-1 {
+  font-size: 8pt;
+}
+
+.size-2 {
+  font-size: 8.5pt;
+}
+
+.size-3 {
+  font-size: 9pt;
+}
+
+.size-4 {
+  font-size: 9.5pt;
+}
+
+.size-5 {
+  font-size: 10pt;
+}
+
+.size-6 {
+  font-size: 10.5pt;
+}
+
+.size-7 {
+  font-size: 11pt;
+}
+
+.size-8 {
+  font-size: 12pt;
+}
+
+.size-9 {
+  font-size: 12.5pt;
+}
+
+.size-10 {
+  font-size: 13pt;
+}
+
+.more_link {
   float: right;
-  width: 690px;
-  display: block;
-}
-
-.dated_content h3 { 
-  margin: 0;
-  padding: 0;
-  margin-top: 0px;
-}
-
-div.dated_block { 
-  width: 900px;
-  display: block;
-  position: relative;
-  margin-bottom: 50px;
-}
-
-/* Blog stuffs */
-
-div.blog {
-  width: 900px;
-  float: left;
-  text-align: justify;
-}
-
-div.blog .sidebar { 
-  margin-left: 12px;
-}  
-
-div.blog h2 { 
-  margin: 0;
-  padding: 0;
-}
-
-.tags, .comments, .views {
-    font-size: 7pt;
-    float: left;
-}
-
-.tags { 
-  min-width: 200px;
-}
-
-.comments { 
-  margin-left: 20px;
-}
-
-.views { 
-  margin-left: 40px;
-}
-
-div.blog ul { 
-  list-style-type: disc;
-}
-
-.excerpt {
-    border-bottom: dotted #777 1px;
-    margin-bottom: 20px;
-  text-align: justify;
-}
-
-.comment_block {
-    border-top: dotted #777 1px;
-    border-left: dotted #777 1px;
-    display: block;
-}
-
-.commenter {
-    font-weight: bold;
-    display: block;
-    font-size: 8pt;
-    margin-left: 20px;
-}
-
-.comment {
-    margin-left: 40px;
-    margin-bottom: 20px;
-    display: block;
-    font-size: 8pt;
-}
-
-
-div.tag, #blog_tags li { 
-  display: block;
-  border: solid black 1px;
-  margin-bottom: 5px;
-  padding-left: 3px;
-  cursor: pointer;
-}
-
-#blog_tags li a { 
-  float: right;
-  padding-right: 5px;
-}
-
-#blog_tags { 
-  margin-top: 0;
-  margin-bottom: 30px;
-}
-
-#available_tags, #blog_tags, #add_tags { 
-  float: left;
-  width: 40%;
-  border: dotted #777 1px;
-  padding: 10px;
-  margin-right: 10px;
-}
-
-#add_tags { 
-  padding-bottom: 100px;
-}
-
-#order_message { 
-  float: right;
-  margin-right: 50px;
+  font-size: 12.5pt;
 }

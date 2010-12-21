@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{ Simplic.IT } - <%= controller.name %> - <%= params[:action] %></title>
+  <%= stylesheet_link_tag "screen" %>
+  <!--[if lt IE 8]>
+    <%= stylesheet_link_tag "ie" %>
+  <![endif]-->
+  <%= stylesheet_link_tag "style", "pygment" %>
+
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div class="container">
+    <%= image_tag "logo.png" %>
+    <ul class="menu" id="mainmenu">
+      <%= menu_link "Home", :controller => :home %>
+      <%= menu_link "Blog", :controller => :blog %>
+      <%= menu_link "LifeLine", :controller => :life_line %>
+      <%= menu_link "Tools", :controller => :tools %>
+      <!-- %= menu_link "Contact", :controller => :home, :action => :contact % -->
+    </ul>
+    <% if controller.respond_to? :sub_menu %>
+    
+    <ul class="submenu" id="submenu">
+      <% controller.sub_menu.each do |name, action| %>
+        <%= menu_link name, :action => action %>
+      <% end %>
+    </ul>
+    <% end %>
+    <br class="clear" />
+    <br />
+
+    <!-- start content -->
+    <%= yield %>
+    <br class="clear"/><br />
+
+    <div class="span-24 last push-1">
+      <div style="float: right; display: inline-block;">
+        <span id="what">find me on:</span>
+          <%= link_to image_tag("icons/small/git.png",
+                                :border => 0,
+                                :alt => "github" ),
+                "http://github.com/coffeeaddict",
+                :onMouseOver => "$('what').update('fork me on:');"
+          %>
+          <%= link_to image_tag("icons/small/twitter.png",
+                                :border => 0,
+                                :alt => "twitter"),
+                "http://twitter.com/coffeeaddict_nl",
+                :onMouseOver => "$('what').update('follow me on:');"
+           %>
+          <%= link_to image_tag("icons/small/linkedin.png",
+                                :border => 0,
+                                :alt => "Linked-In"),
+                "http://www.linkedin.com/in/hartog",
+                :onMouseOver => "$('what').update('join me on:');"
+          %>
+          <%= link_to image_tag("icons/small/facebook.png",
+                                :border => 0,
+                                :alt => "Facebook"),
+                "http://www.facebook.com/coffeeaddictnl",
+                :onMouseOver => "$('what').update('befriend me on:');"
+          %>
+          <%= link_to image_tag("icons/small/flickr.png",
+                                :border => 0,
+                                :alt => "Flickr"),
+                "http://www.flickr.com/photos/coffeeaddict_nl",
+                :onMouseOver => "$('what').update('view me on:');"
+          %>
+          <!--
+          # TODO; make an RSS feed
+          <%= link_to image_tag("icons/small/rss.png",
+                                :border => 0,
+                                :alt => "RSS"),
+                "/rss",
+                :onMouseOver => "$('what').update('read me on:');"
+          %>
+          -->
+      </div>
+    </div>    
+    <br class="clear" />
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <span style="float: left;">
+        Not <%= link_to "#acta", :controller => :home, :action => :copyright %> compliant.
+      </span>
+      <span style="float: right;">&pi;</span>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+    document.observe("dom:loaded", function() {
+      // observe the menu for mouse overs
+      $$('ul.menu li').each(function(item) {
+        if ( !item.hasClassName("selected") ) {
+          item.observe("mouseover", function() {
+            item.setStyle('color: #36576b');
+          });
+          item.observe("mouseout", function() {
+            item.setStyle('color: white');
+          });
+        }
+      });
+
+      $$('ul.submenu li').each(function(item) {
+        if ( !item.hasClassName("selected") ) {
+          item.observe("mouseover", function() {
+            item.setStyle('border-width: 3px;');
+          });
+          item.observe("mouseout", function() {
+            item.setStyle('border-width: 1px;');
+          });
+        }
+      });
+      
+      // observer all elements with a data-url, they want to be clicked
+      $$('*[data-url]').each(function(item) {
+        item.observe("click", function() { document.location.href=item.getAttribute("data-url"); });
+        item.setStyle('cursor: pointer');
+      });
+
+      // select home if nothing was selected
+      items = $$('ul#mainmenu > li')
+      var has_selected = false
+      items.each( function(item) {
+        if ( item.hasClassName("selected") ) { has_selected = true }
+      });
+
+      if ( has_selected == false ) {
+        items.first().addClassName("selected");
+      }
+      
+      // feed all code blocks trough the pygmenting service
+      blocks = $$('code')
+      blocks.each ( function(block) {
+        if ( block.getAttribute("language") ) {
+          new Ajax.Request('<%= url_for( :controller => :home, :action => :pygment) %>', {
+            method: 'POST',
+            parameters: {
+              code: '' + block.innerHTML,
+              lang: block.getAttribute("language")
+            },
+            onSuccess: function(response) {
+              block.replace(response.responseText);
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

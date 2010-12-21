@@ -1,11 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  title: MyString
-  subtitle: MyString
-  content: MyText
+  url_key: MyString
+  file: MyString
 
 two:
-  title: MyString
-  subtitle: MyString
-  content: MyText
+  url_key: MyString
+  file: MyString

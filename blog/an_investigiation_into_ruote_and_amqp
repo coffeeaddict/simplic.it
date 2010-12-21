@@ -1,0 +1,234 @@
+<h3>Introduction</h3>
+
+<p>I recently stumbled upon <a title="ruote"
+href="http://ruote.rubyforge.org/" target="_blank">ruote</a>. I have
+in the past worked with jBPM and have been intrigued by Business
+Process Management stuffs ever since but have not been able to put
+that interest into my work so it has been mostly dormant.</p>
+
+<p>I was able to get a neat little sand-box project up and running in
+no time. Ruote seems very plausible for my current work project but it
+should be able to run in a somewhat service oriented architecture to
+be really useful (for my project at least).</p>
+
+<p>Turns out I would need a Message Queue (MQ) that has the <a
+title="Advanced Message Queueing Protocol"
+href="http://www.amqp.org/confluence/display/AMQP/Advanced+Message+Queuing+Protocol"
+target="_blank">AMQP</a> lingo and ruote-amqp. I went with <a
+title="RabbitMQ" href="http://www.rabbitmq.com/"
+target="_blank">RabbitMQ</a> as my MQ for no apparant reason (other
+then being available in apt-get and that it uses Erlang).</p>
+
+<p>So I read some examples of ruote and ruote amqp and then some more
+and tried to get the stuff to work. Not an easy task... After some
+more blind messing around I decided I would take the ping-pong example
+from the <a title="tmm1/amqp" href="http://github.com/tmm1/amqp"
+target="_blank">Ruby AMQP library</a> and do it in ruote.</p>
+
+<p>To get some insights as to how to do this I investigated the <a
+title="MeeGo Boss"
+href="meego.gitorious.org/meego-infrastructure-tools/boss"
+target="_blank">meego-boss</a> project, by David Greaves and the <a
+title="ruote Rails example"
+href="http://github.com/threetee/ruote-rails-example"
+target="_blank">ruote-rails-example</a>, by Eric Dennis and tried to
+replicate their results.</p>
+
+<h2>Getting started</h2>
+<h3>Installation instructions</h3>
+
+<p>I work on Ubuntu, so these instructions assume you also have
+Ubuntu. They also assume you know a little something about UN*X (read:
+your favorite distro) and are able to translate the instructions here
+to your own needs.</p>
+
+<p>To get started you need to install some stuff; work as root,</p>
+<pre><code language="sh">% sudo -s </code></pre>
+<p>and install the needed reqs.</p>
+<pre><code language="bash"># gem install ruote ruote-amqp daemon-kit bundler
+# apt-get install rabbitmq</code></pre>
+<p>Now that you have the gems, you must set up the RabbitMQ (again as root (or using sudo))</p>
+<pre><code language="bash"># rabbitmqctl add_vhost ruote
+# rabbitmqctl add_user ruote ruote
+# rabbitmqctl set_permissions -p ruote ruote '.*' '.*' '.*'</code></pre>
+<h3>Making a ping and a pong participant to the game</h3>
+<p>We use daemon-kit to generate 2 daemons; ping and pong.</p>
+<pre><code language="bash">% daemon-kit -i ruote ping
+% daemon-kit -i ruote pong</code></pre>
+<p>First we edit the ping daemon:</p>
+<p>Edit config/amqp.yml to look somewhat like this:</p>
+<pre><code language="yaml">defaults: &amp;defaults
+  user: ruote
+  pass: ruote
+  host: localhost
+  vhost: ruote</code></pre>
+
+<p>And make sure the daemon will listen on the ping queue by editing
+config/ruote.yml to look like this:</p>
+
+<pre><code language="yaml">defaults: &defaults
+  amqp:
+    queues:
+     - ping
+</code></pre>
+<p>Now make a Ping class and clear the given sample</p>
+<code language="bash">% mv lib/sample.rb lib/ping.rb</code>
+<p>Edit ping.rb to become a Ping class and change the quote function to a ping function something like this:</p>
+<pre><code language="ruby">class Ping &lt; DaemonKit::RuotePseudoParticipant
+  # ...
+  def ping   # it said 'def quote' here in the sample
+    workitem["state"] = "ping"
+    count = Integer(workitem["count"]) rescue 0
+    workitem["count"] = count + 1
+  end
+  #...
+end</code></pre>
+
+<p>Update the daemon code to register the Ping class as a participant,
+where it says <code language="ruby">config.register Sample</code> make
+it say <code language="ruby">config.register Ping</code></p>
+
+<p>Now we do the same for pong (replacing ping with pong where needed)</p>
+<h3>Starting ping and pong</h3>
+<p>You should now be able to get the ping and the pong player onto the field (although I might have forgotten some steps - please notify me if so).</p>
+<p>So we have to first start the ping and the pong daemon. You can do this by starting each in a separate (x)term for each, or just by backgrounding them. The latter approach is used here</p>
+<pre><code language="bash">% cd ping
+% ./bin/ping &
+% cd ../pong
+% ./bin/pong &
+</code></pre>
+<p>Each should generate output that looks somewhat like this:</p>
+<pre>[daemon-kit]: Setting up trap for USR1<br />[daemon-kit]: Setting up trap for USR2<br />[daemon-kit]: Setting up trap for HUP<br />[daemon-kit]: Setting up trap for INT<br />[daemon-kit]: Setting up trap for TERM<br />[daemon-kit]: DaemonKit (0.1.8.1) booted, now running pong<br />[daemon-kit]: AMQP.start({:pass=&gt;"ruote", :vhost=&gt;"ruote", :host=&gt;"localhost", :user=&gt;"ruote"})<br />[daemon-kit]: Subscribing to pong for workitems</pre>
+<p>Now that both the players are on the field it is time to start the match. But we must create a playing field for that. Ruote to the rescue:</p>
+<h2>Make a ruote</h2>
+<p>Create a directory (next to ping/ and pong/) called ping-pong-engine/</p>
+<p>First, let's make a Gemfile for Bundler</p>
+<pre><code language="ruby">source "http://rubygems.org"
+
+gem 'daemon-kit'
+gem 'amqp', :git =&gt;"git://github.com/tmm1/amqp.git"
+gem 'ruote', :git =&gt; 'git://github.com/jmettraux/ruote.git', :branch =&gt; 'ruote2.1'
+gem 'ruote-amqp', :git =&gt; "git://github.com/kennethkalmer/ruote-amqp.git", :branch =&gt; 'ruote2.1'
+gem 'rspec'
+gem 'eventmachine'
+gem 'json'
+gem 'yajl-ruby'
+</code></pre>
+<p>and run <code language="bash">bundler install</code>.</p>
+<p>We obviously have already installed the gems, but this will put us on the edge</p>
+
+<p>In lib/main.rb - I use NetBeans for development so I got a lib/ directory for free - create a script to execute the match. Start of with some she-bang and require stuff
+<pre><code language="ruby">#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler'
+Bundler.setup
+
+require 'ruote'
+require 'ruote/storage/fs_storage'
+require 'ruote-amqp'
+</code></pre>
+Now let's create a ruote engine, using a FileSystem storage method, letting it store the stuff in ruote-data.
+<pre><code language="ruby">engine = Ruote::Engine.new(
+  Ruote::Worker.new(
+    Ruote::FsStorage.new("ruote_data")
+  )
+)
+</code></pre>
+<pre><code language="ruby">{ :host  =&gt; 'localhost',
+  :vhost =&gt; 'ruote',
+  :user  =&gt; 'ruote',
+  :pass  =&gt; 'ruote'
+}.each { |k,v|
+  AMQP.settings[k]=v
+}</code></pre>
+<p>Now, we must have a receiver for the return messages from Ping and Pong.</p>
+<pre><code language="ruby"># listens to the ruote_workitems queue by default.
+receiver = RuoteAMQP::Receiver.new(
+  engine,
+  :launchitems =&gt; false # tell the receiver only to only accept workitems
+)
+</code></pre>
+<p>Now that we are all setup for the match, we must define it.</p>
+<p>First, we make some particpants.</p>
+<pre><code language="ruby"># register ping and pong as participants to the game and subscribe them to the right queue
+engine.register_participant :ping, RuoteAMQP::Participant, :queue =&gt; "ping"
+engine.register_participant :pong, RuoteAMQP::Participant, :queue =&gt; "pong"</code></pre>
+<pre><code language="ruby"># we need a crowd as well
+engine.register_participant :logger do |workitem|
+  $stderr.puts "State: #{workitem.fields['state']}"
+  $stderr.puts "Count: #{workitem.fields['count']}"
+end</code></pre>
+<pre><code language="ruby"># and we need some one to initiate the game
+engine.register_participant :alpha do |wi|
+  wi.fields['state'] = 'alpha'
+  wi.fields['count'] = 0
+end</code></pre>
+<p>Pretty straight forward right? Now; create the definition of the game</p>
+<pre><code language="ruby">pdef = Ruote.process_definition :name =&gt; 'game' do
+  # the main definition, perform the setup and play until the count is 6 or higher
+  sequence :on_error =&gt; :shout do
+    setup
+    repeat do
+      play
+      _break :if =&gt; '${f:count} &gt;= 6'
+    end
+  end
+
+  # setup shop by calling alpha and let the logger show the state
+  define 'setup' do
+    alpha
+    logger
+  end
+
+  # perform a ping and a pong. To get the workitem to the right place we need to specify
+  # a command. It is composed of '/$service/$function' - the first being the Ping class
+  # registered by our ping daemon and the latter the method to call on that class
+  #
+  # unfortunately we have to specify the reply_queue here... :-/
+  #
+  define 'play' do
+    ping :command =&gt; "/ping/ping", :reply_queue =&gt; "ruote_workitems"
+    logger
+    pong :command =&gt; "/pong/pong", :reply_queue =&gt; "ruote_workitems"
+    logger
+  end
+
+  # show the occurence of errors
+  define :shout do
+    echo 'Error occured...'
+  end
+end</code></pre>
+<p>Again, not to complex - now let's launch the game, be blocking for it, and show any errors that occured.</p>
+<pre><code language="ruby">wfid = engine.launch(pdef) # launch
+engine.wait_for(wfid)      # be blocking
+
+# show the errors
+errs = engine.errors
+if errs.size &gt; 0
+  puts "there are processes with errors :"
+  errs.each do |err|
+    puts "process #{err.wfid}"
+  end
+end</code></pre>
+<p>save your work and execute</p>
+<pre>% ruby lib/main.rb</pre>
+<p>If all is well you should see something like this:</p>
+<pre>State: alpha
+Count: 0
+State: ping
+Count: 1
+State: pong
+Count: 2
+State: ping
+Count: 3
+State: pong
+Count: 4
+State: ping
+Count: 5
+State: pong
+Count: 6</pre>
+<p>It worked! Your ruoting engine has submitted a workitem to both of the daemons a couple of times and they have altered the workitem before returning it. Your participants where orchestrated to play a blind game of ping pong. Now how cool is that?</p>
+<p>&nbsp;</p>
+<p>You can find all the above code in my <a title="Examplatory Code" href="http://github.com/coffeeaddict/ruote-amqp-ping-pong" target="_blank">ruote-amqp-ping-pong project on github</a>.</p>
+<p><small>(20100927/minor edits after suggestions from <a title="John Mettraux" href="http://api.twitter.com/jmettraux" target="_blank">@jmettraux</a> in <a title="Gist" href="http://gist.github.com/598447" target="_blank">http://gist.github.com/598447</a>)</small></p>

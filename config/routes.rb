@@ -1,9 +1,25 @@
-ActionController::Routing::Routes.draw do |map|
-  # You can have the root of your site routed with map.root -- just
-  # remember to delete public/index.html.
-  #
-  map.root :controller => "home"
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
-  map.connect '/:id', :controller => "home"
+Webapp::Application.routes.draw do
+  
+  match '/blog' => "blog#index"
+  match '/blog/:url_key' => "blog#by_url_key"
+  match '/blog/tag/:tag' => "blog#by_tag"
+  
+  match '/:controller/pygment' => '#pygment'
+  
+  namespace :home do
+    match :index
+    %w( freelance resume copyright contact ).each do |action|
+      match "#{action}" => { :controller => :home, :action => :index }
+    end
+  end
+  
+  match '/life_line' => 'life_line#index'
+  match '/life_line/index' => 'life_line#index'
+  match '/life_line/by_origin/:origin' => 'life_line#by_origin'
+  
+  namespace :tools do
+    match :index
+  end
+  
+  root :to => "home#index"  
 end

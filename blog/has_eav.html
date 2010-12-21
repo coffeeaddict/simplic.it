@@ -1,0 +1,47 @@
+<p>While EAV (Entity Attribute Value; see
+  <a href="http://en.wikipedia.org/wiki/Entity-attribute-value_model">Wikipedia</a>)
+  might not be the best solution for everything, it might be needed sometimes. 
+  It can also make your live easier when doing STI (Single Table Inheritance) - inherited objects
+  might want to add new attributes and not only a distinguishing type and EAV can help you there.
+</p>
+<p>In Rails-2.3.x I used <a href="https://github.com/visfleet/acts_as_eav_model">acts_as_eav_model</a>
+  for this purpose. It was hastily made ready for Rails-3, and as it passes all it's own specs, 
+  but it has a nasty <a href="https://github.com/visfleet/acts_as_eav_model/issues#issue/3">bug
+    that I reported</a> the other day. I forked it and tried to fix things, but acts_as_eav_model 
+    is rather complex in it's setup and is geared to the database (1 base table can have several
+    AV tables). So I took the short way out, DIY. Within a day I had created the desired behavior
+    on my model, distilled it into a reusable module, then into gem and had it
+    <a href="http://rubygems.org/gems/has_eav">published</a>.
+    Thank you Ruby,
+    thank you <a href="https://github.com/technicalpickles/jeweler">Jeweler</a>,
+    thank you <a href="http://gembundler.com/">Bundler</a>,
+    thank you <a href="http://rubygems.org/">rubygems.org</a>.
+  </p>
+<p>I tried to make has_eav act natural for the rails developer, but (intentionally) introduced 
+  2 major drawbacks;
+  <ul>
+    <li>You have to roll your own migration for the attributes model.</li>
+    <li>You must specify the attributes.</li>
+  </ul>
+</p>
+<p>This is done because, has_eav is to be specified on an existing model that needs rails behaviour
+  - the setup is as follows:</p>
+<pre><code language="ruby">class Residence &lt; ActiveRecord::Base
+  has_eav :through =&gt; :residence_attribute do
+    eav_attribute :kitchen_size
+    eav_attribute :room_size
+    eav_attribute :bathroom_size
+    # ...
+    eav_attribute :garden_size
+  end
+end
+
+class ResidenceAttribute
+  belongs_to :residence
+end</code></pre>
+<p>&nbsp;</p>
+<p>Under the hood has_eav performs a 
+  <code language="ruby">ResidenceAttribute.all.where( :residence_id =&gt; self.id )</code> to load the defined
+  attribute/value pairs. (It does so lazily, no attributes are loaded until one is actually
+  requested)
+</p>
