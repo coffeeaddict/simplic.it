@@ -1,0 +1,5 @@
+<h3 class="title"><%= blog.title.html_safe %></h3>
+<h4 class="alt"><%= blog.subtitle.html_safe %></h4>
+<br />
+<%= excerpt(blog)%>
+<% blog.tags.each do |tag| %> <%= render tag %> <% end %>

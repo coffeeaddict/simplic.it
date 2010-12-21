@@ -12,3 +12,25 @@
     </div>
   <% end %>
 </div>
+
+<hr />
+
+<div class="span-11">
+  <div class="blog_on_homepage span-11">
+    <h2>Latest blog posts</h2>
+    <br />
+    <%= render :partial => "blog/on_homepage",
+               :collection => @blogs, :as => :blog,
+               :spacer_template => "ruler"
+   %>
+  </div>
+</div>
+
+<div class="span-12 leftborder last">
+  <div class="span-11 push-1">
+    <h2>Latest LifeLine</h2>
+    <%= render :partial => "life_line/life_line",
+               :collection => @life_lines,
+               :locals => { :extra_class => "tiny" } %>
+  </div>
+</div>

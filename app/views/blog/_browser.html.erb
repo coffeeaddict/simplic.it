@@ -1,0 +1,29 @@
+<p>&nbsp;</p>
+<h3 class="alt" style="display: inline;">Browse the archives : </h3>
+
+<% archives = { 2009 => [ 12 ], 2010 => [ 2, 9, 12 ] }%>
+
+<% archives.each do |year, months| %>
+  <div class="year alt" id="<%= year %>">
+    <strong><%= link_to year, url_for(:action => :archive, :year => year) %></strong> |
+    <div id="<%= year %>_months" class="month alt" style="display: none">
+      <% months.each do |month| %>
+        <%= link_to "%02i" % month, :action => :archive, :year => year, :month => month %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    $$('.year').each(function(item) {
+      var year = item.getAttribute("id");
+      item.observe("mouseover", function() {
+        $(year + '_months' ).show();
+      });
+      item.observe("mouseout", function() {
+        $(year + '_months' ).hide();
+      });
+    });
+  });
+</script>

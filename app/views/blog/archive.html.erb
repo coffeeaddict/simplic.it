@@ -1,0 +1,16 @@
+<h1 class="page_title">All dusty old posts from <%= @period %></h1>
+<br class="large"/>
+
+<% unless @blogs.empty? %>
+  <%= render :partial => "blogs" %>
+<% else %>
+  <h2 class="alt">
+  <% unless @error %>
+    Appearantly, I was to busy back then... There is nothing to show you
+  <% else %>
+    Cannot search that...
+  <% end %>
+  </h2>
+<% end %>
+
+<%= render :partial => "browser" %>

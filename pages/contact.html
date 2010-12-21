@@ -1,0 +1,25 @@
+<script type="text/javascript" src="/javascripts/base64.js"></script>
+
+<h1 class="page_title">Contact</h1>
+
+<strong>E-Mail:</strong>
+<address class="b64">aGFydG9nLmRlLm1pa0BzaW1wbGljLml0</address>
+
+<noscript>You should turn on javascript to see the email address. But considering you have javascript disabled, you are a pro! So just decode the base64 string and there you have it!</noscript>
+<br />
+
+<strong>Twitter:</strong>
+<address><a href="http://twitter.com/#!/coffeeaddict">@coffeeaddict_nl</a></address>
+<br />
+
+<strong>Github:</strong>
+<address><a href="https://github.com/coffeeaddict">coffeeaddict</a></address>
+
+
+<script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    $$('address.b64').each(function(item) {
+      item.update(Base64.decode(item.innerHTML));
+    });
+  });
+</script>

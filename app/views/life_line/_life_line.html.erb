@@ -1,0 +1,24 @@
+<% extra_class ||= nil %>
+<div class="life_line alt <%= life_line.origin %> <%= extra_class %>"
+     data-url="<%= url_for( :controller => :life_line, :action => :by_origin, :origin => life_line.origin ) %>">
+  <% unless life_line.title.blank? %><h3><%= h life_line.title %></h3><% end %>
+  
+  <%
+    contents = life_line.contents
+    if life_line.origin == "twitter"
+      contents = twitter_link_up contents
+    else 
+      contents = link_up contents
+    end
+  %>
+  
+  
+  <% if life_line.origin == "flickr" %>
+    <%= link_to image_tag life_line.contents, :width => 500 %>
+  <% else %>
+    <%= life_line.html_safe? ? contents.html_safe : contents %>
+  <% end %>
+  <br />
+  <br />
+  <span class="small"><%= l life_line.publish_time %></span>
+</div>
