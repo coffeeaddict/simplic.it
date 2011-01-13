@@ -36,7 +36,7 @@ Twitter.user_timeline("coffeeaddict_nl").each do |tweet|
 end
 
 # mentions on twitter
-Twitter::Search.new.q("@coffeeaddict").fetch.each do |mention|
+Twitter::Search.new.q("@coffeeaddict_nl").fetch.each do |mention|
   contents = mention.text
   created_at = Time.parse(mention.created_at).in_time_zone(mention.time_zone)
   LifeLine.create(
