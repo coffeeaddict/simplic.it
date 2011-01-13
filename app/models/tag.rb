@@ -5,14 +5,14 @@ class Tag < ActiveRecord::Base
   # The score of a tag; defined by it's usage
   #
   # The score is an integer between 0 and 10, and defined by the
-  # percentile / 10
+  # percentile / 10, rounded upwards
   #
   # When there are not enough tags, the score is always 2
   #
   def score
-    total   = BlogTag.count
+    total   = Blog.count
     
-    return 2 if total < 20
+    # return 2 if total < 20
     
     me      = BlogTag.where( :tag_id => self.id ).count
     percent = total / 100.0
