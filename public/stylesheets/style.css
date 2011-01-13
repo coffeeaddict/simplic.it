@@ -1,7 +1,18 @@
 body {
-  background: url('/images/header_bg.png') repeat-x #ededff;
+  background: url('/images/header_bg.png') repeat-x #ededff fixed;
   padding-top: 9px;
-  
+}
+
+#head {
+  position: fixed;
+  background: url('/images/header_bg.png') repeat-x #ededff;
+  padding: 0; margin: 0; margin-top: -9px;
+  width: 1200px;
+  z-index: 500;
+}
+
+.content {
+  padding-top: 140px;
 }
 
 pre { 
@@ -27,7 +38,7 @@ h2.page_title {
 ul.menu {
   padding: 0;
   margin: 0;
-  padding-top: 18px;  
+  padding-top: 27px;  
   margin-left: 8px;
   color: white;
   font-size: 17px;  
@@ -237,4 +248,20 @@ div.dated_block {
 
 .month {
   position: absolute;
+}
+
+.blog_on_homepage h3.title {
+  color: #102b79;
+}
+
+.blog_on_homepage pre, .blog_on_homepage code {
+  width: 430px;
+}
+
+.span-17 pre, .span-17 code {
+  width: 750px;
+}
+
+code, pre {
+  overflow: auto;
 }

@@ -7,7 +7,7 @@
   <!--[if lt IE 8]>
     <%= stylesheet_link_tag "ie" %>
   <![endif]-->
-  <%= stylesheet_link_tag "style", "pygment" %>
+  <%= stylesheet_link_tag "pygment", "style" %>
 
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
@@ -22,6 +22,7 @@
 </head>
 <body>
   <div class="container">
+    <div id="head">
     <%= image_tag "logo.png" %>
     <ul class="menu" id="mainmenu">
       <%= menu_link "Home", :controller => :home %>
@@ -30,6 +31,10 @@
       <!-- %= menu_link "Tools", :controller => :tools % -->
       <!-- %= menu_link "Contact", :controller => :home, :action => :contact % -->
     </ul>
+  </div>
+
+    <!-- start content -->
+    <div class="content">
     <% if controller.respond_to? :sub_menu %>
     
     <ul class="submenu" id="submenu">
@@ -41,8 +46,6 @@
     <br class="clear" />
     <br />
 
-    <!-- start content -->
-    <div class="content">
       <%= yield %>
     </div>
     
