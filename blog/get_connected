@@ -2,7 +2,7 @@
 <p>Here's a little snippet of code to put in <code>lib/adapter_connection.rb</code> of your <code>RAILS_ROOT</code> to be able to obtain the true connection and start binding and escaping.</p>
 
 <!-- more -->
-<pre><code># this will grant access to the true database connection which is hidden
+<code language="ruby"># this will grant access to the true database connection which is hidden
 # in the current ConnectionAdapter.
 #
 module AdapterConnection
@@ -22,11 +22,11 @@ module AdapterConnection
     # return the TRUE connection
     adapter.get_connection
   end
-end</code></pre>
+end</code>
 <p>&nbsp;</p>
 <p>Be aware that the way binding occurs differs for different database drivers so you should be pretty sure this is the only way, since it isn't very portable!</p>
 <p>Now in your model you would want to add the following lines of code:</p>
-<pre><code>class MyModel &lt;&lt; ActiveRecord::Base
+<code language="ruby">class MyModel < ActiveRecord::Base
 
   include AdapterConnection
 
@@ -35,4 +35,7 @@ end</code></pre>
     # ...
   end
 end
-</code></pre>
+</code>
+
+
+<em class="alt">Updated to get pygments on the code blocks</em>
