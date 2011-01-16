@@ -7,6 +7,8 @@
     contents = life_line.contents
     if life_line.origin == "twitter"
       contents = twitter_link_up contents
+    elsif life_line.origin == "github"
+      contents = github_link_up contents
     else 
       contents = link_up contents
     end

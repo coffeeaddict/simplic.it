@@ -22,6 +22,10 @@ module LifeLineHelper
     return words.join " "
   end
   
+  def github_link_up line
+    line.gsub(/href=\"/, 'href="https://github.com')
+  end
+  
   def link_up line
     words = line.split " "
     words.each_index do |i|

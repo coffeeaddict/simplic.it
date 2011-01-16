@@ -1,0 +1,131 @@
+<p>When you google for gitweb on nginx you only find disapointed
+  people asking questions. Let's hope this post makes it high into
+  <code>$search_engine</code> so that everyone can enjoy the pleasures
+  of a gitweb on nginx</p>
+
+<h3>You will need:</h3>
+<p>
+<ul>
+  <li><a href="http://git-scm.com">Git</a></li>
+  <li><a href="http://nginx.org">nginx</a></li>
+  <li><a href="http://perl.org">Perl</a></li>
+  <li><a href="http://search.cpan.org/~skimo/FCGI-0.67/">The FGCI Perl module</a></li>
+  <li><a href="http://technotes.1000lines.net/fastcgi-wrapper.pl">A FastCGI wrapper</a></li>
+  <li>gitweb.cgi (should come with Git)</li>
+</ul>
+
+I will not discuss how to install these. <span class="alt">Go RTFM. ;-)</span>
+<br class="clear"/>
+<br />
+</p>
+
+<h3>Prepare:</h3>
+<br />
+
+<p>First we shall put the FastCGI wrapper into place.<br /><br />
+Before we put it into <code>/usr/local/bin</code>, let's first do a
+quick inspection of it's source.
+</p>
+
+<code language="perl">
+  # ...
+  sub main {
+    #$socket = FCGI::OpenSocket( "127.0.0.1:8999", 10 ); #use IP sockets
+    $socket = FCGI::OpenSocket( "/var/run/nginx/perl_cgi-dispatch.sock", 10 );
+
+    # ...
+</code>
+
+<p>I prefer a nice UNIX socket, so create the
+  <code>/var/run/nginx</code> directory and chown it to the user you
+  intend to run the wrapper with. (Make it an unpriviledged user,
+  security first!). You can now edit fastcgi-wrapper.pl to update the
+  socket path or have it use a TCP connection.<br /><br />
+
+  When you are done, copy it to /usr/local/bin and run it (as the
+  intended user!)
+</p>
+
+<p>
+  And now; prepare a nice web environment. (With a nice theme)
+</p>
+
+<pre>
+  # mkdir -p /www/git.mydomain.com/htdocs
+  # mkdir -p /www/logs/git.mydomain.com
+  % cp /path/to/installed/gitweb.cgi /www/git.mydomain.com/htdocs
+  % cp /path/to/installed/gitweb-assets/* /www/git.mydomain.com/htdocs
+  % cd /www/git.mydomain.com/htdocs
+  % mkdir orig; cp gitweb.css orig
+  % git clone git://github.com/kogakure/gitweb-theme.git
+  % cp gitweb-theme/* .
+</pre>
+
+<h3>Configure:</h3>
+<br />
+
+<p>First, let's get this thing in working order and make an nginx
+  configuration file for it.
+</p>
+
+<code language="nginx">
+server {
+  listen 1.2.3.4:80;
+  server_name git.mydomain.com;
+
+  access_log /www/logs/git.mydomain.com/access;
+  error_log /www/logs/git.mydomain.com/error info;
+
+  root /www/git.mydomain.com/htdocs;
+
+  # ACL + handler
+  location / {
+    allow 1.2.3.4;   # me
+    allow 5.6.7.8;   # my peers
+    allow 1.3.5.7;
+    allow 2.4.6.8;
+    deny all;
+
+    index index.html gitweb.cgi;
+    try_files $uri $uri/ @handler;
+    expires 10d;
+  }
+
+  # Cache control for assets
+  location ~* \.(css|png|gif|ico|jpe?g|js) {
+    expires 31d;
+  }
+
+  # Let gitweb.cgi handle the uri's
+  location @handler {
+    rewrite / /gitweb.cgi;
+  }
+
+  # Tie it up
+  location ~ .cgi$ {
+    if (!-e $request_filename) { rewrite / /gitweb.cgi last; }
+
+    expires off;
+
+    fastcgi_pass unix:/var/run/perl_cgi-dispatch.sock;
+    fastcgi_index gitweb.cgi;
+    fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+    include /opt/nginx/conf/fastcgi_params;
+  }
+}
+</code>
+
+<p>Restart your nginx and point your browser to your domain and have a
+peek if everything is in working order. It should display a neatly
+(Github) themed page with a "404 no projects found" message</p>
+
+<p>Now edit <code>/etc/gitweb.conf</code> and point to your repository
+root. If you have an alternate git install, you might want to edit
+gitweb.cgi as well - or put <code>$GIT = "/usr/local/bin/git"</code>
+into gitweb.conf if you'd rather not tough gitweb.cgi.</p>
+
+<p>Reload the browser. It should show up some projects. Note that
+project directories have to be called whatever<em>.git</em>.
+

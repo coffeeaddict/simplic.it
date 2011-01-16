@@ -1,4 +1,4 @@
-<h3 class="title"><%= blog.title.html_safe %></h3>
+<h3 class="title" data-url="<%= blog_key_path( :url_key => blog.url_key ) %>"><%= blog.title.html_safe %></h3>
 <h4 class="alt"><%= blog.subtitle.html_safe %></h4>
 <br />
 <%= excerpt(blog)%>
