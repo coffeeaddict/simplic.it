@@ -12,6 +12,8 @@ class LifeLineController < ApplicationController
   end
   
   def by_origin
+    @title = "index / #{params[:origin]}"
+
     @life_lines = LifeLine.all_by_origin(params[:origin]).sort_by { |l|
       l.publish_time.in_time_zone("Amsterdam")
     }.reverse.take 75

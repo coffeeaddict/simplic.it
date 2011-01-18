@@ -12,6 +12,7 @@ class BlogController < ApplicationController
     unless ( @blog = Blog.find_by_url_key(params[:url_key]) )
       return not_found
     end
+    @title = @blog.title
   end
   
   def by_tag
@@ -19,17 +20,22 @@ class BlogController < ApplicationController
       return not_found
     end
     @blogs = @tag.blogs    
+    @title = "Tag: #{@tag.name} - Blogs"
   end
   
   def archive
     year  = params[:year]
     month = params[:month]
         
+    @title = "Archive #{year}"
+
     template = "%Y"
     @period  = "%i" % year
     unless month.blank?
       template += "/%m"
-      @period  += "/%02i" % month.gsub(/^0+/, "")
+      month = "/%02i" % month.gsub(/^0+/, "")
+      @period  += month
+      @title   += month
     end
     
     @blogs = Blog.where( [ "strftime('#{template}', created_at)=?", @period] )

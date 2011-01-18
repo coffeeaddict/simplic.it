@@ -4,7 +4,13 @@ require 'digest/md5'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
+  before_filter :set_title
+
+  def set_title
+    @title = params[:action]
+  end
+
   # show my name
   def name
     self.class.name.underscore.gsub(/_controller$/, "")
