@@ -1,10 +1,15 @@
 <% @blogs.each do |blog| %>
   <h4 class="right alt"><%= l blog.created_at.to_date %></h4>
+  
   <h2 class="page_title" data-url="/blog/<%= blog.url_key %>">
     ~> <%= blog.title.html_safe %>
   </h2>
+  <% unless blog.subtitle.blank? %>
   <h3 class="alt"><%= blog.subtitle.html_safe %><br /><br /></h3>
-  <%= excerpt(blog) %>
+  <% end %>
+  
+  <div><%= excerpt(blog.contents) %></div>
+  
   <h4 style="display: inline-block;">Tags : </h4>
   <% blog.tags.each do |tag| %> <%= render tag %> <% end %>
   <hr />

@@ -1,5 +1,17 @@
-<h3 class="title" data-url="<%= blog_key_path( :url_key => blog.url_key ) %>"><%= blog.title.html_safe %></h3>
-<h4 class="alt"><%= blog.subtitle.html_safe %></h4>
-<br />
-<%= excerpt(blog)%>
+<h3 class="title" data-url="<%= blog_key_path( :url_key => blog.url_key ) %>">
+  <%= blog.title.html_safe %>
+</h3>
+
+<% if blog.subtitle %>
+  <h4 class="alt"><%= blog.subtitle.html_safe %></h4>
+  <br />
+<% end %>
+
+<%= excerpt(blog.contents, 500)%>
+
+<%= link_to blog_key_path( :url_key => blog.url_key ), :class => "large alt right" do %>
+  ~> read more
+<% end %>
+
+
 <% blog.tags.each do |tag| %> <%= render tag %> <% end %>
