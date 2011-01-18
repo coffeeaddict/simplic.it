@@ -1,0 +1,148 @@
+<!-- title: Ruby UNIX Sockets Howto -->
+<!-- subtitle: -->
+<!-- tags: ruby, unix sockets, howto, zsh -->
+
+<p>Yesterday I was trying do put some good old UNIX voodoo to use and make a
+socket to notify there was a new push to a git repo, so it could be automaticly
+deployed as another user. Of course set-user-id scripts can do this, but they
+are not really safe. I wanted to do this in ruby as gitolite is to much Perl
+already and I'm done with Perl.</p>
+
+<p>When looking for a howto, i found very little info. Sure... There was enough
+about <code>AF_INET</code> sockets, but <code>AF_UNIX</code> seems under
+appreciated...</p>
+
+<p>Combining old knowledge and freshly found informations i cooked up
+something like this:
+</p>
+
+<code language="ruby">require 'socket'
+
+# make sure everybody can write to my socket
+File.umask 0000
+
+file = "/var/run/my/socket.sock"
+File.unlink(file) if File.exists?(file)
+
+server = UNIXServer.open(file)
+  
+loop {
+  $stderr.puts "[server] Awaiting new connection"
+
+  # server.accept is blocking, so the loop wont loop and eat your bogomips.
+  # Once the thread is started, the loop runs once and the server awaits a 
+  # new connection
+  #
+  Thread.start(server.accept) do |client|
+    # get(s) a question from the client
+    question = client.gets.chomp
+
+    # give the client her answer
+    answer = question.gsub '?', '!'
+    client.puts answer
+
+    # close the connection to the client
+    client.close
+
+    # if you want, you can do time and resource consuming things here
+    sleep 5
+    $stderr.puts "[server] Closing thread"
+  end
+}
+</code>
+
+<p>And here is some client code to go with it</p>
+
+<code language="ruby">require 'socket'
+
+file = "/var/run/my/socket.sock"
+socket = UNIXSocket.new(file)
+
+socket.puts "Hello?"
+response = socket.gets
+
+$stderr.puts "The server said: #{response}"
+</code>
+
+<p>When you run this, you should get some output like below:</p>
+
+<pre>
+~ % ruby server.rb &
+[server] Awaiting new connection
+~ % ruby client.rb
+[server] Awaiting new connection
+The server said: Hello!
+~ % [server] Closing thread
+
+</pre>
+
+<p>And if you love zsh like me, you can even test that the multi-threading
+works as expected with a nice globbing/foreach trick</p>
+
+<pre>
+~ % foreach a ( {1..10} ) { ruby client.rb & }
+[3] 7543
+[4] 7544
+[5] 7545
+Awaiting new connection
+The server said: Hello!
+[6] 7546
+[4]    done       ruby client.rb
+Awaiting new connection
+The server said: Hello!
+[4] 7547
+[3]    done       ruby client.rb
+Awaiting new connection
+The server said: Hello!
+[3] 7548
+[6]  - done       ruby client.rb
+Awaiting new connection
+The server said: Hello!
+[6] 7549
+[7] 7550
+[5]    done       ruby client.rb
+[5] 7551
+Awaiting new connection
+Awaiting new connection
+[8] 7552
+~ % Awaiting new connection
+The server said: Hello!
+
+[3]    done       ruby client.rb
+~ % Awaiting new connection
+The server said: Hello!
+
+[4]    done       ruby client.rb
+~ % Awaiting new connection
+The server said: Hello!
+The server said: Hello!
+
+[8]  + done       ruby client.rb
+~ % The server said: Hello!
+
+[6]  - done       ruby client.rb
+~ %
+[7]  + done       ruby client.rb
+~ % Awaiting new connection
+The server said: Hello!
+
+[5]  + done       ruby client.rb
+~ % Closing thread
+Closing thread
+Closing thread
+Closing thread
+Closing thread
+Closing thread
+Closing thread
+Closing thread
+Closing thread
+Closing thread
+
+</pre>
+
+<p>Hurray! It works (if you don't have a globbing shell, you can copy/paste
+<code>ruby client.rb &</code> 10 times on one line to get the same effect)
+Now just add some code to deamonize it and off you go.</p>
+
+<p>PS: Did you know you can pass file-descriptors through a UNIX socket? I
+still need the time to get it figured out, if you know how - let me know!</p>
