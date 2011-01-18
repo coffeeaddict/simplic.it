@@ -34,18 +34,28 @@ class Blog < ActiveRecord::Base
       updated_at
     end
   end
+  
+  def contents
+    contents = File.read file_path
+    lines = contents.split /\n/
+    while lines.first =~ /<!-- .+ -->/ 
+      lines.shift
+    end
+    
+    return lines.join("\n")
+  end
 
   def self.create_from_file file, url_key=nil
     blog = create( :file => file, :url_key => url_key )
 
     contents = File.read blog.file_path
-    if ( match = contents.match(/<!-- title: (.*)-->/) )
+    if ( match = contents.match(/<!--\s?title:\s?(.*)-->/) )
       blog.title = match[1].gsub(/\s+$/, '') if !match[1].nil?
     end
-    if ( match = contents.match(/<!-- subtitle: (.*)-->/) )
+    if ( match = contents.match(/<!--\s?subtitle:\s?(.*)-->/) )
       blog.subtitle = match[1].gsub(/\s+$/, '') if !match[1].nil?
     end
-    if ( match = contents.match(/<!-- tags: (.*)-->/) )
+    if ( match = contents.match(/<!--\s?tags:\s?(.*)-->/) )
       if ( tags = match[1] )
         tags.gsub!(/\s+$/, '')
         tags = tags.split /,\s*/
