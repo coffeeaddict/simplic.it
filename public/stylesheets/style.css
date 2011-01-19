@@ -265,3 +265,16 @@ div.dated_block {
 code, pre {
   overflow: auto;
 }
+
+
+.tagcloud .size-0 { font-size: 9pt; }
+.tagcloud .size-1 { font-size: 10pt; }
+.tagcloud .size-2 { font-size: 11pt; }
+.tagcloud .size-3 { font-size: 12pt; }
+.tagcloud .size-4 { font-size: 13pt; }
+.tagcloud .size-5 { font-size: 14pt; }
+.tagcloud .size-6 { font-size: 15pt; }
+.tagcloud .size-7 { font-size: 16pt; }
+.tagcloud .size-8 { font-size: 17pt; }
+.tagcloud .size-9 { font-size: 18pt; }
+.tagcloud .size-10 { font-size: 19pt; }

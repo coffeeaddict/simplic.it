@@ -17,12 +17,19 @@
 
 <div class="span-11">
   <div class="blog_on_homepage span-11">
-    <h2>Latest blog posts</h2>
+    <h2>Latest Blog Posts</h2>
+
     <br />
     <%= render :partial => "blog/on_homepage",
                :collection => @blogs, :as => :blog,
                :spacer_template => "ruler"
    %>
+  </div>
+
+  <br class="clear" /><br />
+  <div class="push-2 span-7 tagcloud">
+    <h2>Tag Cloud</h2>
+    <% Tag.all.each do |tag| %><%= render tag %><% end %>
   </div>
 </div>
 
